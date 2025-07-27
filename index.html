@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omer Zimmerman - TheOgOz69</title>
+    <title>Omer Zimer</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -72,6 +72,32 @@
             transform: scale(1.05);
         }
         
+        .image-link {
+            display: block;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .image-link::after {
+            content: "🔍 Click to view full size";
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .image-link:hover::after {
+            opacity: 1;
+        }
+        
         @media (max-width: 768px) {
             .image-gallery {
                 flex-direction: column;
@@ -98,13 +124,19 @@
         
         <div class="image-gallery">
             <div class="image-container">
-                <img src="Ribs/1.jpg" alt="Ribs Photo 1" loading="lazy">
+                <a href="Ribs/1.jpg" target="_blank" class="image-link">
+                    <img src="Ribs/thumbnails/1.jpg" alt="Ribs Photo 1" loading="lazy">
+                </a>
             </div>
             <div class="image-container">
-                <img src="Ribs/2.jpg" alt="Ribs Photo 2" loading="lazy">
+                <a href="Ribs/2.jpg" target="_blank" class="image-link">
+                    <img src="Ribs/thumbnails/2.jpg" alt="Ribs Photo 2" loading="lazy">
+                </a>
             </div>
             <div class="image-container">
-                <img src="Ribs/3.jpg" alt="Ribs Photo 3" loading="lazy">
+                <a href="Ribs/3.jpg" target="_blank" class="image-link">
+                    <img src="Ribs/thumbnails/3.jpg" alt="Ribs Photo 3" loading="lazy">
+                </a>
             </div>
         </div>
     </div>
