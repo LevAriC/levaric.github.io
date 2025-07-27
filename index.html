@@ -1,2 +1,87 @@
-Omer Zimmerman is TheOgOz69
-Now you all know the secret.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omer Zimmerman - TheOgOz69</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+        
+        .image-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .image-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .image-container img:hover {
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 768px) {
+            .image-gallery {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .image-container {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Omer Zimmerman is TheOgOz69</h1>
+        <p class="subtitle">Now you all know the secret.</p>
+        
+        <div class="image-gallery">
+            <div class="image-container">
+                <img src="Ribs/1.jpg" alt="Ribs Photo 1" loading="lazy">
+            </div>
+            <div class="image-container">
+                <img src="Ribs/2.jpg" alt="Ribs Photo 2" loading="lazy">
+            </div>
+            <div class="image-container">
+                <img src="Ribs/3.jpg" alt="Ribs Photo 3" loading="lazy">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
