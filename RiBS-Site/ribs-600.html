@@ -64,71 +64,61 @@
             color: white;
         }
         
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
+        .gallery-container {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 50px;
         }
         
-        .image-item {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
+        .thumbnail-column {
+            flex: 0 0 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
         
-        .image-item:hover {
-            transform: translateY(-8px);
-        }
-        
-        .image-item img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
+        .thumbnail-item {
             cursor: pointer;
-            border: none;
-            outline: none;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            border: 3px solid transparent;
         }
         
-        .image-item:hover img {
+        .thumbnail-item:hover {
             transform: scale(1.05);
         }
         
-        .image-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            color: white;
-            padding: 20px;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
+        .thumbnail-item.active {
+            border-color: #5f4f42;
         }
         
-        .image-item:hover .image-overlay {
-            transform: translateY(0);
+        .thumbnail-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            display: block;
         }
         
-        .image-overlay h3 {
-            font-size: 1.4em;
-            margin-bottom: 8px;
-            font-weight: 400;
+        .main-image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
         }
         
-        .image-overlay p {
-            font-size: 0.95em;
-            opacity: 0.9;
+        .main-image {
+            max-width: 100%;
+            max-height: 600px;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
         
         .product-specs {
             max-width: 600px;
             margin: 40px auto;
-            background: rgba(255,255,255,0.9);
-            border-radius: 12px;
-            padding: 30px;
+            padding: 30px 0;
             text-align: left;
         }
         
@@ -164,9 +154,23 @@
                 padding: 20px 15px;
             }
             
-            .image-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
+            .gallery-container {
+                flex-direction: column;
+            }
+            
+            .thumbnail-column {
+                flex-direction: row;
+                flex: none;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .thumbnail-item {
+                flex: 0 0 80px;
+            }
+            
+            .thumbnail-item img {
+                height: 80px;
             }
         }
     </style>
@@ -177,55 +181,31 @@
             <a href="../ribs.html" class="back-link">← Back to RiBS Collection</a>
             <h1 class="headline">RiBS 600</h1>
             <p class="description">
-                Extended lighting solution perfect for larger spaces and dramatic architectural statements. The RiBS 600 series delivers bold presence with sophisticated design, creating linear beauty and illuminated poetry.
+                Extended fixtures for larger spaces and statement lighting. The RiBS 600 series offers enhanced lighting coverage with sophisticated design elements.
             </p>
         </div>
         
-        <div class="image-grid">
-            <div class="image-item">
-                <a href="../Assets/Lighting/RiBS/RiBSLong/1.jpg" target="_blank">
-                    <img src="../Assets/Lighting/RiBS/RiBSLong/thumbnails/1.jpg" alt="RiBS 600 - 1" loading="lazy">
-                    <div class="image-overlay">
-                        <h3>Extended Elegance</h3>
-                        <p>Dramatic lighting for larger spaces</p>
-                    </div>
-                </a>
+        <div class="gallery-container">
+            <div class="thumbnail-column">
+                <div class="thumbnail-item active" onclick="changeMainImage('../Assets/Lighting/RiBS/RiBSLong/1.jpg', this)">
+                    <img src="../Assets/Lighting/RiBS/RiBSLong/thumbnails/1.jpg" alt="RiBS 600 - 1">
+                </div>
+                <div class="thumbnail-item" onclick="changeMainImage('../Assets/Lighting/RiBS/RiBSLong/2.jpg', this)">
+                    <img src="../Assets/Lighting/RiBS/RiBSLong/thumbnails/2.jpg" alt="RiBS 600 - 2">
+                </div>
+                <div class="thumbnail-item" onclick="changeMainImage('../Assets/Lighting/RiBS/RiBSLong/3.jpg', this)">
+                    <img src="../Assets/Lighting/RiBS/RiBSLong/thumbnails/3.jpg" alt="RiBS 600 - 3">
+                </div>
+                <div class="thumbnail-item" onclick="changeMainImage('../Assets/Lighting/RiBS/RiBSLong/4.jpg', this)">
+                    <img src="../Assets/Lighting/RiBS/RiBSLong/thumbnails/4.jpg" alt="RiBS 600 - 4">
+                </div>
+                <div class="thumbnail-item" onclick="changeMainImage('../Assets/Lighting/RiBS/RiBSLong/5.jpg', this)">
+                    <img src="../Assets/Lighting/RiBS/RiBSLong/thumbnails/5.jpg" alt="RiBS 600 - 5">
+                </div>
             </div>
-            <div class="image-item">
-                <a href="../Assets/Lighting/RiBS/RiBSLong/2.jpg" target="_blank">
-                    <img src="../Assets/Lighting/RiBS/RiBSLong/thumbnails/2.jpg" alt="RiBS 600 - 2" loading="lazy">
-                    <div class="image-overlay">
-                        <h3>Linear Beauty</h3>
-                        <p>Perfect for dining areas and hallways</p>
-                    </div>
-                </a>
-            </div>
-            <div class="image-item">
-                <a href="../Assets/Lighting/RiBS/RiBSLong/3.jpg" target="_blank">
-                    <img src="../Assets/Lighting/RiBS/RiBSLong/thumbnails/3.jpg" alt="RiBS 600 - 3" loading="lazy">
-                    <div class="image-overlay">
-                        <h3>Architectural Statement</h3>
-                        <p>Bold presence with sophisticated design</p>
-                    </div>
-                </a>
-            </div>
-            <div class="image-item">
-                <a href="../Assets/Lighting/RiBS/RiBSLong/4.jpg" target="_blank">
-                    <img src="../Assets/Lighting/RiBS/RiBSLong/thumbnails/4.jpg" alt="RiBS 600 - 4" loading="lazy">
-                    <div class="image-overlay">
-                        <h3>Sculptural Form</h3>
-                        <p>Art and function in perfect balance</p>
-                    </div>
-                </a>
-            </div>
-            <div class="image-item">
-                <a href="../Assets/Lighting/RiBS/RiBSLong/5.jpg" target="_blank">
-                    <img src="../Assets/Lighting/RiBS/RiBSLong/thumbnails/5.jpg" alt="RiBS 600 - 5" loading="lazy">
-                    <div class="image-overlay">
-                        <h3>Illuminated Poetry</h3>
-                        <p>Light dancing through organic curves</p>
-                    </div>
-                </a>
+            
+            <div class="main-image-container">
+                <img id="mainImage" class="main-image" src="../Assets/Lighting/RiBS/RiBSLong/1.jpg" alt="RiBS 600" loading="lazy">
             </div>
         </div>
         
@@ -238,5 +218,19 @@
             </ul>
         </div>
     </div>
+    
+    <script>
+        function changeMainImage(imageSrc, thumbnailElement) {
+            document.getElementById('mainImage').src = imageSrc;
+            
+            // Remove active class from all thumbnails
+            document.querySelectorAll('.thumbnail-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active class to clicked thumbnail
+            thumbnailElement.classList.add('active');
+        }
+    </script>
 </body>
 </html> 
