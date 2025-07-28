@@ -39,14 +39,6 @@
             text-transform: uppercase;
         }
         
-        .description {
-            font-size: 1.2em;
-            color: #555;
-            max-width: 600px;
-            margin: 0 auto 30px;
-            line-height: 1.8;
-        }
-        
         .back-link {
             display: inline-block;
             color: #5f4f42;
@@ -56,7 +48,7 @@
             border: 2px solid #5f4f42;
             border-radius: 25px;
             transition: all 0.3s ease;
-            margin-bottom: 40px;
+            margin-top: 40px;
         }
         
         .back-link:hover {
@@ -113,13 +105,19 @@
             object-fit: contain;
             border-radius: 12px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .main-image:hover {
+            transform: scale(1.02);
         }
         
         .product-specs {
             max-width: 600px;
             margin: 40px auto;
             padding: 30px 0;
-            text-align: left;
+            text-align: center;
         }
         
         .specs-title {
@@ -128,21 +126,11 @@
             margin-bottom: 20px;
             font-weight: 400;
             letter-spacing: 1px;
+        }
+        
+        .footer {
             text-align: center;
-        }
-        
-        .specs-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .specs-list li {
-            margin-bottom: 12px;
-            padding-left: 0;
-            color: #555;
-            line-height: 1.6;
-            font-size: 1.1em;
+            margin-top: 40px;
         }
         
         @media (max-width: 768px) {
@@ -178,11 +166,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <a href="../ribs.html" class="back-link">← Back to RiBS Collection</a>
             <h1 class="headline">RiBS 600</h1>
-            <p class="description">
-                Extended fixtures for larger spaces and statement lighting. The RiBS 600 series offers enhanced lighting coverage with sophisticated design elements.
-            </p>
         </div>
         
         <div class="gallery-container">
@@ -205,23 +189,25 @@
             </div>
             
             <div class="main-image-container">
-                <img id="mainImage" class="main-image" src="../Assets/Lighting/RiBS/RiBSLong/1.jpg" alt="RiBS 600" loading="lazy">
+                <a href="../Assets/Lighting/RiBS/RiBSLong/1.jpg" target="_blank" id="mainImageLink">
+                    <img id="mainImage" class="main-image" src="../Assets/Lighting/RiBS/RiBSLong/1.jpg" alt="RiBS 600" loading="lazy">
+                </a>
             </div>
         </div>
         
         <div class="product-specs">
             <h2 class="specs-title">RIBS 600</h2>
-            <ul class="specs-list">
-                <li>• Equipped with an E27 bulb.</li>
-                <li>• Versatile enough to serve as a main light source in a room.</li>
-                <li>• Available in: Birch wood, Aluminum, Perspex.</li>
-            </ul>
+        </div>
+        
+        <div class="footer">
+            <a href="../ribs.html" class="back-link">← Back to RiBS Collection</a>
         </div>
     </div>
     
     <script>
         function changeMainImage(imageSrc, thumbnailElement) {
             document.getElementById('mainImage').src = imageSrc;
+            document.getElementById('mainImageLink').href = imageSrc;
             
             // Remove active class from all thumbnails
             document.querySelectorAll('.thumbnail-item').forEach(item => {
