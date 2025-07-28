@@ -5,28 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Omer Zimer</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
             background-color: #f5f5f5;
         }
         
+        /* Main Navigation */
+        .main-nav {
+            background-color: #333;
+            padding: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .main-nav li {
+            margin: 0;
+        }
+        
+        .main-nav a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .main-nav a:hover, .main-nav a.active {
+            background-color: #555;
+        }
+        
+        /* Sub Navigation */
+        .sub-nav {
+            background-color: #666;
+            padding: 0;
+            display: none;
+        }
+        
+        .sub-nav.active {
+            display: block;
+        }
+        
+        .sub-nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .sub-nav li {
+            margin: 0;
+        }
+        
+        .sub-nav a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            transition: background-color 0.3s ease;
+            font-size: 0.9em;
+        }
+        
+        .sub-nav a:hover, .sub-nav a.active {
+            background-color: #888;
+        }
+        
+        .sub-nav a.coming-soon {
+            color: #ccc;
+            font-style: italic;
+        }
+        
+        .sub-nav a.coming-soon:hover {
+            background-color: #666;
+            cursor: not-allowed;
+        }
+        
+        /* Content Area */
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 40px 20px;
             text-align: center;
         }
         
-        h1 {
-            color: #333;
-            margin-bottom: 10px;
+        .page {
+            display: none;
         }
         
-        .subtitle {
-            color: #666;
-            margin-bottom: 30px;
-            font-style: italic;
+        .page.active {
+            display: block;
         }
         
         .gallery-title {
@@ -98,7 +176,26 @@
             opacity: 1;
         }
         
+        .placeholder {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+        
+        .placeholder h2 {
+            margin-bottom: 20px;
+            color: #444;
+        }
+        
         @media (max-width: 768px) {
+            .main-nav ul, .sub-nav ul {
+                flex-direction: column;
+            }
+            
+            .main-nav a, .sub-nav a {
+                text-align: center;
+            }
+            
             .image-gallery {
                 flex-direction: column;
                 align-items: center;
@@ -111,34 +208,194 @@
     </style>
 </head>
 <body>
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#" onclick="showSection('lighting')" class="nav-link active">Lighting</a></li>
+            <li><a href="#" onclick="showSection('collaborations')" class="nav-link">Collaborations</a></li>
+            <li><a href="#" onclick="showSection('objects')" class="nav-link">Objects</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sub Navigation for Lighting -->
+    <nav class="sub-nav" id="lighting-nav">
+        <ul>
+            <li><a href="#" onclick="showPage('ribs')" class="sub-nav-link active">RiBS</a></li>
+            <li><a href="#" onclick="showPage('mirror')" class="sub-nav-link">MiRROR</a></li>
+            <li><a href="#" onclick="showPage('forest')" class="sub-nav-link coming-soon">Forest (Coming soon..)</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sub Navigation for Collaborations -->
+    <nav class="sub-nav" id="collaborations-nav">
+        <ul>
+            <li><a href="#" onclick="showPage('tair-almor')" class="sub-nav-link">Tair Almor</a></li>
+            <li><a href="#" onclick="showPage('martha-rieger')" class="sub-nav-link">Martha Rieger</a></li>
+            <li><a href="#" onclick="showPage('avi-ben-shoshan')" class="sub-nav-link">Avi Ben Shoshan</a></li>
+            <li><a href="#" onclick="showPage('zohar-eizenberg')" class="sub-nav-link">Zohar Eizenberg</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sub Navigation for Objects -->
+    <nav class="sub-nav" id="objects-nav">
+        <ul>
+            <li><a href="#" onclick="showPage('vaze')" class="sub-nav-link">VaZE</a></li>
+            <li><a href="#" onclick="showPage('balll')" class="sub-nav-link">Balll</a></li>
+            <li><a href="#" onclick="showPage('tray')" class="sub-nav-link">Tray</a></li>
+        </ul>
+    </nav>
+
     <div class="container">
-        <h2 class="gallery-title">Ribs by Omer Zimmerman</h2>
-        
-        <div class="gallery-description">
-            <p>In the quiet hours of a winter evening, Omer Zimmerman sat in his workshop, contemplating the interplay of light and shadow. Inspired by the elegant curves of architectural ribbing and the way light dances through organic forms, he envisioned something extraordinary – a light fixture that would breathe life into any space. The "Ribs" collection was born from this moment of pure creative inspiration.</p>
+        <!-- RiBS Page -->
+        <div class="page active" id="ribs-page">
+            <h2 class="gallery-title">RiBS by Omer Zimmermann</h2>
             
-            <p>Each piece in the Ribs series tells a story of meticulous craftsmanship and innovative design. Omer spent months perfecting the balance between form and function, ensuring that every curve catches and redirects light in the most captivating way. These aren't just light fixtures; they're sculptural statements that transform ordinary rooms into spaces of wonder and warmth.</p>
+            <div class="gallery-description">
+                <p>In the quiet hours of a winter evening, Omer Zimmermann sat in his workshop, contemplating the interplay of light and shadow. Inspired by the elegant curves of architectural ribbing and the way light dances through organic forms, he envisioned something extraordinary – a light fixture that would breathe life into any space. The "RiBS" collection was born from this moment of pure creative inspiration.</p>
+                
+                <p>Each piece in the RiBS series tells a story of meticulous craftsmanship and innovative design. Omer spent months perfecting the balance between form and function, ensuring that every curve catches and redirects light in the most captivating way. These aren't just light fixtures; they're sculptural statements that transform ordinary rooms into spaces of wonder and warmth.</p>
+                
+                <p>Bring Omer's vision into your home and experience how the RiBS collection can elevate your living space. Whether illuminating a cozy reading nook or serving as the centerpiece of your dining room, these fixtures create an atmosphere that's both sophisticated and inviting. Don't just light your home – inspire it with RiBS by Omer Zimmermann.</p>
+            </div>
             
-            <p>Bring Omer's vision into your home and experience how the Ribs collection can elevate your living space. Whether illuminating a cozy reading nook or serving as the centerpiece of your dining room, these fixtures create an atmosphere that's both sophisticated and inviting. Don't just light your home – inspire it with Ribs by Omer Zimmerman.</p>
+            <div class="image-gallery">
+                <div class="image-container">
+                    <a href="Assets/FiveRibs/1.jpg" target="_blank" class="image-link">
+                        <img src="Assets/FiveRibs/thumbnails/1.jpg" alt="RiBS Photo 1" loading="lazy">
+                    </a>
+                </div>
+                <div class="image-container">
+                    <a href="Assets/FiveRibs/2.jpg" target="_blank" class="image-link">
+                        <img src="Assets/FiveRibs/thumbnails/2.jpg" alt="RiBS Photo 2" loading="lazy">
+                    </a>
+                </div>
+                <div class="image-container">
+                    <a href="Assets/FiveRibs/3.jpg" target="_blank" class="image-link">
+                        <img src="Assets/FiveRibs/thumbnails/3.jpg" alt="RiBS Photo 3" loading="lazy">
+                    </a>
+                </div>
+            </div>
         </div>
-        
-        <div class="image-gallery">
-            <div class="image-container">
-                <a href="Assets/FiveRibs/1.jpg" target="_blank" class="image-link">
-                    <img src="Assets/FiveRibs/thumbnails/1.jpg" alt="Ribs Photo 1" loading="lazy">
-                </a>
+
+        <!-- Placeholder pages for other sections -->
+        <div class="page" id="mirror-page">
+            <div class="placeholder">
+                <h2>MiRROR</h2>
+                <p>Coming soon...</p>
             </div>
-            <div class="image-container">
-                <a href="Assets/FiveRibs/2.jpg" target="_blank" class="image-link">
-                    <img src="Assets/FiveRibs/thumbnails/2.jpg" alt="Ribs Photo 2" loading="lazy">
-                </a>
+        </div>
+
+        <div class="page" id="forest-page">
+            <div class="placeholder">
+                <h2>Forest</h2>
+                <p>Coming soon...</p>
             </div>
-            <div class="image-container">
-                <a href="Assets/FiveRibs/3.jpg" target="_blank" class="image-link">
-                    <img src="Assets/FiveRibs/thumbnails/3.jpg" alt="Ribs Photo 3" loading="lazy">
-                </a>
+        </div>
+
+        <div class="page" id="tair-almor-page">
+            <div class="placeholder">
+                <h2>Collaboration with Tair Almor</h2>
+                <p>Coming soon...</p>
+            </div>
+        </div>
+
+        <div class="page" id="martha-rieger-page">
+            <div class="placeholder">
+                <h2>Collaboration with Martha Rieger</h2>
+                <p>Coming soon...</p>
+            </div>
+        </div>
+
+        <div class="page" id="avi-ben-shoshan-page">
+            <div class="placeholder">
+                <h2>Collaboration with Avi Ben Shoshan</h2>
+                <p>Coming soon...</p>
+            </div>
+        </div>
+
+        <div class="page" id="zohar-eizenberg-page">
+            <div class="placeholder">
+                <h2>Collaboration with Zohar Eizenberg</h2>
+                <p>Coming soon...</p>
+            </div>
+        </div>
+
+        <div class="page" id="vaze-page">
+            <div class="placeholder">
+                <h2>VaZE</h2>
+                <p>Coming soon...</p>
+            </div>
+        </div>
+
+        <div class="page" id="balll-page">
+            <div class="placeholder">
+                <h2>Balll</h2>
+                <p>Coming soon...</p>
+            </div>
+        </div>
+
+        <div class="page" id="tray-page">
+            <div class="placeholder">
+                <h2>Tray</h2>
+                <p>Coming soon...</p>
             </div>
         </div>
     </div>
+
+    <script>
+        // Navigation functionality
+        let currentSection = 'lighting';
+        let currentPage = 'ribs';
+
+        function showSection(section) {
+            // Update main navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Hide all sub-navs
+            document.querySelectorAll('.sub-nav').forEach(nav => {
+                nav.classList.remove('active');
+            });
+
+            // Show relevant sub-nav
+            document.getElementById(section + '-nav').classList.add('active');
+
+            currentSection = section;
+
+            // Show default page for section
+            if (section === 'lighting') {
+                showPage('ribs');
+            } else if (section === 'collaborations') {
+                showPage('tair-almor');
+            } else if (section === 'objects') {
+                showPage('vaze');
+            }
+        }
+
+        function showPage(page) {
+            // Update sub-navigation
+            document.querySelectorAll('.sub-nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(pageEl => {
+                pageEl.classList.remove('active');
+            });
+
+            // Show selected page
+            document.getElementById(page + '-page').classList.add('active');
+
+            currentPage = page;
+        }
+
+        // Initialize - show lighting section and RiBS page
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('lighting-nav').classList.add('active');
+        });
+    </script>
 </body>
 </html>
