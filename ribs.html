@@ -98,16 +98,50 @@
             line-height: 1.5;
         }
         
-        .bottom-text {
+        .models-section {
             max-width: 700px;
             margin: 40px auto;
             text-align: center;
+        }
+        
+        .models-title {
+            font-size: 1.6em;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+        
+        .models-text {
             font-size: 1.1em;
             line-height: 1.6;
             color: #666;
-            padding: 30px;
-            background: rgba(255,255,255,0.5);
-            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px auto;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #5f4f42;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+        
+        .social-link:hover {
+            color: #333;
+        }
+        
+        .social-icon {
+            margin-right: 8px;
+            font-size: 1.4em;
         }
         
         .product-description {
@@ -375,6 +409,12 @@
             </div>
         </div>
         
+        <!-- About the Models -->
+        <div class="models-section">
+            <h2 class="models-title">About the Models</h2>
+            <p class="models-text">All RIBS models are designed to highlight the honest beauty of their materials.<br>No coatings, no disguises — just clean lines, layered simplicity, and soft yet powerful light.</p>
+        </div>
+        
         <!-- Hero Image Section -->
         <div class="hero-image-section">
             <div class="hero-image-container">
@@ -383,15 +423,16 @@
             </div>
         </div>
         
-        <!-- Bottom Text -->
-        <div class="bottom-text">
-            <p>All RIBS models are designed to highlight the honest beauty of their materials.<br>No coatings, no disguises — just clean lines, layered simplicity, and soft yet powerful light.</p>
-        </div>
-        
-        <!-- Call to Action -->
-        <div class="cta-section">
-            <p class="cta-text">Experience the RiBS collection and transform your space with architectural lighting</p>
-            <a href="mailto:contact@omerzimer.com" class="cta-button">Contact Omer Zimmermann</a>
+        <!-- Social Links -->
+        <div class="social-links">
+            <a href="https://www.instagram.com/omerzimmermann/" target="_blank" rel="noopener" class="social-link">
+                <span class="social-icon">📷</span>
+                Instagram
+            </a>
+            <a href="https://omerzimer.com" target="_blank" rel="noopener" class="social-link">
+                <span class="social-icon">🌐</span>
+                Website
+            </a>
         </div>
     </div>
 </body>

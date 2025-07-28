@@ -23,11 +23,29 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
+            position: relative;
+        }
+        
+        .home-link {
+            position: absolute;
+            top: 40px;
+            left: 20px;
+            color: #5f4f42;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            z-index: 10;
+        }
+        
+        .home-link:hover {
+            color: #333;
         }
         
         .header {
             text-align: center;
             margin-bottom: 50px;
+            margin-top: 60px;
         }
         
         .headline {
@@ -37,23 +55,6 @@
             font-weight: 300;
             letter-spacing: 3px;
             text-transform: uppercase;
-        }
-        
-        .back-link {
-            display: inline-block;
-            color: #5f4f42;
-            text-decoration: none;
-            font-size: 1.1em;
-            padding: 10px 20px;
-            border: 2px solid #5f4f42;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            margin-top: 40px;
-        }
-        
-        .back-link:hover {
-            background-color: #5f4f42;
-            color: white;
         }
         
         .gallery-container {
@@ -101,7 +102,7 @@
         
         .main-image {
             max-width: 100%;
-            max-height: 600px;
+            height: 525px;
             object-fit: contain;
             border-radius: 12px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
@@ -120,19 +121,6 @@
             text-align: center;
         }
         
-        .specs-title {
-            font-size: 1.8em;
-            color: #333;
-            margin-bottom: 20px;
-            font-weight: 400;
-            letter-spacing: 1px;
-        }
-        
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-        }
-        
         @media (max-width: 768px) {
             .headline {
                 font-size: 2.5em;
@@ -140,6 +128,15 @@
             
             .container {
                 padding: 20px 15px;
+            }
+            
+            .home-link {
+                top: 20px;
+                left: 15px;
+            }
+            
+            .header {
+                margin-top: 80px;
             }
             
             .gallery-container {
@@ -160,11 +157,18 @@
             .thumbnail-item img {
                 height: 80px;
             }
+            
+            .main-image {
+                height: auto;
+                max-height: 400px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <a href="../ribs.html" class="home-link">Home</a>
+        
         <div class="header">
             <h1 class="headline">RiBS Wall Aluminum</h1>
         </div>
@@ -193,10 +197,6 @@
         </div>
         
         <div class="product-specs">
-        </div>
-        
-        <div class="footer">
-            <a href="../ribs.html" class="back-link">← Back to RiBS Collection</a>
         </div>
     </div>
     
