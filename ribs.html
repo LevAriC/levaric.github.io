@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RiBS - Architectural Lighting by Omer Zimmermann</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 20px;
+        }
+        
+        .hero {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .headline {
+            font-size: 6em;
+            font-weight: 300;
+            color: #2c2c2c;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin-bottom: 0px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .byline {
+            font-size: 1.4em;
+            color: #555;
+            margin-top: 0px;
+            margin-bottom: 20px;
+            font-style: italic;
+            font-weight: 300;
+        }
+        
+        .product-description {
+            max-width: 800px;
+            margin: 0 auto 60px auto;
+            font-size: 1.3em;
+            color: #555;
+            line-height: 1.8;
+            text-align: center;
+            padding: 40px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-section {
+            margin-bottom: 60px;
+        }
+        
+        .gallery-title {
+            font-size: 2.5em;
+            color: #333;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .image-grid-limited {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+            max-width: 960px; /* Max 3 items at 300px + gaps */
+            margin-left: auto;
+            margin-right: auto;
+            justify-items: center;
+        }
+        
+        .hero-image-section {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0 40px 0;
+        }
+        
+        .hero-image-container {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+
+        
+        .hero-hover {
+            opacity: 0;
+        }
+        
+        .hero-image-container:hover .hero-hover {
+            opacity: 1;
+        }
+        
+        .hero-image-container:hover .hero-default {
+            opacity: 0;
+        }
+        
+        .hero-image-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: none;
+        }
+        
+                 .image-item {
+             position: relative;
+             border-radius: 12px;
+             overflow: hidden;
+             transition: transform 0.3s ease;
+         }
+         
+         .image-item a {
+             display: block;
+             text-decoration: none;
+             color: inherit;
+         }
+        
+        .image-item:hover {
+            transform: translateY(-8px);
+        }
+        
+                 .image-item img {
+             width: 100%;
+             height: 300px;
+             object-fit: cover;
+             transition: transform 0.3s ease;
+             cursor: pointer;
+             border: none;
+             outline: none;
+         }
+        
+        .image-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .image-item:hover .image-overlay {
+            transform: translateY(0);
+        }
+        
+        .cta-section {
+            text-align: center;
+            margin-top: 80px;
+            padding: 60px 40px;
+            background: rgba(139, 69, 19, 0.1);
+            border-radius: 12px;
+        }
+        
+        .cta-text {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #8b4513;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background: #654321;
+        }
+        
+        @media (max-width: 768px) {
+            .headline {
+                font-size: 3.5em;
+                letter-spacing: 4px;
+            }
+            
+            .product-description {
+                font-size: 1.1em;
+                padding: 30px 20px;
+            }
+            
+            .image-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .gallery-title {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1 class="headline">RiBS</h1>
+            <p class="byline">By Omer Zimmermann</p>
+        </div>
+        
+        <!-- RiBS 400 and 600 Side by Side -->
+        <div class="gallery-section">
+            <h2 class="gallery-title">RiBS Collection</h2>
+            <div class="image-grid-limited">
+                <div class="image-item">
+                    <a href="RiBS-Site/ribs-400.html">
+                        <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/1.jpg" alt="RiBS 400" loading="lazy">
+                        <div class="image-overlay">
+                            <h3>RiBS 400</h3>
+                            <p>Compact and elegant lighting solution</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="image-item">
+                    <a href="RiBS-Site/ribs-600.html">
+                        <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/1.jpg" alt="RiBS 600" loading="lazy">
+                        <div class="image-overlay">
+                            <h3>RiBS 600</h3>
+                            <p>Extended lighting for larger spaces</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- RiBS Wall -->
+        <div class="gallery-section">
+            <h2 class="gallery-title">RiBS Wall</h2>
+            <div class="image-grid-limited">
+                <div class="image-item">
+                    <a href="RiBS-Site/ribs-wall-aluminum.html">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall A.png" alt="RiBS Wall Aluminum" loading="lazy">
+                        <div class="image-overlay">
+                            <h3>RiBS Wall Aluminum</h3>
+                            <p>Sleek aluminum wall-mounted solutions</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="image-item">
+                    <a href="RiBS-Site/ribs-wall-birch.html">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall Wood A.png" alt="RiBS Wall Birch" loading="lazy">
+                        <div class="image-overlay">
+                            <h3>RiBS Wall Birch</h3>
+                            <p>Warm birch wall-mounted designs</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- RiBS Strip -->
+        <div class="gallery-section">
+            <h2 class="gallery-title">RiBS Strip</h2>
+            <div class="image-grid-limited">
+                <div class="image-item">
+                    <a href="RiBS-Site/ribs-strip-aluminum.html">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long A.45.png" alt="RiBS Strip Aluminum" loading="lazy">
+                        <div class="image-overlay">
+                            <h3>RiBS Strip Aluminum</h3>
+                            <p>Linear aluminum strip lighting</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="image-item">
+                    <a href="RiBS-Site/ribs-strip-birch.html">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long Wood A.png" alt="RiBS Strip Birch" loading="lazy">
+                        <div class="image-overlay">
+                            <h3>RiBS Strip Birch</h3>
+                            <p>Elegant birch strip lighting</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hero Image Section -->
+        <div class="hero-image-section">
+            <div class="hero-image-container">
+                <img src="Assets/Lighting/RiBS/thumbnails/2.jpg" alt="RiBS Hero" class="hero-default" loading="lazy">
+                <img src="Assets/Lighting/RiBS/thumbnails/1.jpg" alt="RiBS Hero Hover" class="hero-hover" loading="lazy">
+            </div>
+        </div>
+        
+        <!-- Call to Action -->
+        <div class="cta-section">
+            <p class="cta-text">Experience the RiBS collection and transform your space with architectural lighting</p>
+            <a href="mailto:contact@omerzimer.com" class="cta-button">Contact Omer Zimmermann</a>
+        </div>
+    </div>
+</body>
+</html> 
