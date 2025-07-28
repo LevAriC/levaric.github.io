@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RiBS - Architectural Lighting by Omer Zimmermann</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .hero {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .headline {
+            font-size: 6em;
+            font-weight: 300;
+            color: #2c2c2c;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .product-description {
+            max-width: 800px;
+            margin: 0 auto 60px auto;
+            font-size: 1.3em;
+            color: #555;
+            line-height: 1.8;
+            text-align: center;
+            padding: 40px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-section {
+            margin-bottom: 60px;
+        }
+        
+        .gallery-title {
+            font-size: 2.5em;
+            color: #333;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .image-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .image-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .image-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .image-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .image-item:hover .image-overlay {
+            transform: translateY(0);
+        }
+        
+        .cta-section {
+            text-align: center;
+            margin-top: 80px;
+            padding: 60px 40px;
+            background: rgba(139, 69, 19, 0.1);
+            border-radius: 12px;
+        }
+        
+        .cta-text {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #8b4513;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background: #654321;
+        }
+        
+        @media (max-width: 768px) {
+            .headline {
+                font-size: 3.5em;
+                letter-spacing: 4px;
+            }
+            
+            .product-description {
+                font-size: 1.1em;
+                padding: 30px 20px;
+            }
+            
+            .image-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .gallery-title {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1 class="headline">RiBS</h1>
+            
+            <div class="product-description">
+                <p>Inspired by the elegant curves of architectural ribbing and the organic flow of natural forms, RiBS represents the perfect fusion of sculptural artistry and functional illumination. Each piece in this collection captures and redirects light in the most captivating way, transforming ordinary spaces into extraordinary environments.</p>
+                
+                <p>Crafted with meticulous attention to detail, RiBS fixtures are more than lighting solutions – they are architectural statements that breathe life into any interior. Whether you choose the dramatic presence of RiBS Long, the intimate warmth of RiBS Short, or the striking impact of RiBS Wall, each design tells a story of innovation, craftsmanship, and the endless pursuit of beauty in functional art.</p>
+            </div>
+        </div>
+        
+        <!-- Main RiBS Collection -->
+        <div class="gallery-section">
+            <h2 class="gallery-title">RiBS Collection</h2>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="Assets/Lighting/RiBS/1.jpg" alt="RiBS Design 1" loading="lazy">
+                    <div class="image-overlay">
+                        <h3>Architectural Elegance</h3>
+                        <p>Where form meets function in perfect harmony</p>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="Assets/Lighting/RiBS/2.jpg" alt="RiBS Design 2" loading="lazy">
+                    <div class="image-overlay">
+                        <h3>Sculptural Lighting</h3>
+                        <p>Transforming spaces through innovative design</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- RiBS Long Collection -->
+        <div class="gallery-section">
+            <h2 class="gallery-title">RiBS Long</h2>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="Assets/Lighting/RiBS/RiBSLong/1.jpg" alt="RiBS Long 1" loading="lazy">
+                    <div class="image-overlay">
+                        <h3>Extended Elegance</h3>
+                        <p>Dramatic lighting for larger spaces</p>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="Assets/Lighting/RiBS/RiBSLong/2.jpg" alt="RiBS Long 2" loading="lazy">
+                    <div class="image-overlay">
+                        <h3>Linear Beauty</h3>
+                        <p>Perfect for dining areas and hallways</p>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="Assets/Lighting/RiBS/RiBSLong/3.jpg" alt="RiBS Long 3" loading="lazy">
+                    <div class="image-overlay">
+                        <h3>Architectural Statement</h3>
+                        <p>Bold presence with sophisticated design</p>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="Assets/Lighting/RiBS/RiBSLong/4.jpg" alt="RiBS Long 4" loading="lazy">
+                    <div class="image-overlay">
+                        <h3>Sculptural Form</h3>
+                        <p>Art and function in perfect balance</p>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="Assets/Lighting/RiBS/RiBSLong/5.jpg" alt="RiBS Long 5" loading="lazy">
+                    <div class="image-overlay">
+                        <h3>Illuminated Poetry</h3>
+                        <p>Light dancing through organic curves</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- RiBS Short Collection -->
+        <div class="gallery-section">
+            <h2 class="gallery-title">RiBS Short</h2>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img src="Assets/Lighting/RiBS/RiBSShort/1.jpg" alt="RiBS Short 1" loading="lazy">
+                    <div class="image-overlay">
+                        <h3>Intimate Lighting</h3>
+                        <p>Perfect for cozy spaces and accent lighting</p>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="Assets/Lighting/RiBS/RiBSShort/2.jpg" alt="RiBS Short 2" loading="lazy">
+                    <div class="image-overlay">
+                        <h3>Compact Elegance</h3>
+                        <p>Maximum impact in minimal space</p>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="Assets/Lighting/RiBS/RiBSShort/3.jpg" alt="RiBS Short 3" loading="lazy">
+                    <div class="image-overlay">
+                        <h3>Warm Ambiance</h3>
+                        <p>Creating intimate atmospheres</p>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="Assets/Lighting/RiBS/RiBSShort/4.jpg" alt="RiBS Short 4" loading="lazy">
+                    <div class="image-overlay">
+                        <h3>Refined Design</h3>
+                        <p>Sophisticated lighting for modern living</p>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="Assets/Lighting/RiBS/RiBSShort/5.jpg" alt="RiBS Short 5" loading="lazy">
+                    <div class="image-overlay">
+                        <h3>Artistic Expression</h3>
+                        <p>Where craftsmanship meets innovation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Call to Action -->
+        <div class="cta-section">
+            <p class="cta-text">Experience the RiBS collection and transform your space with architectural lighting</p>
+            <a href="mailto:contact@omerzimer.com" class="cta-button">Contact Omer Zimmermann</a>
+        </div>
+    </div>
+</body>
+</html> 
