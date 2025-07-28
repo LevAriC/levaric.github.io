@@ -75,13 +75,11 @@
             position: relative;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease;
         }
         
         .image-item:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
         
         .image-item img {
@@ -90,6 +88,8 @@
             object-fit: cover;
             transition: transform 0.3s ease;
             cursor: pointer;
+            border: none;
+            outline: none;
         }
         
         .image-item:hover img {
