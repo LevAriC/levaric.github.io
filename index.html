@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omer Zimer</title>
+    <title>Omer Zimmermann</title>
+    <link rel="icon" type="image/png" href="Assets/Logo/processed/logo-60.png">
     <style>
         * {
             margin: 0;
@@ -57,6 +58,11 @@
             display: block;
         }
         
+        /* RiBS Sub Navigation - Wood Brown from lighting fixtures */
+        #ribs-nav {
+            background-color: #5f4f42;
+        }
+        
         .sub-nav ul {
             list-style: none;
             display: flex;
@@ -79,6 +85,11 @@
         
         .sub-nav a:hover, .sub-nav a.active {
             background-color: #888;
+        }
+        
+        /* RiBS Sub Navigation Hover - Darker Brown */
+        #ribs-nav a:hover, #ribs-nav a.active {
+            background-color: #4a3f34;
         }
         
         .sub-nav a.coming-soon {
@@ -107,12 +118,144 @@
             display: block;
         }
         
+        /* Home Page Styles */
+        .home-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0px 20px 20px 20px;
+            overflow-x: auto;
+        }
+        
+        .home-text-intro {
+            margin-bottom: 20px;
+        }
+
+        .home-text-intro h1 {
+            font-size: 4.5em;
+            color: #333;
+            margin-bottom: 0;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            line-height: 1.2;
+            text-align: center;
+        }
+        
+        .home-hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+        }
+        
+        .home-text {
+            display: none;
+        }
+        
+
+        
+
+        
+        .home-image {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .home-image img {
+            width: 720px;
+            height: 720px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .home-image-mobile {
+            display: none;
+        }
+        
+
+        
+
+        
+        /* Overview Pages Styles */
+        .overview-page {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .overview-title {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 40px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .item-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .item-card.coming-soon {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .item-card.coming-soon:hover {
+            transform: none;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .item-name {
+            font-size: 1.8em;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .item-description {
+            font-size: 1em;
+            color: #666;
+            line-height: 1.5;
+            text-align: center;
+        }
+        
+        .coming-soon-text {
+            font-style: italic;
+            color: #999;
+            text-align: center;
+        }
+        
+        /* Individual Item Pages */
         .gallery-title {
             color: #444;
             font-size: 2em;
             margin: 40px 0 30px 0;
             font-weight: bold;
-            text-align: left;
+            text-align: center;
         }
         
         .gallery-description {
@@ -120,8 +263,8 @@
             font-size: 1.1em;
             line-height: 1.6;
             max-width: 800px;
-            margin: 0 0 40px 0;
-            text-align: left;
+            margin: 0 auto 40px auto;
+            text-align: center;
             padding: 0 20px;
         }
         
@@ -176,6 +319,8 @@
             opacity: 1;
         }
         
+
+        
         .placeholder {
             text-align: center;
             padding: 60px 20px;
@@ -185,15 +330,86 @@
         .placeholder h2 {
             margin-bottom: 20px;
             color: #444;
+            text-align: center;
         }
         
-        @media (max-width: 768px) {
+        .placeholder h3 {
+            text-align: center;
+        }
+        
+        .placeholder p {
+            text-align: center;
+        }
+        
+        @media (max-width: 760px) {
+            .home-text {
+                display: none;
+            }
+            
+            .home-text-intro h1 {
+                font-size: 3em;
+                letter-spacing: 2px;
+            }
+        }
+        
+        @media (max-width: 500px) {
             .main-nav ul, .sub-nav ul {
                 flex-direction: column;
             }
             
             .main-nav a, .sub-nav a {
                 text-align: center;
+            }
+            
+
+            
+            .home-hero {
+                gap: 30px;
+            }
+            
+            .home-text {
+                display: none;
+            }
+            
+            .home-text-intro h1 {
+                font-size: 2.5em;
+                color: #333;
+                text-shadow: none;
+                letter-spacing: 2px;
+                text-transform: none;
+            }
+            
+
+            
+            .home-image {
+                display: none;
+            }
+            
+            .home-image-mobile {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .home-image-mobile img {
+                max-width: 300px;
+                width: 100%;
+                height: auto;
+                border-radius: 12px;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            }
+            
+            .home-content h1 {
+                font-size: 2.2em;
+            }
+            
+            .overview-title {
+                font-size: 2em;
+            }
+            
+            .items-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
             
             .image-gallery {
@@ -211,7 +427,8 @@
     <!-- Main Navigation -->
     <nav class="main-nav">
         <ul>
-            <li><a href="#" onclick="showSection('lighting')" class="nav-link active">Lighting</a></li>
+            <li><a href="#" onclick="showSection('home')" class="nav-link active">HoME</a></li>
+            <li><a href="#" onclick="showSection('lighting')" class="nav-link">Lighting</a></li>
             <li><a href="#" onclick="showSection('collaborations')" class="nav-link">Collaborations</a></li>
             <li><a href="#" onclick="showSection('objects')" class="nav-link">Objects</a></li>
         </ul>
@@ -223,6 +440,15 @@
             <li><a href="#" onclick="showPage('ribs')" class="sub-nav-link active">RiBS</a></li>
             <li><a href="#" onclick="showPage('mirror')" class="sub-nav-link">MiRROR</a></li>
             <li><a href="#" onclick="showPage('forest')" class="sub-nav-link coming-soon">Forest (Coming soon..)</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sub Navigation for RiBS -->
+    <nav class="sub-nav" id="ribs-nav">
+        <ul>
+            <li><a href="#" onclick="showPage('ribs-long')" class="ribs-nav-link">RiBS - Long</a></li>
+            <li><a href="#" onclick="showPage('ribs-short')" class="ribs-nav-link">RiBS - Short</a></li>
+            <li><a href="#" onclick="showPage('ribs-wall')" class="ribs-nav-link">RiBS - Wall</a></li>
         </ul>
     </nav>
 
@@ -246,33 +472,206 @@
     </nav>
 
     <div class="container">
-        <!-- RiBS Page -->
-        <div class="page active" id="ribs-page">
-            <h2 class="gallery-title">RiBS by Omer Zimmermann</h2>
+        <!-- Home Page -->
+        <div class="page active" id="home-page">
+            <div class="home-content">
+                                 <div class="home-text-intro">
+                     <h1>Omer Zimmermann</h1>
+                 </div>
+                <div class="home-hero">
+                                         <div class="home-text">
+                     </div>
+                                         <div class="home-image">
+                         <img src="Assets/Home/Omer.jpg" alt="Omer Zimmermann Portrait">
+                     </div>
+                     <div class="home-image-mobile">
+                         <img src="Assets/Home/thumbnails/Omer.jpg" alt="Omer Zimmermann Portrait">
+                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lighting Overview Page -->
+        <div class="page" id="lighting-overview-page">
+            <div class="overview-page">
+                <h2 class="overview-title">Lighting Collection</h2>
+                <div class="items-grid">
+                    <div class="item-card" onclick="showSection('lighting'); showPage('ribs');">
+                        <div class="item-name">RiBS</div>
+                        <div class="item-description">Inspired by architectural ribbing and organic forms, the RiBS collection captures and redirects light in the most captivating way.</div>
+                    </div>
+                    <div class="item-card" onclick="showSection('lighting'); showPage('mirror');">
+                        <div class="item-name">MiRROR</div>
+                        <div class="item-description">An innovative lighting concept that plays with reflection and refraction to create dynamic illumination.</div>
+                    </div>
+                    <div class="item-card coming-soon">
+                        <div class="item-name">Forest</div>
+                        <div class="item-description coming-soon-text">Coming soon...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Collaborations Overview Page -->
+        <div class="page" id="collaborations-overview-page">
+            <div class="overview-page">
+                <h2 class="overview-title">Collaborations</h2>
+                <div class="items-grid">
+                    <div class="item-card" onclick="showSection('collaborations'); showPage('tair-almor');">
+                        <div class="item-name">Tair Almor</div>
+                        <div class="item-description">A unique collaboration exploring the intersection of light and contemporary art.</div>
+                    </div>
+                    <div class="item-card" onclick="showSection('collaborations'); showPage('martha-rieger');">
+                        <div class="item-name">Martha Rieger</div>
+                        <div class="item-description">An artistic partnership bringing together innovative design and craftsmanship.</div>
+                    </div>
+                    <div class="item-card" onclick="showSection('collaborations'); showPage('avi-ben-shoshan');">
+                        <div class="item-name">Avi Ben Shoshan</div>
+                        <div class="item-description">A creative collaboration merging lighting design with architectural vision.</div>
+                    </div>
+                    <div class="item-card" onclick="showSection('collaborations'); showPage('zohar-eizenberg');">
+                        <div class="item-name">Zohar Eizenberg</div>
+                        <div class="item-description">An inspiring partnership creating luminous works of functional art.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Objects Overview Page -->
+        <div class="page" id="objects-overview-page">
+            <div class="overview-page">
+                <h2 class="overview-title">Objects Collection</h2>
+                <div class="items-grid">
+                    <div class="item-card" onclick="showSection('objects'); showPage('vaze');">
+                        <div class="item-name">VaZE</div>
+                        <div class="item-description">Sculptural vessels that blur the line between functional object and artistic expression.</div>
+                    </div>
+                    <div class="item-card" onclick="showSection('objects'); showPage('balll');">
+                        <div class="item-name">Balll</div>
+                        <div class="item-description">Spherical forms that explore balance, proportion, and the beauty of geometric simplicity.</div>
+                    </div>
+                    <div class="item-card" onclick="showSection('objects'); showPage('tray');">
+                        <div class="item-name">Tray</div>
+                        <div class="item-description">Elegant serving pieces that transform everyday rituals into moments of aesthetic pleasure.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RiBS Main Page -->
+        <div class="page" id="ribs-page">
+            <h2 class="gallery-title">RiBS Collection by Omer Zimmermann</h2>
             
             <div class="gallery-description">
                 <p>In the quiet hours of a winter evening, Omer Zimmermann sat in his workshop, contemplating the interplay of light and shadow. Inspired by the elegant curves of architectural ribbing and the way light dances through organic forms, he envisioned something extraordinary – a light fixture that would breathe life into any space. The "RiBS" collection was born from this moment of pure creative inspiration.</p>
                 
                 <p>Each piece in the RiBS series tells a story of meticulous craftsmanship and innovative design. Omer spent months perfecting the balance between form and function, ensuring that every curve catches and redirects light in the most captivating way. These aren't just light fixtures; they're sculptural statements that transform ordinary rooms into spaces of wonder and warmth.</p>
                 
-                <p>Bring Omer's vision into your home and experience how the RiBS collection can elevate your living space. Whether illuminating a cozy reading nook or serving as the centerpiece of your dining room, these fixtures create an atmosphere that's both sophisticated and inviting. Don't just light your home – inspire it with RiBS by Omer Zimmermann.</p>
+                <p>Explore the different variations of the RiBS collection using the navigation above, or browse the main collection below.</p>
             </div>
             
             <div class="image-gallery">
                 <div class="image-container">
-                    <a href="Assets/FiveRibs/1.jpg" target="_blank" class="image-link">
-                        <img src="Assets/FiveRibs/thumbnails/1.jpg" alt="RiBS Photo 1" loading="lazy">
+                    <a href="Assets/Lighting/RiBS/1.jpg" target="_blank" class="image-link">
+                        <img src="Assets/Lighting/RiBS/thumbnails/1.jpg" alt="RiBS Photo 1" loading="lazy">
                     </a>
                 </div>
                 <div class="image-container">
-                    <a href="Assets/FiveRibs/2.jpg" target="_blank" class="image-link">
-                        <img src="Assets/FiveRibs/thumbnails/2.jpg" alt="RiBS Photo 2" loading="lazy">
+                    <a href="Assets/Lighting/RiBS/2.jpg" target="_blank" class="image-link">
+                        <img src="Assets/Lighting/RiBS/thumbnails/2.jpg" alt="RiBS Photo 2" loading="lazy">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- RiBS Long Page -->
+        <div class="page" id="ribs-long-page">
+            <h2 class="gallery-title">RiBS - Long by Omer Zimmermann</h2>
+            
+            <div class="gallery-description">
+                <p>The extended version of the RiBS collection, featuring elongated forms that create dramatic lighting effects across larger spaces. These pieces are perfect for dining areas, hallways, and spaces where you want to make a bold statement with light.</p>
+            </div>
+            
+            <div class="image-gallery">
+                <div class="image-container">
+                    <a href="Assets/Lighting/RiBSLong/1.jpg" target="_blank" class="image-link">
+                        <img src="Assets/Lighting/RiBSLong/thumbnails/1.jpg" alt="RiBS Long Photo 1" loading="lazy">
                     </a>
                 </div>
                 <div class="image-container">
-                    <a href="Assets/FiveRibs/3.jpg" target="_blank" class="image-link">
-                        <img src="Assets/FiveRibs/thumbnails/3.jpg" alt="RiBS Photo 3" loading="lazy">
+                    <a href="Assets/Lighting/RiBSLong/2.jpg" target="_blank" class="image-link">
+                        <img src="Assets/Lighting/RiBSLong/thumbnails/2.jpg" alt="RiBS Long Photo 2" loading="lazy">
                     </a>
+                </div>
+                <div class="image-container">
+                    <a href="Assets/Lighting/RiBSLong/3.jpg" target="_blank" class="image-link">
+                        <img src="Assets/Lighting/RiBSLong/thumbnails/3.jpg" alt="RiBS Long Photo 3" loading="lazy">
+                    </a>
+                </div>
+                <div class="image-container">
+                    <a href="Assets/Lighting/RiBSLong/4.jpg" target="_blank" class="image-link">
+                        <img src="Assets/Lighting/RiBSLong/thumbnails/4.jpg" alt="RiBS Long Photo 4" loading="lazy">
+                    </a>
+                </div>
+                <div class="image-container">
+                    <a href="Assets/Lighting/RiBSLong/5.jpg" target="_blank" class="image-link">
+                        <img src="Assets/Lighting/RiBSLong/thumbnails/5.jpg" alt="RiBS Long Photo 5" loading="lazy">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- RiBS Short Page -->
+        <div class="page" id="ribs-short-page">
+            <h2 class="gallery-title">RiBS - Short by Omer Zimmermann</h2>
+            
+            <div class="gallery-description">
+                <p>The compact version of the RiBS collection, designed for intimate spaces and accent lighting. These pieces provide focused illumination while maintaining the distinctive aesthetic of the RiBS design language.</p>
+            </div>
+            
+            <div class="image-gallery">
+                <div class="image-container">
+                    <a href="Assets/Lighting/RiBSShort/1.jpg" target="_blank" class="image-link">
+                        <img src="Assets/Lighting/RiBSShort/thumbnails/1.jpg" alt="RiBS Short Photo 1" loading="lazy">
+                    </a>
+                </div>
+                <div class="image-container">
+                    <a href="Assets/Lighting/RiBSShort/2.jpg" target="_blank" class="image-link">
+                        <img src="Assets/Lighting/RiBSShort/thumbnails/2.jpg" alt="RiBS Short Photo 2" loading="lazy">
+                    </a>
+                </div>
+                <div class="image-container">
+                    <a href="Assets/Lighting/RiBSShort/3.jpg" target="_blank" class="image-link">
+                        <img src="Assets/Lighting/RiBSShort/thumbnails/3.jpg" alt="RiBS Short Photo 3" loading="lazy">
+                    </a>
+                </div>
+                <div class="image-container">
+                    <a href="Assets/Lighting/RiBSShort/4.jpg" target="_blank" class="image-link">
+                        <img src="Assets/Lighting/RiBSShort/thumbnails/4.jpg" alt="RiBS Short Photo 4" loading="lazy">
+                    </a>
+                </div>
+                <div class="image-container">
+                    <a href="Assets/Lighting/RiBSShort/5.jpg" target="_blank" class="image-link">
+                        <img src="Assets/Lighting/RiBSShort/thumbnails/5.jpg" alt="RiBS Short Photo 5" loading="lazy">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- RiBS Wall Page -->
+        <div class="page" id="ribs-wall-page">
+            <h2 class="gallery-title">RiBS - Wall by Omer Zimmermann</h2>
+            
+            <div class="gallery-description">
+                <p>Wall-mounted versions of the RiBS collection that transform vertical surfaces into canvases of light and shadow. These pieces are perfect for creating dramatic focal points and ambient lighting.</p>
+            </div>
+            
+            <div class="image-gallery">
+                <div class="image-container">
+                    <div class="placeholder">
+                        <h3>RiBS - Wall Collection</h3>
+                        <p>Photos coming soon...</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -344,8 +743,8 @@
 
     <script>
         // Navigation functionality
-        let currentSection = 'lighting';
-        let currentPage = 'ribs';
+        let currentSection = 'home';
+        let currentPage = 'home';
 
         function showSection(section) {
             // Update main navigation
@@ -359,27 +758,56 @@
                 nav.classList.remove('active');
             });
 
-            // Show relevant sub-nav
-            document.getElementById(section + '-nav').classList.add('active');
+            // Show relevant sub-nav and default page for section
+            if (section === 'home') {
+                showPage('home');
+            } else if (section === 'lighting') {
+                document.getElementById('lighting-nav').classList.add('active');
+                showPage('lighting-overview');
+            } else if (section === 'collaborations') {
+                document.getElementById('collaborations-nav').classList.add('active');
+                showPage('collaborations-overview');
+            } else if (section === 'objects') {
+                document.getElementById('objects-nav').classList.add('active');
+                showPage('objects-overview');
+            }
 
             currentSection = section;
-
-            // Show default page for section
-            if (section === 'lighting') {
-                showPage('ribs');
-            } else if (section === 'collaborations') {
-                showPage('tair-almor');
-            } else if (section === 'objects') {
-                showPage('vaze');
-            }
         }
 
         function showPage(page) {
-            // Update sub-navigation
+            // Update sub-navigation active states
             document.querySelectorAll('.sub-nav-link').forEach(link => {
                 link.classList.remove('active');
             });
-            event.target.classList.add('active');
+            document.querySelectorAll('.ribs-nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Set active nav link based on page
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+
+            // Handle RiBS sub-navigation
+            if (page === 'ribs') {
+                // Show lighting nav and ribs sub-nav
+                document.getElementById('lighting-nav').classList.add('active');
+                document.getElementById('ribs-nav').classList.add('active');
+                // Hide other sub-navs
+                document.getElementById('collaborations-nav').classList.remove('active');
+                document.getElementById('objects-nav').classList.remove('active');
+            } else if (page === 'ribs-long' || page === 'ribs-short' || page === 'ribs-wall') {
+                // Show both lighting and ribs nav
+                document.getElementById('lighting-nav').classList.add('active');
+                document.getElementById('ribs-nav').classList.add('active');
+            } else if (page === 'lighting-overview') {
+                document.getElementById('lighting-nav').classList.add('active');
+                document.getElementById('ribs-nav').classList.remove('active');
+            } else {
+                // Hide ribs sub-nav for other pages
+                document.getElementById('ribs-nav').classList.remove('active');
+            }
 
             // Hide all pages
             document.querySelectorAll('.page').forEach(pageEl => {
@@ -392,9 +820,9 @@
             currentPage = page;
         }
 
-        // Initialize - show lighting section and RiBS page
+        // Initialize - show home page
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('lighting-nav').classList.add('active');
+            showPage('home');
         });
     </script>
 </body>
