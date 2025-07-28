@@ -71,6 +71,54 @@
             margin-bottom: 40px;
         }
         
+        .image-grid-limited {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+            max-width: 960px; /* Max 3 items at 300px + gaps */
+            margin-left: auto;
+            margin-right: auto;
+            justify-items: center;
+        }
+        
+        .hero-image-section {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        
+        .hero-image-container {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .hero-image-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+        
+        .hero-hover {
+            opacity: 0;
+        }
+        
+        .hero-image-container:hover .hero-hover {
+            opacity: 1;
+        }
+        
+        .hero-image-container:hover .hero-default {
+            opacity: 0;
+        }
+        
                  .image-item {
              position: relative;
              border-radius: 12px;
@@ -178,283 +226,90 @@
 
         </div>
         
-        <!-- RiBS Strip Aluminum Collection -->
-        <div class="gallery-section">
-            <h2 class="gallery-title">RiBS Strip Aluminum</h2>
-            <div class="image-grid">
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/Illustrations/Ribs long A.45.png" target="_blank">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long A.45.png" alt="RiBS Long A" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>RiBS Long A</h3>
-                            <p>First variant in the long series</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/Illustrations/Ribs long B.png" target="_blank">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long B.png" alt="RiBS Long B" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>RiBS Long B</h3>
-                            <p>Second variant in the long series</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/Illustrations/Ribs long C.png" target="_blank">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long C.png" alt="RiBS Long C" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>RiBS Long C</h3>
-                            <p>Third variant in the long series</p>
-                        </div>
-                    </a>
-                </div>
+        <!-- Hero Image Section -->
+        <div class="hero-image-section">
+            <div class="hero-image-container">
+                <img src="Assets/Lighting/RiBS/thumbnails/2.jpg" alt="RiBS Hero" class="hero-default" loading="lazy">
+                <img src="Assets/Lighting/RiBS/thumbnails/1.jpg" alt="RiBS Hero Hover" class="hero-hover" loading="lazy">
             </div>
         </div>
         
-        <!-- RiBS Birch Wood Collection -->
-        <div class="gallery-section">
-            <h2 class="gallery-title">RiBS Birch Wood</h2>
-            <div class="image-grid">
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/Illustrations/Ribs long Wood A.png" target="_blank">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long Wood A.png" alt="RiBS Long Wood A" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>RiBS Long Wood A</h3>
-                            <p>First wood variant in the long series</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/Illustrations/Ribs long Wood B.png" target="_blank">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long Wood B.png" alt="RiBS Long Wood B" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>RiBS Long Wood B</h3>
-                            <p>Second wood variant in the long series</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/Illustrations/Ribs long Wood C.png" target="_blank">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long Wood C.png" alt="RiBS Long Wood C" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>RiBS Long Wood C</h3>
-                            <p>Third wood variant in the long series</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- RiBS Wall Aluminum Collection -->
-        <div class="gallery-section">
-            <h2 class="gallery-title">RiBS Wall Aluminum</h2>
-            <div class="image-grid">
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/Illustrations/Ribs wall A.png" target="_blank">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall A.png" alt="RiBS Wall A" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>RiBS Wall A</h3>
-                            <p>First variant in the wall series</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/Illustrations/Ribs wall B.png" target="_blank">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall B.png" alt="RiBS Wall B" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>RiBS Wall B</h3>
-                            <p>Second variant in the wall series</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/Illustrations/Ribs wall C.png" target="_blank">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall C.png" alt="RiBS Wall C" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>RiBS Wall C</h3>
-                            <p>Third variant in the wall series</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/Illustrations/Ribs wall D.png" target="_blank">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall D.png" alt="RiBS Wall D" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>RiBS Wall D</h3>
-                            <p>Fourth variant in the wall series</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- RiBS Wall Birch Wood Collection -->
-        <div class="gallery-section">
-            <h2 class="gallery-title">RiBS Wall Birch Wood</h2>
-            <div class="image-grid">
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/Illustrations/Ribs wall Wood A.png" target="_blank">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall Wood A.png" alt="RiBS Wall Wood A" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>RiBS Wall Wood A</h3>
-                            <p>First wood variant in the wall series</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/Illustrations/Ribs wall Wood B.png" target="_blank">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall Wood B.png" alt="RiBS Wall Wood B" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>RiBS Wall Wood B</h3>
-                            <p>Second wood variant in the wall series</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/Illustrations/Ribs wall Wood C.png" target="_blank">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall Wood C.png" alt="RiBS Wall Wood C" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>RiBS Wall Wood C</h3>
-                            <p>Third wood variant in the wall series</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/Illustrations/Ribs wall Wood D.png" target="_blank">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall Wood D.png" alt="RiBS Wall Wood D" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>RiBS Wall Wood D</h3>
-                            <p>Fourth wood variant in the wall series</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- RiBS Collection -->
-        <div class="gallery-section">
-            <h2 class="gallery-title">RiBS Collection</h2>
-            <div class="image-grid">
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/1.jpg" target="_blank">
-                        <img src="Assets/Lighting/RiBS/thumbnails/1.jpg" alt="RiBS Design 1" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>Architectural Elegance</h3>
-                            <p>Where form meets function in perfect harmony</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/2.jpg" target="_blank">
-                        <img src="Assets/Lighting/RiBS/thumbnails/2.jpg" alt="RiBS Design 2" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>Sculptural Lighting</h3>
-                            <p>Transforming spaces through innovative design</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- RiBS 600 Photos -->
-        <div class="gallery-section">
-            <h2 class="gallery-title">RiBS 600</h2>
-            <div class="image-grid">
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/RiBSLong/1.jpg" target="_blank">
-                        <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/1.jpg" alt="RiBS Long 1" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>Extended Elegance</h3>
-                            <p>Dramatic lighting for larger spaces</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/RiBSLong/2.jpg" target="_blank">
-                        <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/2.jpg" alt="RiBS Long 2" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>Linear Beauty</h3>
-                            <p>Perfect for dining areas and hallways</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/RiBSLong/3.jpg" target="_blank">
-                        <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/3.jpg" alt="RiBS Long 3" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>Architectural Statement</h3>
-                            <p>Bold presence with sophisticated design</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/RiBSLong/4.jpg" target="_blank">
-                        <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/4.jpg" alt="RiBS Long 4" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>Sculptural Form</h3>
-                            <p>Art and function in perfect balance</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/RiBSLong/5.jpg" target="_blank">
-                        <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/5.jpg" alt="RiBS Long 5" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>Illuminated Poetry</h3>
-                            <p>Light dancing through organic curves</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- RiBS 400 Photos -->
+        <!-- RiBS 400 -->
         <div class="gallery-section">
             <h2 class="gallery-title">RiBS 400</h2>
-            <div class="image-grid">
+            <div class="image-grid-limited">
                 <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/RiBSShort/1.jpg" target="_blank">
-                        <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/1.jpg" alt="RiBS Short 1" loading="lazy">
+                    <a href="ribs-400.html">
+                        <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/1.jpg" alt="RiBS 400" loading="lazy">
                         <div class="image-overlay">
-                            <h3>Intimate Lighting</h3>
-                            <p>Perfect for cozy spaces and accent lighting</p>
+                            <h3>RiBS 400</h3>
+                            <p>Compact and elegant lighting solution</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- RiBS 600 -->
+        <div class="gallery-section">
+            <h2 class="gallery-title">RiBS 600</h2>
+            <div class="image-grid-limited">
+                <div class="image-item">
+                    <a href="ribs-600.html">
+                        <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/1.jpg" alt="RiBS 600" loading="lazy">
+                        <div class="image-overlay">
+                            <h3>RiBS 600</h3>
+                            <p>Extended lighting for larger spaces</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- RiBS Wall -->
+        <div class="gallery-section">
+            <h2 class="gallery-title">RiBS Wall</h2>
+            <div class="image-grid-limited">
+                <div class="image-item">
+                    <a href="ribs-wall-aluminum.html">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall A.png" alt="RiBS Wall Aluminum" loading="lazy">
+                        <div class="image-overlay">
+                            <h3>RiBS Wall Aluminum</h3>
+                            <p>Sleek aluminum wall-mounted solutions</p>
                         </div>
                     </a>
                 </div>
                 <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/RiBSShort/2.jpg" target="_blank">
-                        <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/2.jpg" alt="RiBS Short 2" loading="lazy">
+                    <a href="ribs-wall-birch.html">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall Wood A.png" alt="RiBS Wall Birch Wood" loading="lazy">
                         <div class="image-overlay">
-                            <h3>Compact Elegance</h3>
-                            <p>Maximum impact in minimal space</p>
+                            <h3>RiBS Wall Birch Wood</h3>
+                            <p>Warm birch wood wall-mounted designs</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- RiBS Strip -->
+        <div class="gallery-section">
+            <h2 class="gallery-title">RiBS Strip</h2>
+            <div class="image-grid-limited">
+                <div class="image-item">
+                    <a href="ribs-strip-aluminum.html">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long A.45.png" alt="RiBS Strip Aluminum" loading="lazy">
+                        <div class="image-overlay">
+                            <h3>RiBS Strip Aluminum</h3>
+                            <p>Linear aluminum strip lighting</p>
                         </div>
                     </a>
                 </div>
                 <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/RiBSShort/3.jpg" target="_blank">
-                        <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/3.jpg" alt="RiBS Short 3" loading="lazy">
+                    <a href="ribs-strip-birch.html">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long Wood A.png" alt="RiBS Strip Birch Wood" loading="lazy">
                         <div class="image-overlay">
-                            <h3>Warm Ambiance</h3>
-                            <p>Creating intimate atmospheres</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/RiBSShort/4.jpg" target="_blank">
-                        <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/4.jpg" alt="RiBS Short 4" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>Refined Design</h3>
-                            <p>Sophisticated lighting for modern living</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="image-item">
-                    <a href="Assets/Lighting/RiBS/RiBSShort/5.jpg" target="_blank">
-                        <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/5.jpg" alt="RiBS Short 5" loading="lazy">
-                        <div class="image-overlay">
-                            <h3>Artistic Expression</h3>
-                            <p>Where craftsmanship meets innovation</p>
+                            <h3>RiBS Strip Birch Wood</h3>
+                            <p>Elegant birch wood strip lighting</p>
                         </div>
                     </a>
                 </div>

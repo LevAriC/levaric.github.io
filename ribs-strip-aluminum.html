@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RiBS Strip Aluminum - Linear Lighting by Omer Zimmermann</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .headline {
+            font-size: 4em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        .description {
+            font-size: 1.2em;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+        }
+        
+        .back-link {
+            display: inline-block;
+            color: #5f4f42;
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 10px 20px;
+            border: 2px solid #5f4f42;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            margin-bottom: 40px;
+        }
+        
+        .back-link:hover {
+            background-color: #5f4f42;
+            color: white;
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .image-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .image-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .image-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .image-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .image-item:hover .image-overlay {
+            transform: translateY(0);
+        }
+        
+        .image-overlay h3 {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+        
+        .image-overlay p {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .headline {
+                font-size: 2.5em;
+            }
+            
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .image-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="ribs.html" class="back-link">← Back to RiBS Collection</a>
+            <h1 class="headline">RiBS Strip Aluminum</h1>
+            <p class="description">
+                Linear aluminum strip lighting that creates continuous lines of light for modern architectural applications. The RiBS Strip Aluminum series offers sleek, minimalist designs perfect for contemporary spaces.
+            </p>
+        </div>
+        
+        <div class="image-grid">
+            <div class="image-item">
+                <a href="Assets/Lighting/RiBS/Illustrations/Ribs long A.45.png" target="_blank">
+                    <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long A.45.png" alt="RiBS Strip Aluminum A" loading="lazy">
+                    <div class="image-overlay">
+                        <h3>RiBS Strip A</h3>
+                        <p>First variant in the aluminum strip series</p>
+                    </div>
+                </a>
+            </div>
+            <div class="image-item">
+                <a href="Assets/Lighting/RiBS/Illustrations/Ribs long B.png" target="_blank">
+                    <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long B.png" alt="RiBS Strip Aluminum B" loading="lazy">
+                    <div class="image-overlay">
+                        <h3>RiBS Strip B</h3>
+                        <p>Second variant in the aluminum strip series</p>
+                    </div>
+                </a>
+            </div>
+            <div class="image-item">
+                <a href="Assets/Lighting/RiBS/Illustrations/Ribs long C.png" target="_blank">
+                    <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long C.png" alt="RiBS Strip Aluminum C" loading="lazy">
+                    <div class="image-overlay">
+                        <h3>RiBS Strip C</h3>
+                        <p>Third variant in the aluminum strip series</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
