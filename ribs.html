@@ -350,8 +350,9 @@
             display: block;
         }
         
+        /* Gallery Logic - Hidden but preserved for future use */
         .gallery-container {
-            display: none;
+            display: none !important;
             flex-direction: row;
             gap: 40px;
             margin-bottom: 50px;
@@ -365,7 +366,95 @@
         }
         
         .gallery-container.active {
+            display: flex !important;
+        }
+        
+        /* New Dropdown Style */
+        .dropdown-thumbnails {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 15px;
+            align-items: center;
+        }
+        
+        .dropdown-thumbnails.active {
             display: flex;
+        }
+        
+        .dropdown-thumbnail {
+            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+            width: 150px;
+        }
+        
+        .dropdown-thumbnail:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-color: #5f4f42;
+        }
+        
+        .dropdown-thumbnail img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        /* Lightbox Popup */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+        
+        .lightbox-close:hover {
+            background: #f0f0f0;
         }
         
         .thumbnail-column {
@@ -440,7 +529,7 @@
             }
             
             .product-row {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
                 gap: 15px;
             }
             
@@ -490,23 +579,90 @@
         
         <!-- Product Selection Row -->
         <div class="product-row">
-            <div class="product-trigger" onclick="showGallery('ribs400')" data-product="ribs400">
+            <div class="product-trigger" onclick="showDropdown('ribs400', this)" data-product="ribs400">
                 <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/1.jpg" alt="RiBS 400" loading="lazy">
+                <div class="dropdown-thumbnails" id="ribs400Dropdown">
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/RiBSShort/1.jpg', event)">
+                        <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/1.jpg" alt="RiBS 400 - 1">
+                    </div>
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/RiBSShort/2.jpg', event)">
+                        <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/2.jpg" alt="RiBS 400 - 2">
+                    </div>
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/RiBSShort/3.jpg', event)">
+                        <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/3.jpg" alt="RiBS 400 - 3">
+                    </div>
+                </div>
             </div>
-            <div class="product-trigger" onclick="showGallery('ribs600')" data-product="ribs600">
+            <div class="product-trigger" onclick="showDropdown('ribs600', this)" data-product="ribs600">
                 <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/1.jpg" alt="RiBS 600" loading="lazy">
+                <div class="dropdown-thumbnails" id="ribs600Dropdown">
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/RiBSLong/1.jpg', event)">
+                        <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/1.jpg" alt="RiBS 600 - 1">
+                    </div>
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/RiBSLong/2.jpg', event)">
+                        <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/2.jpg" alt="RiBS 600 - 2">
+                    </div>
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/RiBSLong/3.jpg', event)">
+                        <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/3.jpg" alt="RiBS 600 - 3">
+                    </div>
+                </div>
             </div>
-            <div class="product-trigger" onclick="showGallery('wallbirch')" data-product="wallbirch">
+            <div class="product-trigger" onclick="showDropdown('wallbirch', this)" data-product="wallbirch">
                 <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall Wood A.png" alt="RiBS Wall Birch" loading="lazy">
+                <div class="dropdown-thumbnails" id="wallbirchDropdown">
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs wall Wood A.png', event)">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall Wood A.png" alt="RiBS Wall Birch A">
+                    </div>
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs wall Wood B.png', event)">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall Wood B.png" alt="RiBS Wall Birch B">
+                    </div>
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs wall Wood C.png', event)">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall Wood C.png" alt="RiBS Wall Birch C">
+                    </div>
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs wall Wood D.png', event)">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall Wood D.png" alt="RiBS Wall Birch D">
+                    </div>
+                </div>
             </div>
-            <div class="product-trigger" onclick="showGallery('wallaluminum')" data-product="wallaluminum">
+            <div class="product-trigger" onclick="showDropdown('wallaluminum', this)" data-product="wallaluminum">
                 <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall B.png" alt="RiBS Wall Aluminum" loading="lazy">
+                <div class="dropdown-thumbnails" id="wallaluminumDropdown">
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs wall A.png', event)">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall A.png" alt="RiBS Wall Aluminum A">
+                    </div>
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs wall B.png', event)">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall B.png" alt="RiBS Wall Aluminum B">
+                    </div>
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs wall C.png', event)">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall C.png" alt="RiBS Wall Aluminum C">
+                    </div>
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs wall D.png', event)">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall D.png" alt="RiBS Wall Aluminum D">
+                    </div>
+                </div>
             </div>
-            <div class="product-trigger" onclick="showGallery('stripbirch')" data-product="stripbirch">
-                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long Wood A.png" alt="RiBS Strip Birch" loading="lazy">
-            </div>
-            <div class="product-trigger" onclick="showGallery('stripaluminum')" data-product="stripaluminum">
+            <div class="product-trigger" onclick="showDropdown('stripaluminum', this)" data-product="stripaluminum">
                 <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long A.45.png" alt="RiBS Strip Aluminum" loading="lazy">
+                <div class="dropdown-thumbnails" id="stripaluminumDropdown">
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs long A.45.png', event)">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long A.45.png" alt="RiBS Strip Aluminum A.45">
+                    </div>
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs long B.png', event)">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long B.png" alt="RiBS Strip Aluminum B">
+                    </div>
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs long C.png', event)">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long C.png" alt="RiBS Strip Aluminum C">
+                    </div>
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs long Wood A.png', event)">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long Wood A.png" alt="RiBS Strip Birch A">
+                    </div>
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs long Wood B.png', event)">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long Wood B.png" alt="RiBS Strip Birch B">
+                    </div>
+                    <div class="dropdown-thumbnail" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs long Wood C.png', event)">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long Wood C.png" alt="RiBS Strip Birch C">
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -669,7 +825,16 @@
         </div>
     </div>
     
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <img class="lightbox-image" id="lightboxImage" onclick="openOriginalImage()" alt="Lightbox Image">
+        </div>
+    </div>
+
     <script>
+        // Gallery Logic - Preserved for future use
         function showGallery(galleryId) {
             // Hide all galleries
             document.querySelectorAll('.gallery-container').forEach(gallery => {
@@ -710,6 +875,64 @@
             // Add active class to clicked thumbnail
             thumbnailElement.classList.add('active');
         }
+
+        // New Dropdown Logic
+        function showDropdown(productId, triggerElement) {
+            // Hide all dropdowns
+            document.querySelectorAll('.dropdown-thumbnails').forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+            
+            // Remove active class from all product triggers
+            document.querySelectorAll('.product-trigger').forEach(trigger => {
+                trigger.classList.remove('active');
+            });
+            
+            // Show selected dropdown
+            const targetDropdown = document.getElementById(productId + 'Dropdown');
+            
+            if (targetDropdown) {
+                targetDropdown.classList.add('active');
+                triggerElement.classList.add('active');
+            }
+        }
+        
+        function openLightbox(imageSrc, event) {
+            event.stopPropagation(); // Prevent dropdown from toggling
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            
+            lightboxImage.src = imageSrc;
+            lightboxImage.dataset.originalSrc = imageSrc; // Store for full-size opening
+            lightbox.classList.add('active');
+        }
+        
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        
+        function openOriginalImage() {
+            const lightboxImage = document.getElementById('lightboxImage');
+            const originalSrc = lightboxImage.dataset.originalSrc;
+            
+            if (originalSrc) {
+                window.open(originalSrc, '_blank');
+            }
+        }
+        
+        // Close lightbox when clicking outside the image
+        document.getElementById('lightbox').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeLightbox();
+            }
+        });
+        
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
     </script>
 </body>
 </html> 
