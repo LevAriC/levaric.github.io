@@ -400,10 +400,6 @@
             align-items: center;
         }
         
-        .product-trigger:hover .dropdown-thumbnails {
-            display: flex;
-        }
-        
         .dropdown-thumbnails.active {
             display: flex;
         }
@@ -635,7 +631,7 @@
         <!-- Product Selection Row -->
         <div class="product-row">
             <div class="product-trigger" data-product="ribs400">
-                <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/1.jpg" alt="RiBS 400" loading="lazy">
+                <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/1.jpg" alt="RiBS 400" loading="lazy" onclick="toggleDropdown('ribs400', this.parentElement)">
                 <div class="product-label">400</div>
                 <div class="dropdown-thumbnails" id="ribs400Dropdown">
                     <div class="dropdown-thumbnail">
@@ -650,7 +646,7 @@
                 </div>
             </div>
             <div class="product-trigger" data-product="ribs600">
-                <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/1.jpg" alt="RiBS 600" loading="lazy">
+                <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/1.jpg" alt="RiBS 600" loading="lazy" onclick="toggleDropdown('ribs600', this.parentElement)">
                 <div class="product-label">600</div>
                 <div class="dropdown-thumbnails" id="ribs600Dropdown">
                     <div class="dropdown-thumbnail">
@@ -665,7 +661,7 @@
                 </div>
             </div>
             <div class="product-trigger" data-product="wallaluminum">
-                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall B.png" alt="RiBS Wall" loading="lazy">
+                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall B.png" alt="RiBS Wall" loading="lazy" onclick="toggleDropdown('wallaluminum', this.parentElement)">
                 <div class="product-label">Wall</div>
                 <div class="dropdown-thumbnails" id="wallaluminumDropdown">
                     <div class="dropdown-thumbnail">
@@ -677,7 +673,7 @@
                 </div>
             </div>
             <div class="product-trigger" data-product="stripaluminum">
-                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long A.45.png" alt="RiBS Strip" loading="lazy">
+                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long A.45.png" alt="RiBS Strip" loading="lazy" onclick="toggleDropdown('stripaluminum', this.parentElement)">
                 <div class="product-label">Strip</div>
                 <div class="dropdown-thumbnails" id="stripaluminumDropdown">
                     <div class="dropdown-thumbnail">
@@ -900,8 +896,8 @@
             thumbnailElement.classList.add('active');
         }
 
-        // New Dropdown Logic
-        function showDropdown(productId, triggerElement) {
+        // Toggle Dropdown Logic (Mobile-Friendly)
+        function toggleDropdown(productId, triggerElement) {
             const targetDropdown = document.getElementById(productId + 'Dropdown');
             const isCurrentlyActive = targetDropdown && targetDropdown.classList.contains('active');
             
@@ -915,7 +911,8 @@
                 trigger.classList.remove('active');
             });
             
-            // If it wasn't already active, show the selected dropdown
+            // If it wasn't already active, show the selected dropdown (first click)
+            // If it was active, it stays hidden (second click)
             if (targetDropdown && !isCurrentlyActive) {
                 targetDropdown.classList.add('active');
                 triggerElement.classList.add('active');
