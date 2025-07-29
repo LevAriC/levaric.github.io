@@ -402,7 +402,17 @@
         
         /* Hover for desktop devices that support hover */
         @media (hover: hover) {
-            .product-trigger:hover .dropdown-thumbnails {
+            /* Show dropdown when hovering over any part of the product trigger area */
+            .product-trigger:hover > .dropdown-thumbnails {
+                display: flex;
+            }
+            
+            /* Ensure smooth transitions between product areas */
+            .product-row:hover .dropdown-thumbnails {
+                display: none;
+            }
+            
+            .product-row:hover .product-trigger:hover > .dropdown-thumbnails {
                 display: flex;
             }
         }
