@@ -122,10 +122,38 @@
             line-height: 1.5;
         }
         
-        .models-section {
+        .info-sections {
+            display: flex;
+            gap: 40px;
             max-width: 960px;
             margin: 40px auto;
+            align-items: flex-start;
+        }
+        
+        .about-section,
+        .models-section {
+            flex: 1;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+            padding: 25px;
             text-align: left;
+        }
+        
+        .about-title,
+        .models-title {
+            font-size: 1.4em;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+        
+        .about-text,
+        .models-text {
+            font-size: 1em;
+            line-height: 1.6;
+            color: #666;
+            margin: 0;
         }
         
         .models-title {
@@ -413,12 +441,7 @@
         /* Extend product trigger area to cover dropdown space */
         .product-trigger {
             min-height: 400px; /* Cover main image + dropdown area */
-        }
-        
-        /* Reduce gap after product row */
-        .product-row {
-            margin-bottom: 20px;
-        }
+                }
         
         /* Click toggle for touch devices */
         .dropdown-thumbnails.active {
@@ -601,6 +624,11 @@
                 top: 15px;
             }
             
+            .info-sections {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
             .product-trigger > img {
                 height: 100px;
             }
@@ -643,10 +671,6 @@
         </div>
         <div class="hero">
             
-            <div class="about-section">
-                <h2 class="about-title">The Collection</h2>
-                <p class="about-text">The RIBS collection, handmade in Tel Aviv by the Omer Zimmermann Studio, features raw wood and aluminum in their purest form. With a strong yet minimal presence, each piece brings a calm, layered beauty to any space.</p>
-            </div>
         </div>
         
         <!-- Product Selection Row -->
@@ -839,10 +863,16 @@
             </div>
         </div>
         
-        <!-- The Models -->
-        <div class="models-section">
-            <h2 class="models-title">The Models</h2>
-            <p class="models-text">All RIBS models are designed to highlight the honest beauty of their materials.<br>No coatings, no disguises — just clean lines, layered simplicity, and soft yet powerful light.</p>
+        <!-- Info Sections Side by Side -->
+        <div class="info-sections">
+            <div class="about-section">
+                <h2 class="about-title">The Collection</h2>
+                <p class="about-text">The RIBS collection, handmade in Tel Aviv by the Omer Zimmermann Studio, features raw wood and aluminum in their purest form. With a strong yet minimal presence, each piece brings a calm, layered beauty to any space.</p>
+            </div>
+            <div class="models-section">
+                <h2 class="models-title">The Models</h2>
+                <p class="models-text">All RIBS models are designed to highlight the honest beauty of their materials.<br>No coatings, no disguises — just clean lines, layered simplicity, and soft yet powerful light.</p>
+            </div>
         </div>
         
         <!-- Hero Image Section -->
