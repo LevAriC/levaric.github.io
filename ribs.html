@@ -317,7 +317,7 @@
         
         .product-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             margin-bottom: 40px;
             max-width: 960px;
@@ -342,10 +342,24 @@
             display: block;
             cursor: pointer;
             transition: transform 0.3s ease;
+            filter: brightness(0.6);
         }
         
         .product-trigger img:hover {
             transform: translateY(-8px);
+        }
+        
+        .product-label {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.2em;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            pointer-events: none;
+            letter-spacing: 1px;
         }
         
         /* Gallery Logic - Hidden but preserved for future use */
@@ -412,6 +426,8 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            padding: 40px;
+            box-sizing: border-box;
         }
         
         .lightbox.active {
@@ -420,8 +436,11 @@
         
         .lightbox-content {
             position: relative;
-            max-width: 90%;
-            max-height: 90%;
+            max-width: 100%;
+            max-height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .lightbox-image {
@@ -429,12 +448,13 @@
             max-height: 100%;
             border-radius: 8px;
             cursor: pointer;
+            object-fit: contain;
         }
         
         .lightbox-close {
             position: absolute;
-            top: -40px;
-            right: 0;
+            top: -50px;
+            right: -10px;
             background: white;
             border: none;
             border-radius: 50%;
@@ -451,6 +471,11 @@
         
         .lightbox-close:hover {
             background: #f0f0f0;
+        }
+        
+        /* Disable body scroll when lightbox is open */
+        body.lightbox-open {
+            overflow: hidden;
         }
         
         .thumbnail-column {
@@ -525,8 +550,13 @@
             }
             
             .product-row {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                grid-template-columns: repeat(2, 1fr);
                 gap: 15px;
+            }
+            
+            .product-label {
+                font-size: 1em;
+                bottom: 15px;
             }
             
             .product-trigger img {
@@ -577,6 +607,7 @@
         <div class="product-row">
             <div class="product-trigger" data-product="ribs400">
                 <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/1.jpg" alt="RiBS 400" loading="lazy" onclick="showDropdown('ribs400', this.parentElement)">
+                <div class="product-label">400</div>
                 <div class="dropdown-thumbnails" id="ribs400Dropdown">
                     <div class="dropdown-thumbnail">
                         <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/1.jpg" alt="RiBS 400 - 1" onclick="openLightbox('Assets/Lighting/RiBS/RiBSShort/1.jpg', event)">
@@ -591,6 +622,7 @@
             </div>
             <div class="product-trigger" data-product="ribs600">
                 <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/1.jpg" alt="RiBS 600" loading="lazy" onclick="showDropdown('ribs600', this.parentElement)">
+                <div class="product-label">600</div>
                 <div class="dropdown-thumbnails" id="ribs600Dropdown">
                     <div class="dropdown-thumbnail">
                         <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/1.jpg" alt="RiBS 600 - 1" onclick="openLightbox('Assets/Lighting/RiBS/RiBSLong/1.jpg', event)">
@@ -603,9 +635,22 @@
                     </div>
                 </div>
             </div>
-            <div class="product-trigger" data-product="wallbirch">
-                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall Wood A.png" alt="RiBS Wall Birch" loading="lazy" onclick="showDropdown('wallbirch', this.parentElement)">
-                <div class="dropdown-thumbnails" id="wallbirchDropdown">
+            <div class="product-trigger" data-product="wallaluminum">
+                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall B.png" alt="RiBS Wall" loading="lazy" onclick="showDropdown('wallaluminum', this.parentElement)">
+                <div class="product-label">Wall</div>
+                <div class="dropdown-thumbnails" id="wallaluminumDropdown">
+                    <div class="dropdown-thumbnail">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall A.png" alt="RiBS Wall Aluminum A" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs wall A.png', event)">
+                    </div>
+                    <div class="dropdown-thumbnail">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall B.png" alt="RiBS Wall Aluminum B" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs wall B.png', event)">
+                    </div>
+                    <div class="dropdown-thumbnail">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall C.png" alt="RiBS Wall Aluminum C" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs wall C.png', event)">
+                    </div>
+                    <div class="dropdown-thumbnail">
+                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall D.png" alt="RiBS Wall Aluminum D" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs wall D.png', event)">
+                    </div>
                     <div class="dropdown-thumbnail">
                         <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall Wood A.png" alt="RiBS Wall Birch A" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs wall Wood A.png', event)">
                     </div>
@@ -620,43 +665,15 @@
                     </div>
                 </div>
             </div>
-            <div class="product-trigger" data-product="wallaluminum">
-                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall B.png" alt="RiBS Wall Aluminum" loading="lazy" onclick="showDropdown('wallaluminum', this.parentElement)">
-                <div class="dropdown-thumbnails" id="wallaluminumDropdown">
-                    <div class="dropdown-thumbnail">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall A.png" alt="RiBS Wall Aluminum A" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs wall A.png', event)">
-                    </div>
-                    <div class="dropdown-thumbnail">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall B.png" alt="RiBS Wall Aluminum B" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs wall B.png', event)">
-                    </div>
-                    <div class="dropdown-thumbnail">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall C.png" alt="RiBS Wall Aluminum C" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs wall C.png', event)">
-                    </div>
-                    <div class="dropdown-thumbnail">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall D.png" alt="RiBS Wall Aluminum D" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs wall D.png', event)">
-                    </div>
-                </div>
-            </div>
             <div class="product-trigger" data-product="stripaluminum">
-                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long A.45.png" alt="RiBS Strip Aluminum" loading="lazy" onclick="showDropdown('stripaluminum', this.parentElement)">
+                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long A.45.png" alt="RiBS Strip" loading="lazy" onclick="showDropdown('stripaluminum', this.parentElement)">
+                <div class="product-label">Strip</div>
                 <div class="dropdown-thumbnails" id="stripaluminumDropdown">
                     <div class="dropdown-thumbnail">
                         <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long A.45.png" alt="RiBS Strip Aluminum A.45" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs long A.45.png', event)">
                     </div>
                     <div class="dropdown-thumbnail">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long B.png" alt="RiBS Strip Aluminum B" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs long B.png', event)">
-                    </div>
-                    <div class="dropdown-thumbnail">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long C.png" alt="RiBS Strip Aluminum C" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs long C.png', event)">
-                    </div>
-                    <div class="dropdown-thumbnail">
                         <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long Wood A.png" alt="RiBS Strip Birch A" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs long Wood A.png', event)">
-                    </div>
-                    <div class="dropdown-thumbnail">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long Wood B.png" alt="RiBS Strip Birch B" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs long Wood B.png', event)">
-                    </div>
-                    <div class="dropdown-thumbnail">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long Wood C.png" alt="RiBS Strip Birch C" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs long Wood C.png', event)">
                     </div>
                 </div>
             </div>
@@ -901,10 +918,16 @@
             lightboxImage.src = imageSrc;
             lightboxImage.dataset.originalSrc = imageSrc; // Store for full-size opening
             lightbox.classList.add('active');
+            
+            // Disable body scroll
+            document.body.classList.add('lightbox-open');
         }
         
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
+            
+            // Re-enable body scroll
+            document.body.classList.remove('lightbox-open');
         }
         
         function openOriginalImage() {
