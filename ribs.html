@@ -405,6 +405,11 @@
             display: flex !important;
         }
         
+        /* Keep dropdown open when moving between products */
+        .product-row:hover .dropdown-thumbnails.last-hovered {
+            display: flex !important;
+        }
+        
         /* Extend product trigger area to cover dropdown space */
         .product-trigger {
             min-height: 400px; /* Cover main image + dropdown area */
@@ -910,6 +915,44 @@
         // Check if device supports hover (desktop) or is touch-only (mobile)
         function supportsHover() {
             return window.matchMedia('(hover: hover)').matches;
+        }
+        
+        // Track last hovered dropdown for seamless navigation
+        let lastHoveredDropdown = null;
+        
+        // Add hover listeners for seamless navigation on desktop
+        if (typeof window !== 'undefined') {
+            document.addEventListener('DOMContentLoaded', function() {
+                if (supportsHover()) {
+                    // Add mouseenter/mouseleave to each product trigger
+                    document.querySelectorAll('.product-trigger').forEach(trigger => {
+                        trigger.addEventListener('mouseenter', function() {
+                            // Clear previous last-hovered
+                            if (lastHoveredDropdown) {
+                                lastHoveredDropdown.classList.remove('last-hovered');
+                            }
+                            
+                            // Set new last-hovered
+                            const dropdown = this.querySelector('.dropdown-thumbnails');
+                            if (dropdown) {
+                                lastHoveredDropdown = dropdown;
+                                dropdown.classList.add('last-hovered');
+                            }
+                        });
+                    });
+                    
+                    // Clear last-hovered when leaving product row entirely
+                    const productRow = document.querySelector('.product-row');
+                    if (productRow) {
+                        productRow.addEventListener('mouseleave', function() {
+                            if (lastHoveredDropdown) {
+                                lastHoveredDropdown.classList.remove('last-hovered');
+                                lastHoveredDropdown = null;
+                            }
+                        });
+                    }
+                }
+            });
         }
         
         // Toggle Dropdown Logic (Touch Devices Only)
