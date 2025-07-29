@@ -400,6 +400,14 @@
             align-items: center;
         }
         
+        /* Hover for desktop devices that support hover */
+        @media (hover: hover) {
+            .product-trigger:hover .dropdown-thumbnails {
+                display: flex;
+            }
+        }
+        
+        /* Click toggle for touch devices */
         .dropdown-thumbnails.active {
             display: flex;
         }
@@ -896,8 +904,18 @@
             thumbnailElement.classList.add('active');
         }
 
-        // Toggle Dropdown Logic (Mobile-Friendly)
+        // Check if device supports hover (desktop) or is touch-only (mobile)
+        function supportsHover() {
+            return window.matchMedia('(hover: hover)').matches;
+        }
+        
+        // Toggle Dropdown Logic (Touch Devices Only)
         function toggleDropdown(productId, triggerElement) {
+            // Only handle clicks on touch devices, let hover work on desktop
+            if (supportsHover()) {
+                return;
+            }
+            
             const targetDropdown = document.getElementById(productId + 'Dropdown');
             const isCurrentlyActive = targetDropdown && targetDropdown.classList.contains('active');
             
