@@ -342,7 +342,7 @@
             display: block;
             cursor: pointer;
             transition: transform 0.3s ease;
-            filter: brightness(0.6);
+            filter: brightness(0.85);
         }
         
         .product-trigger img:hover {
@@ -351,13 +351,12 @@
         
         .product-label {
             position: absolute;
-            bottom: 20px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
             color: white;
             font-size: 1.2em;
             font-weight: 600;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
             pointer-events: none;
             letter-spacing: 1px;
         }
@@ -453,7 +452,7 @@
         
         .lightbox-close {
             position: absolute;
-            top: -50px;
+            top: -35px;
             right: -10px;
             background: white;
             border: none;
@@ -556,7 +555,6 @@
             
             .product-label {
                 font-size: 1em;
-                bottom: 15px;
             }
             
             .product-trigger img {
@@ -891,6 +889,9 @@
 
         // New Dropdown Logic
         function showDropdown(productId, triggerElement) {
+            const targetDropdown = document.getElementById(productId + 'Dropdown');
+            const isCurrentlyActive = targetDropdown && targetDropdown.classList.contains('active');
+            
             // Hide all dropdowns
             document.querySelectorAll('.dropdown-thumbnails').forEach(dropdown => {
                 dropdown.classList.remove('active');
@@ -901,10 +902,8 @@
                 trigger.classList.remove('active');
             });
             
-            // Show selected dropdown
-            const targetDropdown = document.getElementById(productId + 'Dropdown');
-            
-            if (targetDropdown) {
+            // If it wasn't already active, show the selected dropdown
+            if (targetDropdown && !isCurrentlyActive) {
                 targetDropdown.classList.add('active');
                 triggerElement.classList.add('active');
             }
