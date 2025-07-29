@@ -21,11 +21,24 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px 20px;
+            position: relative;
+        }
+        
+        .logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: auto;
+            z-index: 10;
         }
         
         .hero {
-            text-align: center;
+            text-align: left;
             margin-bottom: 20px;
+            max-width: 960px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .headline {
@@ -48,9 +61,9 @@
         }
         
         .about-section {
-            max-width: 600px;
+            max-width: 960px;
             margin: 0 auto 40px auto;
-            text-align: center;
+            text-align: left;
         }
         
         .about-title {
@@ -99,9 +112,9 @@
         }
         
         .models-section {
-            max-width: 700px;
+            max-width: 960px;
             margin: 40px auto;
-            text-align: center;
+            text-align: left;
         }
         
         .models-title {
@@ -145,12 +158,12 @@
         }
         
         .product-description {
-            max-width: 800px;
+            max-width: 960px;
             margin: 0 auto 60px auto;
             font-size: 1.3em;
             color: #555;
             line-height: 1.8;
-            text-align: center;
+            text-align: left;
             padding: 40px;
             background: rgba(255,255,255,0.8);
             border-radius: 12px;
@@ -185,7 +198,6 @@
             max-width: 960px; /* Max 3 items at 300px + gaps */
             margin-left: auto;
             margin-right: auto;
-            justify-items: center;
         }
         
         .hero-image-section {
@@ -327,6 +339,7 @@
 </head>
 <body>
     <div class="container">
+        <img src="Assets/Logo/oz-logo-png.png" alt="Omer Zimmermann Logo" class="logo">
         <div class="hero">
             <h1 class="headline">RiBS</h1>
             <p class="byline">By Omer Zimmermann</p>
