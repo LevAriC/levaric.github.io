@@ -400,14 +400,14 @@
             align-items: center;
         }
         
-        /* Test if hover works at all */
-        .product-trigger:hover {
-            background-color: rgba(255,0,0,0.1);
-        }
-        
         /* Hover for all devices */
         .product-trigger:hover .dropdown-thumbnails {
             display: flex !important;
+        }
+        
+        /* Extend product trigger area to cover dropdown space */
+        .product-trigger {
+            min-height: 400px; /* Cover main image + dropdown area */
         }
         
         /* Click toggle for touch devices */
