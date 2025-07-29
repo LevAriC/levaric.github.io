@@ -315,13 +315,57 @@
             background: #654321;
         }
         
+        .product-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+            max-width: 960px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .product-trigger {
+            cursor: pointer;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 3px solid transparent;
+        }
+        
+        .product-trigger:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .product-trigger.active {
+            border-color: #5f4f42;
+            transform: translateY(-5px);
+        }
+        
+        .product-trigger img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+        }
+        
         .gallery-container {
-            display: flex;
+            display: none;
+            flex-direction: row;
             gap: 40px;
             margin-bottom: 50px;
             max-width: 960px;
             margin-left: auto;
             margin-right: auto;
+            padding: 30px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-container.active {
+            display: flex;
         }
         
         .thumbnail-column {
@@ -375,7 +419,7 @@
             transform: scale(1.02);
         }
 
-        @media (max-width: 768px) {
+                    @media (max-width: 768px) {
             .headline {
                 font-size: 3.5em;
                 letter-spacing: 4px;
@@ -395,8 +439,18 @@
                 font-size: 2em;
             }
             
+            .product-row {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+            }
+            
+            .product-trigger img {
+                height: 100px;
+            }
+            
             .gallery-container {
                 flex-direction: column;
+                padding: 20px;
             }
             
             .thumbnail-column {
@@ -434,29 +488,51 @@
             </div>
         </div>
         
+        <!-- Product Selection Row -->
+        <div class="product-row">
+            <div class="product-trigger" onclick="showGallery('ribs400')" data-product="ribs400">
+                <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/1.jpg" alt="RiBS 400" loading="lazy">
+            </div>
+            <div class="product-trigger" onclick="showGallery('ribs600')" data-product="ribs600">
+                <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/1.jpg" alt="RiBS 600" loading="lazy">
+            </div>
+            <div class="product-trigger" onclick="showGallery('wallbirch')" data-product="wallbirch">
+                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall Wood A.png" alt="RiBS Wall Birch" loading="lazy">
+            </div>
+            <div class="product-trigger" onclick="showGallery('wallaluminum')" data-product="wallaluminum">
+                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall B.png" alt="RiBS Wall Aluminum" loading="lazy">
+            </div>
+            <div class="product-trigger" onclick="showGallery('stripbirch')" data-product="stripbirch">
+                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long Wood A.png" alt="RiBS Strip Birch" loading="lazy">
+            </div>
+            <div class="product-trigger" onclick="showGallery('stripaluminum')" data-product="stripaluminum">
+                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long A.45.png" alt="RiBS Strip Aluminum" loading="lazy">
+            </div>
+        </div>
+
         <!-- RiBS 400 Gallery -->
-        <div class="gallery-container">
+        <div class="gallery-container" id="ribs400Gallery">
             <div class="thumbnail-column">
-                <div class="thumbnail-item active" onclick="changeMainImage('Assets/Lighting/RiBS/RiBSShort/1.jpg', this)">
+                <div class="thumbnail-item active" onclick="changeMainImage('Assets/Lighting/RiBS/RiBSShort/1.jpg', this, 'ribs400')">
                     <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/1.jpg" alt="RiBS 400 - 1">
                 </div>
-                <div class="thumbnail-item" onclick="changeMainImage('Assets/Lighting/RiBS/RiBSShort/2.jpg', this)">
+                <div class="thumbnail-item" onclick="changeMainImage('Assets/Lighting/RiBS/RiBSShort/2.jpg', this, 'ribs400')">
                     <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/2.jpg" alt="RiBS 400 - 2">
                 </div>
-                <div class="thumbnail-item" onclick="changeMainImage('Assets/Lighting/RiBS/RiBSShort/3.jpg', this)">
+                <div class="thumbnail-item" onclick="changeMainImage('Assets/Lighting/RiBS/RiBSShort/3.jpg', this, 'ribs400')">
                     <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/3.jpg" alt="RiBS 400 - 3">
                 </div>
             </div>
             
             <div class="main-image-container">
-                <a href="Assets/Lighting/RiBS/RiBSShort/1.jpg" target="_blank" id="mainImageLink">
-                    <img id="mainImage" class="main-image" src="Assets/Lighting/RiBS/RiBSShort/1.jpg" alt="RiBS 400" loading="lazy">
+                <a href="Assets/Lighting/RiBS/RiBSShort/1.jpg" target="_blank" id="ribs400ImageLink">
+                    <img id="ribs400Image" class="main-image" src="Assets/Lighting/RiBS/RiBSShort/1.jpg" alt="RiBS 400" loading="lazy">
                 </a>
             </div>
         </div>
 
         <!-- RiBS 600 Gallery -->
-        <div class="gallery-container">
+        <div class="gallery-container" id="ribs600Gallery">
             <div class="thumbnail-column">
                 <div class="thumbnail-item active" onclick="changeMainImage('Assets/Lighting/RiBS/RiBSLong/1.jpg', this, 'ribs600')">
                     <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/1.jpg" alt="RiBS 600 - 1">
@@ -477,7 +553,7 @@
         </div>
 
         <!-- RiBS Wall Aluminum Gallery -->
-        <div class="gallery-container">
+        <div class="gallery-container" id="wallaluminumGallery">
             <div class="thumbnail-column">
                 <div class="thumbnail-item active" onclick="changeMainImage('Assets/Lighting/RiBS/Illustrations/Ribs wall A.png', this, 'wallaluminum')">
                     <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall A.png" alt="RiBS Wall Aluminum A">
@@ -501,7 +577,7 @@
         </div>
 
         <!-- RiBS Wall Birch Gallery -->
-        <div class="gallery-container">
+        <div class="gallery-container" id="wallbirchGallery">
             <div class="thumbnail-column">
                 <div class="thumbnail-item active" onclick="changeMainImage('Assets/Lighting/RiBS/Illustrations/Ribs wall Wood A.png', this, 'wallbirch')">
                     <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall Wood A.png" alt="RiBS Wall Birch A">
@@ -525,7 +601,7 @@
         </div>
 
         <!-- RiBS Strip Aluminum Gallery -->
-        <div class="gallery-container">
+        <div class="gallery-container" id="stripaluminumGallery">
             <div class="thumbnail-column">
                 <div class="thumbnail-item active" onclick="changeMainImage('Assets/Lighting/RiBS/Illustrations/Ribs long A.45.png', this, 'stripaluminum')">
                     <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long A.45.png" alt="RiBS Strip Aluminum A.45">
@@ -546,7 +622,7 @@
         </div>
 
         <!-- RiBS Strip Birch Gallery -->
-        <div class="gallery-container">
+        <div class="gallery-container" id="stripbirchGallery">
             <div class="thumbnail-column">
                 <div class="thumbnail-item active" onclick="changeMainImage('Assets/Lighting/RiBS/Illustrations/Ribs long Wood A.png', this, 'stripbirch')">
                     <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long Wood A.png" alt="RiBS Strip Birch A">
@@ -594,15 +670,35 @@
     </div>
     
     <script>
+        function showGallery(galleryId) {
+            // Hide all galleries
+            document.querySelectorAll('.gallery-container').forEach(gallery => {
+                gallery.classList.remove('active');
+            });
+            
+            // Remove active class from all product triggers
+            document.querySelectorAll('.product-trigger').forEach(trigger => {
+                trigger.classList.remove('active');
+            });
+            
+            // Show selected gallery
+            const targetGallery = document.getElementById(galleryId + 'Gallery');
+            const targetTrigger = document.querySelector(`[data-product="${galleryId}"]`);
+            
+            if (targetGallery) {
+                targetGallery.classList.add('active');
+            }
+            
+            if (targetTrigger) {
+                targetTrigger.classList.add('active');
+            }
+        }
+        
         function changeMainImage(imageSrc, thumbnailElement, galleryId) {
             // Update main image and link for specific gallery
             if (galleryId) {
                 document.getElementById(galleryId + 'Image').src = imageSrc;
                 document.getElementById(galleryId + 'ImageLink').href = imageSrc;
-            } else {
-                // Fallback for RiBS 400 (original gallery)
-                document.getElementById('mainImage').src = imageSrc;
-                document.getElementById('mainImageLink').href = imageSrc;
             }
             
             // Remove active class from thumbnails in the same gallery container
