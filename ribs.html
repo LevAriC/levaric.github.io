@@ -400,11 +400,14 @@
             align-items: center;
         }
         
-        /* Hover for desktop devices that support hover */
-        @media (hover: hover) {
-            .product-trigger:hover .dropdown-thumbnails {
-                display: flex;
-            }
+        /* Test if hover works at all */
+        .product-trigger:hover {
+            background-color: rgba(255,0,0,0.1);
+        }
+        
+        /* Hover for all devices */
+        .product-trigger:hover .dropdown-thumbnails {
+            display: flex !important;
         }
         
         /* Click toggle for touch devices */
