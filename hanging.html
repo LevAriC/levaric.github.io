@@ -69,47 +69,158 @@
             object-fit: cover;
         }
         
-        .model-info {
-            margin: 40px 0;
-            max-width: 800px;
+        .model-section {
+            margin: 60px 0;
+            max-width: 1200px;
         }
         
-        .model-info h2 {
-            font-size: 2em;
+        .model-section h2 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        .model-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        .model-info {
+            padding-right: 40px;
+        }
+        
+        .model-info h3 {
+            font-size: 1.8em;
             color: #333;
             margin-bottom: 20px;
+            font-weight: 400;
         }
         
         .model-info p {
             font-size: 1.1em;
             color: #666;
             line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .model-info ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .model-info li {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .model-info li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #333;
+        }
+        
+        .model-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .gallery-image:hover {
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 1024px) {
+            .model-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .model-info {
+                padding-right: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .model-section h2 {
+                font-size: 2em;
+            }
+            
+            .model-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-image {
+                height: 250px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="ribs.html" class="back-button">← Back to Collection</a>
+        <a href="collections/ribs.html" class="back-button">← Back to Collection</a>
         
         <img src="Assets/Lighting/RiBS/RiBSLong/1.jpg" alt="RiBS Hanging Light" class="main-image" id="mainImage">
         
-        <div class="model-info">
-            <h2>Hanging Collection</h2>
-            <p>The RiBS hanging collection features pendant lights in both 400mm and 600mm lengths. Each piece is meticulously crafted to create perfect ambient lighting while maintaining a strong architectural presence. Available in both aluminum and natural birch wood finishes.</p>
+        <!-- RIBS-600 Section -->
+        <div class="model-section">
+            <h2>RIBS-600</h2>
+            <div class="model-content">
+                <div class="model-info">
+                    <p>The RIBS-600 combines architectural presence with versatile lighting capabilities. Using an E27 light bulb socket, it offers flexibility in choosing the perfect illumination for your space.</p>
+                    <p>With its larger presence, this model creates an striking focal point, ideal for:</p>
+                    <ul>
+                        <li>Living room centerpieces</li>
+                        <li>Above dining tables</li>
+                        <li>Kitchen islands</li>
+                    </ul>
+                </div>
+                <div class="model-gallery">
+                    <img src="Assets/Lighting/RiBS/RiBSLong/1.jpg" alt="RIBS-600 View 1" class="gallery-image" onclick="updateMainImage(this.src)">
+                    <img src="Assets/Lighting/RiBS/RiBSLong/2.jpg" alt="RIBS-600 View 2" class="gallery-image" onclick="updateMainImage(this.src)">
+                    <img src="Assets/Lighting/RiBS/RiBSLong/3.jpg" alt="RIBS-600 View 3" class="gallery-image" onclick="updateMainImage(this.src)">
+                    <img src="Assets/Lighting/RiBS/RiBSLong/4.jpg" alt="RIBS-600 View 4" class="gallery-image" onclick="updateMainImage(this.src)">
+                </div>
+            </div>
         </div>
-        
-        <div class="thumbnails">
-            <div class="thumbnail" onclick="updateMainImage('Assets/Lighting/RiBS/RiBSShort/1.jpg')">
-                <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/1.jpg" alt="RiBS 400">
-            </div>
-            <div class="thumbnail" onclick="updateMainImage('Assets/Lighting/RiBS/RiBSShort/2.jpg')">
-                <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/2.jpg" alt="RiBS 400">
-            </div>
-            <div class="thumbnail" onclick="updateMainImage('Assets/Lighting/RiBS/RiBSLong/1.jpg')">
-                <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/1.jpg" alt="RiBS 600">
-            </div>
-            <div class="thumbnail" onclick="updateMainImage('Assets/Lighting/RiBS/RiBSLong/2.jpg')">
-                <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/2.jpg" alt="RiBS 600">
+
+        <!-- RIBS-400 Section -->
+        <div class="model-section">
+            <h2>RIBS-400</h2>
+            <div class="model-content">
+                <div class="model-info">
+                    <p>The RIBS-400 features a G9 light bulb with a glass orb, creating a clean, sculptural aesthetic. While more limited in light output, its refined design makes it perfect for creating atmospheric lighting arrangements.</p>
+                    <p>This versatile piece excels in multiple configurations:</p>
+                    <ul>
+                        <li>Pairs or trios above kitchen islands</li>
+                        <li>Single fixtures in reading corners</li>
+                        <li>Above couches</li>
+                        <li>Hallways and entryways</li>
+                    </ul>
+                </div>
+                <div class="model-gallery">
+                    <img src="Assets/Lighting/RiBS/RiBSShort/1.jpg" alt="RIBS-400 View 1" class="gallery-image" onclick="updateMainImage(this.src)">
+                    <img src="Assets/Lighting/RiBS/RiBSShort/2.jpg" alt="RIBS-400 View 2" class="gallery-image" onclick="updateMainImage(this.src)">
+                    <img src="Assets/Lighting/RiBS/RiBSShort/3.jpg" alt="RIBS-400 View 3" class="gallery-image" onclick="updateMainImage(this.src)">
+                    <img src="Assets/Lighting/RiBS/RiBSShort/4.jpg" alt="RIBS-400 View 4" class="gallery-image" onclick="updateMainImage(this.src)">
+                </div>
             </div>
         </div>
     </div>

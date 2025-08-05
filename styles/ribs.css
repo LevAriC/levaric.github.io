@@ -1,0 +1,150 @@
+/* RIBS Collection Specific Styles */
+
+.ribs-showcase {
+    background: #000000;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    padding: var(--space-lg);
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.product-card {
+    background: var(--color-accent);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+}
+
+.product-image {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: var(--space-sm);
+}
+
+.product-title {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-xs);
+}
+
+.product-description {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    margin-bottom: var(--space-sm);
+}
+
+.specs-list {
+    list-style: none;
+    border-top: 1px solid var(--color-accent);
+    padding-top: var(--space-sm);
+}
+
+.specs-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-xs);
+    font-size: 0.9rem;
+}
+
+.specs-label {
+    color: var(--color-muted);
+}
+
+.gallery-section {
+    padding: var(--space-xl) var(--space-lg);
+    background: linear-gradient(to bottom, #000000, #111111);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-md);
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    aspect-ratio: 1;
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-image {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+        padding: var(--space-md);
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--space-sm);
+    }
+}
+
+/* Technical Specifications Section */
+.tech-specs {
+    padding: var(--space-xl) var(--space-lg);
+    background: #0a0a0a;
+}
+
+.specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.spec-category {
+    background: var(--color-accent);
+    padding: var(--space-md);
+    border-radius: 8px;
+}
+
+.category-title {
+    font-size: 1.2rem;
+    margin-bottom: var(--space-md);
+    color: var(--color-text);
+}
+
+.spec-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.spec-table td {
+    padding: var(--space-xs);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.spec-table td:first-child {
+    color: var(--color-muted);
+    width: 40%;
+}

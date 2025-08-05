@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RiBS - Architectural Lighting by Omer Zimmermann</title>
-    <style>
+    <meta http-equiv="refresh" content="0;url=/collections/ribs.html">
+    <title>Redirecting to RIBS Collection...</title>
+    <script>
+        window.location.href = "/collections/ribs.html";
+    </script>
+
+        /* Reset */
         * {
             margin: 0;
             padding: 0;
@@ -12,63 +16,332 @@
         }
         
         body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
             line-height: 1.6;
+            overflow-x: hidden;
+            overflow-x: hidden;
         }
-        
+
+        ::selection {
+            background: rgba(95, 79, 66, 0.2);
+        }
+
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+
         .container {
-            max-width: 1200px;
+            width: 100%;
             margin: 0 auto;
-            padding: 20px 20px;
+            padding: 0;
             position: relative;
         }
         
-        .hero-with-logo {
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .nav-container:hover {
+            opacity: 1;
+        }
+        
+        .nav-wrapper {
             display: flex;
+            justify-content: flex-end;
             align-items: center;
-            gap: 20px;
-            margin-bottom: 20px;
-            max-width: 960px;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 1400px;
+            margin: 0 auto;
         }
         
         .logo {
-            height: 120px;
-            width: auto;
-            flex-shrink: 0;
+            display: none;
         }
         
-        .hero-text {
+        .menu-button {
+            width: 24px;
+            height: 16px;
+            position: relative;
+            cursor: pointer;
+            mix-blend-mode: difference;
+        }
+        
+        .menu-button {
+            width: 30px;
+            height: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .menu-button span {
+            display: block;
+            position: absolute;
+            height: 1px;
+            width: 100%;
+            background: #fff;
+            transition: transform 0.3s ease;
+        }
+        
+        .menu-button span:nth-child(1) { top: 0; }
+        .menu-button span:nth-child(2) { top: 50%; }
+        .menu-button span:nth-child(3) { top: 100%; }
+        
+        /* Landing Page Styles */
+        .landing-page {
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            background: var(--color-bg);
+        }
+
+        /* Split Layout */
+        .split-hero {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            background: var(--color-bg);
+        }
+        
+        .split-section {
             flex: 1;
+            position: relative;
+            overflow: hidden;
+            color: var(--color-text);
+            cursor: pointer;
+            transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .split-section:hover {
+            flex: 1.2;
+        }
+
+        /* Page Transition */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--color-bg);
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .page-transition.active {
+            opacity: 1;
+        }
+
+        /* Collection Pages Container */
+        .collections-container {
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .collections-container.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hover Effects */
+        .hover-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .split-section:hover .hover-overlay {
+            opacity: 1;
         }
         
-        .hero {
-            text-align: left;
-            margin-bottom: 20px;
-            max-width: 960px;
-            margin-left: auto;
-            margin-right: auto;
+        .split-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            transform: scale(1.1);
+            transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .split-section:hover .split-background {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+
+        .mirror-bg {
+            background: url('Assets/Lighting/MiRROR/1.jpg') center center;
+            background-size: cover;
+        }
+        
+        .split-content {
+            position: absolute;
+            bottom: 5rem;
+            left: 5rem;
+            z-index: 1;
+            opacity: 0.9;
+            transition: all 0.4s ease;
+        }
+
+        .split-section:hover .split-content {
+            opacity: 1;
+            transform: translateY(-1rem);
+        }
+
+        .split-headline {
+            font-size: clamp(1.5em, 4vw, 2.5em);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            position: relative;
+        }
+
+        .trademark {
+            font-size: 0.4em;
+            vertical-align: baseline;
+            position: relative;
+            top: -0.5em;
+            margin-left: 0.2em;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        .hover-info {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .split-section:hover .hover-info {
+            opacity: 1;
+        }
+
+        .hover-text {
+            font-size: 1em;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: 1px solid var(--color-text);
+            padding: 1em 2em;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .split-hero {
+                flex-direction: column;
+            }
+
+            .split-section {
+                height: 50vh;
+            }
+
+            .split-section:hover {
+                flex: 1;
+            }
+
+            .split-content {
+                bottom: 3rem;
+                left: 2rem;
+            }
+            
+            .split-headline {
+                font-size: clamp(1.2em, 6vw, 2em);
+            }
+        }
+
+        .collection-link {
+            text-decoration: none;
+            color: #ffffff;
+            opacity: 0;
+            animation: fadeIn 1.5s ease 0.5s forwards;
+            transition: opacity 0.3s ease;
+        }
+
+        .collection-link:hover {
+            opacity: 0.8;
         }
         
         .headline {
-            font-size: 6em;
+            font-size: clamp(1.5em, 4vw, 2.5em);
             font-weight: 300;
-            color: #2c2c2c;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            margin-bottom: -30px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            letter-spacing: 0.05em;
+            line-height: 1.2;
+            color: #ffffff;
+            margin-bottom: 0.5em;
         }
         
-        .byline {
-            font-size: 1.4em;
-            color: #555;
-            margin-top: 0px;
-            margin-bottom: 30px;
-            font-style: italic;
-            font-weight: 300;
+        .technical-header {
+            background: rgba(0, 0, 0, 0.85);
+            padding: 2em;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: inline-block;
+        }
+        
+        .model-tag {
+            font-family: 'Space Mono', monospace;
+            color: #00ff9d;
+            font-size: 0.9em;
+            letter-spacing: 0.2em;
+            display: block;
+            margin-bottom: 1em;
+        }
+        
+        .specs-line {
+            color: rgba(255, 255, 255, 0.3);
+            margin: 1em 0;
+            font-family: monospace;
+        }
+        
+        .technical-data {
+            display: grid;
+            gap: 0.5em;
+            margin-top: 2em;
+            font-family: 'Space Mono', monospace;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9em;
+            letter-spacing: 0.1em;
+        }
+        
+        .spec-item {
+            display: block;
+        }
+        
+        .terminal-prompt {
+            font-family: 'Space Mono', monospace;
+            color: #00ff9d;
+            font-size: 0.9em;
+            opacity: 0.7;
+            animation: blink 1s step-end infinite;
+        }
+        
+        @keyframes blink {
+            50% { opacity: 0; }
         }
         
         .about-section {
@@ -153,29 +426,64 @@
             margin-bottom: 40px;
         }
         
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 40px auto;
+        .site-footer {
+            padding: 10vh 5vw;
+            background: #000000;
+            color: #ffffff;
         }
         
-        .social-link {
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
-            align-items: center;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2em;
+        }
+        
+        .studio-info {
+            font-size: 1em;
+            line-height: 1.6;
+            opacity: 0.7;
+        }
+        
+        .footer-links {
+            font-size: 0.9em;
+        }
+        
+        .footer-links a {
+            color: #ffffff;
             text-decoration: none;
-            color: #5f4f42;
-            font-size: 1.1em;
-            transition: color 0.3s ease;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
         }
         
-        .social-link:hover {
-            color: #333;
+        .footer-links a:hover {
+            opacity: 1;
         }
         
-        .social-icon {
-            margin-right: 8px;
-            font-size: 1.4em;
+        .separator {
+            margin: 0 0.8em;
+            opacity: 0.3;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 3em;
+            }
+            
+            .footer-links {
+                display: flex;
+                flex-direction: column;
+                gap: 1em;
+                align-items: center;
+            }
+            
+            .separator {
+                display: none;
+            }
         }
         
         .product-description {
@@ -336,51 +644,329 @@
             background: #654321;
         }
         
+        .collection-intro {
+            padding: 15vh 5vw 10vh;
+            text-align: left;
+            background: var(--color-bg);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .intro-text {
+            font-size: clamp(1.2em, 2vw, 1.6em);
+            line-height: 1.6;
+            font-weight: 300;
+            color: var(--color-text);
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0;
+            letter-spacing: 0.02em;
+        }
+        
+        .models-grid {
+            padding: 5vw;
+            background: #111111;
+        }
+        
+        .grid-intro {
+            margin-bottom: 5vh;
+            padding-bottom: 2vh;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .collection-label {
+            font-size: 1.2em;
+            letter-spacing: 0.05em;
+            color: #ffffff;
+            opacity: 0.7;
+        }
+        
+        .grid-separator {
+            display: block;
+            color: rgba(255, 255, 255, 0.2);
+            font-family: monospace;
+            margin-top: 0.5em;
+        }
+        
         .product-row {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            margin-bottom: 40px;
-            max-width: 960px;
-            margin-left: auto;
-            margin-right: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2vw;
+            padding: 2vw 0;
         }
         
         .product-trigger {
-            border-radius: 12px;
-            overflow: hidden;
             position: relative;
-            width: 100%;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            cursor: pointer;
+            text-decoration: none;
         }
         
-        .product-trigger.active {
-            /* No visual change for active state */
+        .model-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4vw;
+            padding: 2vw 0;
+        }
+        
+        .model-card {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .model-frame {
+            position: relative;
+            background: #000000;
+            overflow: hidden;
+        }
+        
+        .model-frame img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            opacity: 0.9;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                      opacity 0.6s ease;
+        }
+        
+        .model-card:hover img {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+        
+        .model-info {
+            padding: 2em;
+            background: #0a0a0a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .model-info h3 {
+            font-size: 1.2em;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5em;
+            color: #ffffff;
+        }
+        
+        .specs-list {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.5em 2em;
+            font-size: 0.9em;
+            margin-bottom: 2em;
+        }
+        
+        .specs-list dt {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85em;
+            letter-spacing: 0.05em;
+        }
+        
+        .specs-list dd {
+            color: #ffffff;
+            margin: 0;
+        }
+        
+        .view-details {
+            display: inline-block;
+            color: #ffffff;
+            opacity: 0.5;
+            font-size: 0.9em;
+            transition: opacity 0.3s ease;
+        }
+        
+        .model-card:hover .view-details {
+            opacity: 1;
+        }
+
+        /* Mirror System Styles */
+        .mirror-section {
+            padding: 15vh 5vw;
+            background: #0a0a0a;
+            color: #ffffff;
+        }
+
+        .mirror-intro {
+            max-width: 800px;
+            margin: 0 auto 8vh;
+            text-align: center;
+        }
+
+        .mirror-title {
+            font-size: clamp(2em, 5vw, 3.5em);
+            font-weight: 300;
+            margin-bottom: 2em;
+            letter-spacing: 0.02em;
+        }
+
+        .mirror-text {
+            font-size: clamp(1.2em, 3vw, 1.8em);
+            line-height: 1.6;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+
+        .mirror-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 5vw;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .mirror-specs {
+            padding: 2em;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mirror-details {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1em 2em;
+            font-size: 0.9em;
+        }
+
+        .mirror-details dt {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85em;
+            letter-spacing: 0.05em;
+        }
+
+        .mirror-details dd {
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .mirror-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2em;
+        }
+
+        .mirror-item {
+            position: relative;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+        }
+
+        .mirror-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                      opacity 0.6s ease;
+        }
+
+        .mirror-item:hover img {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+
+        .mirror-caption {
+            position: absolute;
+            bottom: 1.5em;
+            left: 1.5em;
+            color: #ffffff;
+            font-size: 0.9em;
+            opacity: 0;
+            transform: translateY(1em);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .mirror-item:hover .mirror-caption {
+            opacity: 0.8;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .mirror-grid {
+                grid-template-columns: 1fr;
+                gap: 3em;
+            }
+
+            .mirror-specs {
+                order: 2;
+            }
+
+            .mirror-gallery {
+                order: 1;
+            }
+        }
+        
+        .technical-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 1em;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .product-trigger:hover .technical-overlay {
+            transform: translateY(0);
+        }
+        
+        .tech-spec {
+            display: block;
+            font-family: 'Space Mono', monospace;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8em;
+            margin-bottom: 0.5em;
+        }
+        
+        .product-trigger::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            z-index: 1;
         }
         
         .product-trigger > img {
             width: 100%;
-            height: 150px;
+            height: 100%;
             object-fit: cover;
-            display: block;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            filter: brightness(0.80);
+            transform: scale(1.1);
+            transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+            filter: brightness(0.95);
         }
         
-        .product-trigger > img:hover {
-            transform: translateY(-8px);
+        .product-trigger:hover > img {
+            transform: scale(1);
+        }
+        
+        .product-trigger:hover::before {
+            opacity: 1;
         }
         
         .product-label {
             position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: 2rem;
+            left: 2rem;
             color: white;
-            font-size: 1.2em;
-            font-weight: 600;
-            pointer-events: none;
-            letter-spacing: 1px;
+            font-size: clamp(1.2em, 2vw, 1.8em);
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            z-index: 2;
+        }
+        
+        .product-trigger:hover .product-label {
+            transform: translateY(0);
+            opacity: 1;
         }
         
         /* Gallery Logic - Hidden but preserved for future use */
@@ -566,7 +1152,130 @@
             transform: scale(1.02);
         }
 
-                    @media (max-width: 768px) {
+                    /* Floating Home Button */
+        .floating-home {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .floating-home:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .floating-logo {
+            width: 2rem;
+            height: 2rem;
+            object-fit: contain;
+            transition: opacity 0.3s ease;
+        }
+
+        .home-tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            left: 120%;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .home-tooltip::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+            width: 8px;
+            height: 8px;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .floating-home:hover .home-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 768px) {
+            .floating-home {
+                top: 1.5rem;
+                left: 1.5rem;
+                width: 3rem;
+                height: 3rem;
+            }
+
+            .floating-logo {
+                width: 1.75rem;
+                height: 1.75rem;
+            }
+
+            .home-tooltip {
+                display: none;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .subtitle {
+            font-size: 1em;
+            letter-spacing: 0.02em;
+            font-weight: 300;
+            opacity: 0.7;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        ::selection {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        @keyframes scrollIndicate {
+            0% { transform: scaleY(0); transform-origin: top; }
+            50% { transform: scaleY(1); transform-origin: top; }
+            50.1% { transform: scaleY(1); transform-origin: bottom; }
+            100% { transform: scaleY(0); transform-origin: bottom; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
             .headline {
                 font-size: 3.5em;
                 letter-spacing: 4px;
@@ -643,46 +1352,122 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="hero-with-logo">
-            <img src="Assets/Logo/oz-logo-png.png" alt="Omer Zimmermann Logo" class="logo">
-            <div class="hero-text">
-                <h1 class="headline">RiBS</h1>
-                <p class="byline">By Omer Zimmermann</p>
-            </div>
-        </div>
-        <div class="hero">
-            
-        </div>
-        
-        <!-- Info Sections Side by Side -->
-        <div class="info-sections">
-            <div class="about-section">
-                <h2 class="about-title">The Collection</h2>
-                <p class="about-text">The RIBS collection, handmade in Tel Aviv by the Omer Zimmermann Studio, features raw wood and aluminum in their purest form. With a strong yet minimal presence, each piece brings a calm, layered beauty to any space.</p>
-            </div>
-            <div class="models-section">
-                <h2 class="models-title">The Models</h2>
-                <p class="models-text">All RIBS models are designed to highlight the honest beauty of their materials. Available in both aluminum and natural birch wood finishes, each piece is meticulously crafted to create the perfect balance between form and function. The collection includes pendant lights in 400mm and 600mm lengths, wall-mounted fixtures, and continuous strip lighting options. Each design delivers both ambient and direct lighting solutions, making them versatile for any architectural space.</p>
-            </div>
-        </div>
-        
-        <!-- Product Selection Row -->
-        <div class="product-row">
-            <a href="hanging.html" class="product-trigger" data-product="hanging">
-                <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/1.jpg" alt="RiBS Hanging" loading="lazy">
-                <div class="product-label">Hanging</div>
+    <!-- Minimal Navigation -->
+    <nav class="nav-container">
+        <div class="nav-wrapper">
+            <a href="index.html" class="nav-logo">
+                <img src="Assets/Logo/oz-logo-png.png" alt="Omer Zimmermann Logo" class="logo">
             </a>
+            <button class="menu-button" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="nav-menu">
+            <a href="#ribs">RIBS</a>
+            <a href="#mirror">Mirror System</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Floating Home Button -->
+    <a href="/" class="floating-home" title="Home">
+        <img src="Assets/Logo/oz-logo-png.png" alt="Omer Zimmermann Logo" class="floating-logo">
+        <span class="home-tooltip">Home</span>
+    </a>
+
+    <!-- Landing Page -->
+    <main class="landing-page">
+        <!-- Split View Hero Section -->
+        <section class="split-hero">
+            <!-- RIBS Collection Side -->
+            <div class="split-section ribs-section" data-collection="ribs">
+                <video class="split-background" autoplay loop muted playsinline>
+                    <source src="Assets/Lighting/RiBS/wes.mp4" type="video/mp4">
+                </video>
+                <div class="split-content">
+                    <h1 class="split-headline">RIBS Collection<span class="trademark">®</span></h1>
+                    <div class="headline-separator"></div>
+                    <p class="split-subtitle">by Omer Zimmerman</p>
+                </div>
+                <div class="hover-info">
+                    <span class="hover-text">View Collection</span>
+                </div>
+                <div class="hover-overlay"></div>
+            </div>
+
+            <!-- Mirror System Side -->
+            <div class="split-section mirror-section" data-collection="mirror">
+                <div class="split-background mirror-bg"></div>
+                <div class="split-content">
+                    <h1 class="split-headline">Mirror System<span class="trademark">®</span></h1>
+                    <div class="headline-separator"></div>
+                    <p class="split-subtitle">Illuminated Mirrors</p>
+                </div>
+                <div class="hover-info">
+                    <span class="hover-text">View Collection</span>
+                </div>
+                <div class="hover-overlay"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Page Transition Overlay -->
+    <div class="page-transition"></div>
+
+    <!-- Collection Pages Container -->
+    <div class="collections-container">
+
+        <!-- RIBS Collection -->
+        <div class="models-grid">
+            <!-- Collection Intro -->
+            <section class="collection-intro">
+                <p class="intro-text">Ribbed shades. Wall or hanging. Some cozy, some sharp.<br>
+                Handmade in Tel Aviv. Still evolving.</p>
+            </section>
+
+            <div class="grid-intro">
+                <span class="collection-label">RIBS Collection</span>
+                <span class="grid-separator">—</span>
+            </div>
             
-            <a href="wall.html" class="product-trigger" data-product="wall">
-                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall B.png" alt="RiBS Wall" loading="lazy">
-                <div class="product-label">Wall</div>
-            </a>
-            
-            <a href="strip.html" class="product-trigger" data-product="strip">
-                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long A.45.png" alt="RiBS Strip" loading="lazy">
-                <div class="product-label">Strip</div>
-            </a>
+            <div class="model-row">
+                <a href="hanging.html" class="product-trigger" data-product="hanging">
+                    <div class="technical-frame">
+                        <span class="model-id">[MODEL_600]</span>
+                        <img src="Assets/Lighting/RiBS/RiBSLong/1.jpg" alt="RIBS [600] Hanging" loading="lazy">
+                        <div class="technical-overlay">
+                            <span class="tech-spec">TYPE: HANGING</span>
+                            <span class="tech-spec">DIM: 600MM</span>
+                            <span class="tech-spec">VIEW_SPECS >></span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="wall.html" class="product-trigger" data-product="wall">
+                    <div class="technical-frame">
+                        <span class="model-id">[MODEL_WALL]</span>
+                        <img src="Assets/Lighting/RiBS/Illustrations/Ribs wall B.png" alt="RIBS Wall Mount" loading="lazy">
+                        <div class="technical-overlay">
+                            <span class="tech-spec">TYPE: WALL</span>
+                            <span class="tech-spec">DIM: CUSTOM</span>
+                            <span class="tech-spec">VIEW_SPECS >></span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="strip.html" class="product-trigger" data-product="strip">
+                    <div class="technical-frame">
+                        <span class="model-id">[MODEL_STRIP]</span>
+                        <img src="Assets/Lighting/RiBS/Illustrations/Ribs long A.45.png" alt="RIBS Continuous" loading="lazy">
+                        <div class="technical-overlay">
+                            <span class="tech-spec">TYPE: STRIP</span>
+                            <span class="tech-spec">DIM: ∞</span>
+                            <span class="tech-spec">VIEW_SPECS >></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
 
         <!-- RiBS 400 Gallery -->
@@ -816,26 +1601,65 @@
                 </a>
             </div>
         </div>
-        
-        <!-- Hero Image Section -->
-        <div class="hero-image-section">
-            <div class="hero-image-container">
-                <img src="Assets/Lighting/RiBS/thumbnails/2.jpg" alt="RiBS Hero" class="hero-default" loading="lazy">
-                <img src="Assets/Lighting/RiBS/thumbnails/1.jpg" alt="RiBS Hero Hover" class="hero-hover" loading="lazy">
+
+        <!-- Mirror System Section -->
+        <section class="mirror-section">
+            <div class="mirror-intro">
+                <h2 class="mirror-title">Mirror System</h2>
+                <p class="mirror-text">A mirror with built-in light.<br>
+                Pick the shape, pick the size.<br>
+                Glows like nothing else.</p>
             </div>
-        </div>
+
+            <div class="mirror-grid">
+                <div class="mirror-specs">
+                    <dl class="mirror-details">
+                        <dt>MODEL</dt>
+                        <dd>Mirror System [Custom]</dd>
+                        <dt>TYPE</dt>
+                        <dd>Illuminated wall-mounted mirror</dd>
+                        <dt>LIGHT SOURCE</dt>
+                        <dd>Integrated LED</dd>
+                        <dt>MATERIALS</dt>
+                        <dd>Glass + Wood or Aluminum frame</dd>
+                        <dt>OPTIONS</dt>
+                        <dd>Round / Oval / Rectangular</dd>
+                        <dt>DIMENSIONS</dt>
+                        <dd>Custom</dd>
+                    </dl>
+                </div>
+
+                <div class="mirror-gallery">
+                    <div class="mirror-item">
+                        <img src="Assets/Lighting/MiRROR/1.jpg" alt="Mirror System - Hotel Installation" loading="lazy">
+                        <span class="mirror-caption">Hotel Installation</span>
+                    </div>
+                    <div class="mirror-item">
+                        <img src="Assets/Lighting/MiRROR/2.jpg" alt="Mirror System - Restaurant" loading="lazy">
+                        <span class="mirror-caption">Restaurant</span>
+                    </div>
+                    <div class="mirror-item">
+                        <img src="Assets/Lighting/MiRROR/3.jpg" alt="Mirror System - Entryway" loading="lazy">
+                        <span class="mirror-caption">Entryway</span>
+                    </div>
+                </div>
+            </div>
+        </section>
         
-        <!-- Social Links -->
-        <div class="social-links">
-            <a href="https://www.instagram.com/omerzimmermann/" target="_blank" rel="noopener" class="social-link">
-                <span class="social-icon">📷</span>
-                Instagram
-            </a>
-            <a href="https://omerzimer.com" target="_blank" rel="noopener" class="social-link">
-                <span class="social-icon">🌐</span>
-                Website
-            </a>
-        </div>
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-content">
+                <p class="studio-info">Omer Zimmerman Studio<br>
+                Handmade in Tel Aviv since 2017</p>
+                <div class="footer-links">
+                    <a href="https://www.instagram.com/omerzimmermann/" target="_blank" rel="noopener">Instagram</a>
+                    <span class="separator">·</span>
+                    <a href="mailto:contact@omerzimmerman.com">Email</a>
+                    <span class="separator">·</span>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+        </footer>
     </div>
     
     <!-- Lightbox -->
@@ -847,6 +1671,56 @@
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get elements
+            const landingPage = document.querySelector('.landing-page');
+            const collectionsContainer = document.querySelector('.collections-container');
+            const pageTransition = document.querySelector('.page-transition');
+            const splitSections = document.querySelectorAll('.split-section');
+
+            // Initially hide collections container
+            collectionsContainer.style.display = 'none';
+
+            // Add click handlers to split sections
+            splitSections.forEach(section => {
+                section.addEventListener('click', () => {
+                    const collection = section.dataset.collection;
+                    navigateToCollection(collection);
+                });
+            });
+
+            function navigateToCollection(collection) {
+                // Start transition
+                pageTransition.classList.add('active');
+
+                // After transition starts, switch content
+                setTimeout(() => {
+                    // Hide landing page
+                    landingPage.style.display = 'none';
+                    
+                    // Show and position collections container
+                    collectionsContainer.style.display = 'block';
+                    
+                    // Scroll to specific collection
+                    if (collection === 'mirror') {
+                        document.querySelector('.mirror-section').scrollIntoView({ behavior: 'auto' });
+                    } else {
+                        document.querySelector('.models-grid').scrollIntoView({ behavior: 'auto' });
+                    }
+
+                    // Allow animations to work after display change
+                    requestAnimationFrame(() => {
+                        collectionsContainer.classList.add('active');
+                    });
+
+                    // End transition
+                    setTimeout(() => {
+                        pageTransition.classList.remove('active');
+                    }, 600);
+                }, 600);
+            }
+        });
+
         // Gallery Logic - Preserved for future use
         function showGallery(galleryId) {
             // Hide all galleries
