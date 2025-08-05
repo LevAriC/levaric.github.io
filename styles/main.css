@@ -87,22 +87,80 @@ body.lighting-page {
 
 /* Collection Intro */
 .collection-intro {
-    padding: 15vh 5vw 10vh;
-    text-align: left;
-    background: var(--color-bg);
-    max-width: 1400px;
-    margin: 0 auto;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+.intro-background {
+    width: 100%;
+    height: 80vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.intro-content {
+    position: absolute;
+    bottom: 15vh;
+    left: 5vw;
+    right: 5vw;
+    padding: 0;
+    background: none;
 }
 
 .intro-text {
-    font-size: clamp(1.2em, 2vw, 1.6em);
+    font-size: clamp(1.4em, 2.5vw, 2em);
     line-height: 1.6;
     font-weight: 300;
     color: var(--color-text);
-    opacity: 0.8;
+    opacity: 1;
     max-width: 600px;
     margin: 0;
     letter-spacing: 0.02em;
+    position: relative;
+    text-shadow: 
+        -1px -1px 0 rgba(0,0,0,0.3),
+        1px -1px 0 rgba(0,0,0,0.3),
+        -1px 1px 0 rgba(0,0,0,0.3),
+        1px 1px 0 rgba(0,0,0,0.3),
+        2px 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Remove the global gradient overlay to let the image shine */
+.intro-background::after {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .intro-background {
+        height: 90vh;
+    }
+    
+    .intro-content {
+        bottom: 10vh;
+        left: 1.5rem;
+        right: 1.5rem;
+    }
+    
+    .intro-text {
+        font-size: clamp(1.2em, 4vw, 1.6em);
+        padding: 1.25rem 1.5rem;
+        width: calc(100% - 3rem);
+        box-sizing: border-box;
+    }
+}
+
+/* Subtle animation for text box */
+.intro-text {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.intro-text:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
 }
 
 /* RIBS Collection Styles */
