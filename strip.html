@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RiBS - Strip Collection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            transition: color 0.3s ease;
+        }
+        
+        .back-button:hover {
+            color: #666;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 80vh;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .thumbnails {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .thumbnail {
+            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .thumbnail:hover {
+            transform: scale(1.05);
+        }
+        
+        .thumbnail img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .model-info {
+            margin: 40px 0;
+            max-width: 800px;
+        }
+        
+        .model-info h2 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .model-info p {
+            font-size: 1.1em;
+            color: #666;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="ribs.html" class="back-button">← Back to Collection</a>
+        
+        <img src="Assets/Lighting/RiBS/Illustrations/Ribs long A.45.png" alt="RiBS Strip Light" class="main-image" id="mainImage">
+        
+        <div class="model-info">
+            <h2>Strip Collection</h2>
+            <p>The RiBS strip collection offers continuous lighting solutions that can be customized to any length. Available in both aluminum and natural birch wood finishes, these versatile fixtures provide seamless illumination for both residential and commercial spaces.</p>
+        </div>
+        
+        <div class="thumbnails">
+            <div class="thumbnail" onclick="updateMainImage('Assets/Lighting/RiBS/Illustrations/Ribs long A.45.png')">
+                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long A.45.png" alt="RiBS Strip A.45">
+            </div>
+            <div class="thumbnail" onclick="updateMainImage('Assets/Lighting/RiBS/Illustrations/Ribs long B.png')">
+                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long B.png" alt="RiBS Strip B">
+            </div>
+            <div class="thumbnail" onclick="updateMainImage('Assets/Lighting/RiBS/Illustrations/Ribs long Wood A.png')">
+                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long Wood A.png" alt="RiBS Strip Wood">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateMainImage(src) {
+            document.getElementById('mainImage').src = src;
+        }
+    </script>
+</body>
+</html>

@@ -337,9 +337,9 @@
         }
         
         .product-row {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
             margin-bottom: 40px;
             max-width: 960px;
             margin-left: auto;
@@ -350,6 +350,7 @@
             border-radius: 12px;
             overflow: hidden;
             position: relative;
+            width: 100%;
         }
         
         .product-trigger.active {
@@ -597,12 +598,11 @@
             }
             
             .product-row {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
+                gap: 30px;
             }
             
             .product-label {
-                font-size: 1em;
+                font-size: 1.2em;
                 top: 15px;
             }
             
@@ -669,60 +669,20 @@
         
         <!-- Product Selection Row -->
         <div class="product-row">
-            <div class="product-trigger" data-product="ribs400">
-                <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/1.jpg" alt="RiBS 400" loading="lazy" onclick="toggleDropdown('ribs400', this.parentElement)">
-                <div class="product-label">400</div>
-                <div class="dropdown-thumbnails" id="ribs400Dropdown">
-                    <div class="dropdown-thumbnail">
-                        <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/1.jpg" alt="RiBS 400 - 1" onclick="openLightbox('Assets/Lighting/RiBS/RiBSShort/1.jpg', event)">
-                    </div>
-                    <div class="dropdown-thumbnail">
-                        <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/2.jpg" alt="RiBS 400 - 2" onclick="openLightbox('Assets/Lighting/RiBS/RiBSShort/2.jpg', event)">
-                    </div>
-                    <div class="dropdown-thumbnail">
-                        <img src="Assets/Lighting/RiBS/RiBSShort/thumbnails/3.jpg" alt="RiBS 400 - 3" onclick="openLightbox('Assets/Lighting/RiBS/RiBSShort/3.jpg', event)">
-                    </div>
-                </div>
-            </div>
-            <div class="product-trigger" data-product="ribs600">
-                <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/1.jpg" alt="RiBS 600" loading="lazy" onclick="toggleDropdown('ribs600', this.parentElement)">
-                <div class="product-label">600</div>
-                <div class="dropdown-thumbnails" id="ribs600Dropdown">
-                    <div class="dropdown-thumbnail">
-                        <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/1.jpg" alt="RiBS 600 - 1" onclick="openLightbox('Assets/Lighting/RiBS/RiBSLong/1.jpg', event)">
-                    </div>
-                    <div class="dropdown-thumbnail">
-                        <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/2.jpg" alt="RiBS 600 - 2" onclick="openLightbox('Assets/Lighting/RiBS/RiBSLong/2.jpg', event)">
-                    </div>
-                    <div class="dropdown-thumbnail">
-                        <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/3.jpg" alt="RiBS 600 - 3" onclick="openLightbox('Assets/Lighting/RiBS/RiBSLong/3.jpg', event)">
-                    </div>
-                </div>
-            </div>
-            <div class="product-trigger" data-product="wallaluminum">
-                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall B.png" alt="RiBS Wall" loading="lazy" onclick="toggleDropdown('wallaluminum', this.parentElement)">
+            <a href="hanging.html" class="product-trigger" data-product="hanging">
+                <img src="Assets/Lighting/RiBS/RiBSLong/thumbnails/1.jpg" alt="RiBS Hanging" loading="lazy">
+                <div class="product-label">Hanging</div>
+            </a>
+            
+            <a href="wall.html" class="product-trigger" data-product="wall">
+                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall B.png" alt="RiBS Wall" loading="lazy">
                 <div class="product-label">Wall</div>
-                <div class="dropdown-thumbnails" id="wallaluminumDropdown">
-                    <div class="dropdown-thumbnail">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall B.png" alt="RiBS Wall Aluminum B" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs wall B.png', event)">
-                    </div>
-                    <div class="dropdown-thumbnail">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs wall Wood A.png" alt="RiBS Wall Birch A" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs wall Wood A.png', event)">
-                    </div>
-                </div>
-            </div>
-            <div class="product-trigger" data-product="stripaluminum">
-                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long A.45.png" alt="RiBS Strip" loading="lazy" onclick="toggleDropdown('stripaluminum', this.parentElement)">
+            </a>
+            
+            <a href="strip.html" class="product-trigger" data-product="strip">
+                <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long A.45.png" alt="RiBS Strip" loading="lazy">
                 <div class="product-label">Strip</div>
-                <div class="dropdown-thumbnails" id="stripaluminumDropdown">
-                    <div class="dropdown-thumbnail">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long A.45.png" alt="RiBS Strip Aluminum A.45" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs long A.45.png', event)">
-                    </div>
-                    <div class="dropdown-thumbnail">
-                        <img src="Assets/Lighting/RiBS/Illustrations/thumbnails/Ribs long Wood A.png" alt="RiBS Strip Birch A" onclick="openLightbox('Assets/Lighting/RiBS/Illustrations/Ribs long Wood A.png', event)">
-                    </div>
-                </div>
-            </div>
+            </a>
         </div>
 
         <!-- RiBS 400 Gallery -->
