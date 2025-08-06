@@ -45,28 +45,27 @@ body.lighting-page {
     left: 2rem;
     width: 3.5rem;
     height: 3.5rem;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.8);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    transition: transform 0.3s ease;
 }
 
 .floating-home:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
 }
 
 .floating-logo {
-    width: 2rem;
-    height: 2rem;
+    width: 3.2rem;
+    height: 3.2rem;
     object-fit: contain;
-    transition: opacity 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.floating-home:hover .floating-logo {
+    transform: rotate(-5deg);
+    opacity: 0.9;
 }
 
 .home-tooltip {
