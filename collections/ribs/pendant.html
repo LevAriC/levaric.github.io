@@ -10,9 +10,9 @@
 </head>
 <body>
     <!-- Floating Home Button -->
-    <a href="../../collections/ribs.html" class="floating-home" title="Back to RIBS Collection">
+    <a href="../../index.html" class="floating-home" title="Home">
         <img src="../../Assets/Logo/oz-logo-png.png" alt="Omer Zimmermann Logo" class="floating-logo">
-        <span class="home-tooltip">Back to Collection</span>
+        <span class="home-tooltip">Home</span>
     </a>
 
     <div class="product-layout">
@@ -49,10 +49,18 @@
         document.addEventListener('DOMContentLoaded', function() {
             const options = document.querySelectorAll('.selector-option');
             const productImage = document.querySelector('.product-gallery img');
+            const gallery = document.querySelector('.product-gallery');
             
             // Set default values
             let currentSize = '600';
             let currentMaterial = 'birch';
+            
+            // Zoom functionality
+            let scale = 1;
+            let translateX = 0;
+            let translateY = 0;
+            let isDragging = false;
+            let startX, startY;
             
             // Set initial active states
             document.querySelector('[data-size="600"]').classList.add('active');
@@ -100,6 +108,83 @@
                     // Update the product image
                     updateProductImage();
                 });
+            });
+
+            // Zoom functions
+            function updateTransform() {
+                productImage.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+            }
+
+            function resetZoom() {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                gallery.classList.remove('zoomed');
+                updateTransform();
+            }
+
+            // Wheel zoom handler
+            gallery.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const rect = gallery.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+                
+                // Calculate zoom
+                const delta = -Math.sign(e.deltaY) * 0.1;
+                const newScale = Math.min(Math.max(1, scale + delta), 4);
+                
+                if (newScale !== scale) {
+                    // Calculate cursor position relative to image
+                    const scaleChange = newScale - scale;
+                    translateX -= (mouseX - translateX) * (scaleChange / scale);
+                    translateY -= (mouseY - translateY) * (scaleChange / scale);
+                    
+                    scale = newScale;
+                    
+                    // Update cursor and transform
+                    gallery.classList.toggle('zoomed', scale > 1);
+                    updateTransform();
+                }
+            });
+
+            // Mouse drag functionality
+            gallery.addEventListener('mousedown', (e) => {
+                if (scale > 1) {
+                    isDragging = true;
+                    startX = e.clientX - translateX;
+                    startY = e.clientY - translateY;
+                    gallery.style.cursor = 'grabbing';
+                }
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    e.preventDefault();
+                    translateX = e.clientX - startX;
+                    translateY = e.clientY - startY;
+                    
+                    // Constrain panning
+                    const maxTranslateX = (scale - 1) * gallery.offsetWidth / 2;
+                    const maxTranslateY = (scale - 1) * gallery.offsetHeight / 2;
+                    
+                    translateX = Math.min(Math.max(-maxTranslateX, translateX), maxTranslateX);
+                    translateY = Math.min(Math.max(-maxTranslateY, translateY), maxTranslateY);
+                    
+                    updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                gallery.style.cursor = scale > 1 ? 'move' : 'zoom-in';
+            });
+
+            // Reset zoom when changing images
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    resetZoom();
+                }
             });
         });
     </script>

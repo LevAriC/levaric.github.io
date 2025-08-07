@@ -10,7 +10,7 @@
 </head>
 <body>
     <!-- Floating Home Button -->
-    <a href="https://omerzimer.com" class="floating-home" title="Omer Zimmermann Studio">
+    <a href="../index.html" class="floating-home" title="Home">
         <img src="../Assets/Logo/oz-logo-png.png" alt="Omer Zimmermann Logo" class="floating-logo">
         <span class="home-tooltip">Home</span>
     </a>
@@ -30,10 +30,8 @@
         <div class="format-grid">
             <!-- Pendant Format -->
             <a href="ribs/pendant.html" class="format-card" data-format="pendant">
-                <div class="format-slideshow">
-                    <img src="../Assets/Lighting/RiBS/RiBSLong/1.jpg" alt="RIBS Pendant">
-                    <img src="../Assets/Lighting/RiBS/RiBSLong/2.jpg" alt="RIBS Pendant Detail">
-                    <img src="../Assets/Lighting/RiBS/RiBSLong/3.jpg" alt="RIBS Pendant Installation">
+                <div class="format-preview">
+                    <img src="../Assets/ribs/pandent/ribs-pendant-600-birch.jpg" alt="RIBS Pendant" class="preview-image">
                 </div>
                 <div class="format-info">
                     <h3>RIBS Pendant</h3>
@@ -42,10 +40,8 @@
 
             <!-- Wall Format -->
             <a href="ribs/wall.html" class="format-card" data-format="wall">
-                <div class="format-slideshow">
-                    <img src="../Assets/Lighting/RiBS/RiBSShort/1.jpg" alt="RIBS Wall">
-                    <img src="../Assets/Lighting/RiBS/RiBSShort/2.jpg" alt="RIBS Wall Detail">
-                    <img src="../Assets/Lighting/RiBS/RiBSShort/3.jpg" alt="RIBS Wall Installation">
+                <div class="format-preview">
+                    <img src="../Assets/ribs/wall/ribs-wall-birch-1.png" alt="RIBS Wall" class="preview-image">
                 </div>
                 <div class="format-info">
                     <h3>RIBS Wall</h3>
@@ -54,9 +50,8 @@
 
             <!-- Strip Format -->
             <a href="ribs/strip.html" class="format-card" data-format="strip">
-                <div class="format-slideshow">
-                    <img src="../Assets/Lighting/RiBS/1.jpg" alt="RIBS Strip">
-                    <img src="../Assets/Lighting/RiBS/2.jpg" alt="RIBS Strip Detail">
+                <div class="format-preview">
+                    <img src="../Assets/ribs/strip/strip_birch_1.png" alt="RIBS Strip" class="preview-image">
                 </div>
                 <div class="format-info">
                     <h3>RIBS Strip</h3>
@@ -79,5 +74,69 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const productImages = {
+                pendant: [
+                    {
+                        src: '../Assets/ribs/pandent/ribs-pendant-600-birch.jpg',
+                        alt: 'RIBS Pendant in Birch'
+                    },
+                    {
+                        src: '../Assets/ribs/pandent/ribs-pendant-600-aluminum.jpg',
+                        alt: 'RIBS Pendant in Aluminum'
+                    },
+                    {
+                        src: '../Assets/ribs/pandent/ribs-pendant-600-perspex.jpg',
+                        alt: 'RIBS Pendant in Frosted Perspex'
+                    }
+                ],
+                wall: [
+                    {
+                        src: '../Assets/ribs/wall/ribs-wall-birch-1.png',
+                        alt: 'RIBS Wall in Birch'
+                    },
+                    {
+                        src: '../Assets/ribs/wall/ribs-wall-aluminum-1.png',
+                        alt: 'RIBS Wall in Aluminum'
+                    }
+                ],
+                strip: [
+                    {
+                        src: '../Assets/ribs/strip/strip_birch_1.png',
+                        alt: 'RIBS Strip in Birch'
+                    },
+                    {
+                        src: '../Assets/ribs/strip/strip_aluminum_1.png',
+                        alt: 'RIBS Strip in Aluminum'
+                    }
+                ]
+            };
+
+            // Function to get a random item from an array
+            function getRandomItem(array) {
+                return array[Math.floor(Math.random() * array.length)];
+            }
+
+            // Set random preview images for each product type
+            Object.keys(productImages).forEach(productType => {
+                const card = document.querySelector(`[data-format="${productType}"]`);
+                const img = card.querySelector('.preview-image');
+                const randomImage = getRandomItem(productImages[productType]);
+                
+                img.src = randomImage.src;
+                img.alt = randomImage.alt;
+
+                // Handle loading errors
+                img.onerror = function() {
+                    console.error(`Failed to load image: ${this.src}`);
+                    // Fallback to first image in array
+                    this.src = productImages[productType][0].src;
+                    this.alt = productImages[productType][0].alt;
+                };
+            });
+        });
+    </script>
 </body>
 </html>

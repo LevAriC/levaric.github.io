@@ -43,8 +43,8 @@ body.lighting-page {
     position: fixed;
     top: 2rem;
     left: 2rem;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 3.85rem;  /* Increased by 10% from 3.5rem */
+    height: 3.85rem; /* Increased by 10% from 3.5rem */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,8 +57,8 @@ body.lighting-page {
 }
 
 .floating-logo {
-    width: 3.2rem;
-    height: 3.2rem;
+    width: 3.52rem;  /* Increased by 10% from 3.2rem */
+    height: 3.52rem; /* Increased by 10% from 3.2rem */
     object-fit: contain;
     transition: transform 0.3s ease, opacity 0.3s ease;
 }

@@ -10,34 +10,32 @@
 </head>
 <body>
     <!-- Floating Home Button -->
-    <a href="../../collections/ribs.html" class="floating-home" title="Back to RIBS Collection">
+    <a href="../../index.html" class="floating-home" title="Home">
         <img src="../../Assets/Logo/oz-logo-png.png" alt="Omer Zimmermann Logo" class="floating-logo">
-        <span class="home-tooltip">Back to Collection</span>
+        <span class="home-tooltip">Home</span>
     </a>
 
     <div class="product-layout">
         <div class="product-gallery">
-            <img src="../../Assets/Lighting/RiBS/1.jpg" alt="RIBS Strip">
+            <div class="gallery-slideshow">
+                <img src="../../Assets/ribs/strip/strip_birch_1.png" alt="RIBS Strip in birch - View 1" class="active">
+                <img src="../../Assets/ribs/strip/strip_birch_2.png" alt="RIBS Strip in birch - View 2">
+                <img src="../../Assets/ribs/strip/strip_birch_3.png" alt="RIBS Strip in birch - View 3">
+                <button class="gallery-nav prev" aria-label="Previous image">&#8592;</button>
+                <button class="gallery-nav next" aria-label="Next image">&#8594;</button>
+            </div>
         </div>
 
         <div class="product-info">
             <h1 class="product-title">RIBS Strip</h1>
-            <p class="product-description">An architectural lighting element designed for offices and industrial spaces. Features integrated LED strips with adjustable color temperature and brightness.</p>
+            <p class="product-description">A linear lighting fixture with adjustable length. Delivers clean, continuous light to both workspaces and dining settings.</p>
 
             <div class="product-selector">
                 <div class="selector-group">
-                    <h3 class="selector-label">Material & Length</h3>
+                    <h3 class="selector-label">Material</h3>
                     <div class="selector-options">
-                        <div class="selector-option" data-material="birch">Birch (up to 2200 mm)</div>
+                        <div class="selector-option active" data-material="birch">Birch (up to 2200 mm)</div>
                         <div class="selector-option" data-material="aluminum">Aluminum (up to 2500 mm)</div>
-                    </div>
-                </div>
-
-                <div class="selector-group">
-                    <h3 class="selector-label">LED Configuration</h3>
-                    <div class="selector-options">
-                        <div class="selector-option" data-led="single">Single Strip</div>
-                        <div class="selector-option" data-led="double">Double Strip</div>
                     </div>
                 </div>
             </div>
@@ -47,17 +45,172 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const options = document.querySelectorAll('.selector-option');
+            const galleryImages = document.querySelectorAll('.gallery-slideshow img');
+            const galleryContainer = document.querySelector('.gallery-slideshow');
+            let currentMaterial = 'birch';
+            let currentImageIndex = 0;
+            let slideshowInterval;
+            let isPaused = false;
             
+            // Zoom functionality
+            let scale = 1;
+            let translateX = 0;
+            let translateY = 0;
+            let isDragging = false;
+            let startX, startY;
+
+            // Navigation functions
+            function showImage(index) {
+                galleryImages.forEach(img => img.classList.remove('active'));
+                currentImageIndex = (index + galleryImages.length) % galleryImages.length;
+                galleryImages[currentImageIndex].classList.add('active');
+            }
+
+            function nextImage() {
+                showImage(currentImageIndex + 1);
+            }
+
+            function prevImage() {
+                showImage(currentImageIndex - 1);
+            }
+
+            // Update gallery images based on material selection
+            function updateGallery(material) {
+                galleryImages.forEach((img, index) => {
+                    const imageNumber = index + 1;
+                    img.src = `../../Assets/ribs/strip/strip_${material}_${imageNumber}.png`;
+                    img.alt = `RIBS Strip in ${material} - View ${imageNumber}`;
+                });
+                resetZoom();
+            }
+            
+            // Rotate through images in slideshow
+            function rotateImages() {
+                if (!isPaused) {
+                    nextImage();
+                }
+            }
+            
+            // Start slideshow
+            function startSlideshow() {
+                if (slideshowInterval) clearInterval(slideshowInterval);
+                slideshowInterval = setInterval(rotateImages, 3000);
+            }
+
+            // Zoom functions
+            function updateTransform() {
+                const activeImage = document.querySelector('.gallery-slideshow img.active');
+                activeImage.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+            }
+
+            function resetZoom() {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                galleryContainer.classList.remove('zoomed');
+                updateTransform();
+            }
+
+            // Add navigation event listeners
+            document.querySelector('.gallery-nav.next').addEventListener('click', (e) => {
+                e.stopPropagation();
+                nextImage();
+            });
+
+            document.querySelector('.gallery-nav.prev').addEventListener('click', (e) => {
+                e.stopPropagation();
+                prevImage();
+            });
+
+            // Pause on hover
+            galleryContainer.addEventListener('mouseenter', () => {
+                isPaused = true;
+            });
+            
+            // Resume on mouse leave
+            galleryContainer.addEventListener('mouseleave', () => {
+                isPaused = false;
+            });
+
+            // Material selection handling
             options.forEach(option => {
                 option.addEventListener('click', function() {
-                    // Remove active class from siblings
-                    const siblings = this.parentElement.querySelectorAll('.selector-option');
-                    siblings.forEach(sib => sib.classList.remove('active'));
-                    
-                    // Add active class to clicked option
+                    options.forEach(opt => opt.classList.remove('active'));
                     this.classList.add('active');
+                    currentMaterial = this.getAttribute('data-material').toLowerCase();
+                    updateGallery(currentMaterial);
                 });
             });
+
+            // Wheel zoom handler
+            galleryContainer.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const rect = galleryContainer.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+                
+                const delta = -Math.sign(e.deltaY) * 0.1;
+                const newScale = Math.min(Math.max(1, scale + delta), 4);
+                
+                if (newScale !== scale) {
+                    const scaleChange = newScale - scale;
+                    translateX -= (mouseX - translateX) * (scaleChange / scale);
+                    translateY -= (mouseY - translateY) * (scaleChange / scale);
+                    
+                    scale = newScale;
+                    galleryContainer.classList.toggle('zoomed', scale > 1);
+                    updateTransform();
+                }
+            });
+
+            // Mouse drag functionality
+            galleryContainer.addEventListener('mousedown', (e) => {
+                if (scale > 1) {
+                    isDragging = true;
+                    startX = e.clientX - translateX;
+                    startY = e.clientY - translateY;
+                    galleryContainer.style.cursor = 'grabbing';
+                }
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    e.preventDefault();
+                    translateX = e.clientX - startX;
+                    translateY = e.clientY - startY;
+                    
+                    const maxTranslateX = (scale - 1) * galleryContainer.offsetWidth / 2;
+                    const maxTranslateY = (scale - 1) * galleryContainer.offsetHeight / 2;
+                    
+                    translateX = Math.min(Math.max(-maxTranslateX, translateX), maxTranslateX);
+                    translateY = Math.min(Math.max(-maxTranslateY, translateY), maxTranslateY);
+                    
+                    updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                galleryContainer.style.cursor = scale > 1 ? 'move' : 'zoom-in';
+            });
+
+            // Keyboard controls
+            document.addEventListener('keydown', (e) => {
+                switch(e.key) {
+                    case 'ArrowLeft':
+                        prevImage();
+                        break;
+                    case 'ArrowRight':
+                        nextImage();
+                        break;
+                    case 'Escape':
+                        resetZoom();
+                        break;
+                }
+            });
+
+            // Start slideshow
+            startSlideshow();
         });
     </script>
 </body>
