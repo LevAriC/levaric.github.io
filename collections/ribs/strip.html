@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIBS Strip — Omer Zimmerman Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/ribs.css">
+</head>
+<body>
+    <!-- Floating Home Button -->
+    <a href="../../collections/ribs.html" class="floating-home" title="Back to RIBS Collection">
+        <img src="../../Assets/Logo/oz-logo-png.png" alt="Omer Zimmermann Logo" class="floating-logo">
+        <span class="home-tooltip">Back to Collection</span>
+    </a>
+
+    <div class="product-layout">
+        <div class="product-gallery">
+            <img src="../../Assets/Lighting/RiBS/1.jpg" alt="RIBS Strip">
+        </div>
+
+        <div class="product-info">
+            <h1 class="product-title">RIBS Strip</h1>
+            <p class="product-description">An architectural lighting element designed for offices and industrial spaces. Features integrated LED strips with adjustable color temperature and brightness.</p>
+
+            <div class="product-selector">
+                <div class="selector-group">
+                    <h3 class="selector-label">Material & Length</h3>
+                    <div class="selector-options">
+                        <div class="selector-option" data-material="birch">Birch (up to 2200 mm)</div>
+                        <div class="selector-option" data-material="aluminum">Aluminum (up to 2500 mm)</div>
+                    </div>
+                </div>
+
+                <div class="selector-group">
+                    <h3 class="selector-label">LED Configuration</h3>
+                    <div class="selector-options">
+                        <div class="selector-option" data-led="single">Single Strip</div>
+                        <div class="selector-option" data-led="double">Double Strip</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const options = document.querySelectorAll('.selector-option');
+            
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from siblings
+                    const siblings = this.parentElement.querySelectorAll('.selector-option');
+                    siblings.forEach(sib => sib.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

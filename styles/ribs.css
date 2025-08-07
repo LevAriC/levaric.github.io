@@ -1,150 +1,177 @@
-/* RIBS Collection Specific Styles */
-
-.ribs-showcase {
-    background: #000000;
-    min-height: 100vh;
-    padding: 0;
-    margin: 0;
+/* RIBS Collection Styles 2025 */
+:root {
+    --spacing-xs: 1rem;
+    --spacing-sm: 2rem;
+    --spacing-md: 4rem;
+    --spacing-lg: 8rem;
+    --spacing-xl: 12rem;
 }
 
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-    padding: var(--space-lg);
-    max-width: 1600px;
+/* Collection Overview */
+.collection-overview {
+    padding: var(--spacing-lg) var(--spacing-md);
+    max-width: 1800px;
     margin: 0 auto;
 }
 
-.product-card {
-    background: var(--color-accent);
-    border-radius: 8px;
+/* Format Grid */
+.format-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+@media (max-width: 1024px) {
+    .format-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+}
+
+/* Format Cards */
+.format-card {
+    position: relative;
+    aspect-ratio: 3/4;
     overflow: hidden;
-    transition: transform 0.3s ease;
+    text-decoration: none;
+    color: var(--color-text);
+    background: var(--color-bg);
 }
 
-.product-card:hover {
-    transform: translateY(-4px);
-}
-
-.product-image {
+.format-slideshow {
     width: 100%;
-    aspect-ratio: 4/3;
+    height: 100%;
+    position: relative;
+}
+
+.format-slideshow img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.format-slideshow img:first-child {
+    opacity: 1;
+}
+
+.format-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-sm);
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+}
+
+.format-info h3 {
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    margin: 0;
+}
+
+/* Hover Effects */
+.format-card:hover .format-info {
+    transform: translateY(0);
+}
+
+/* Slideshow Animation */
+@keyframes slideshow {
+    0%, 33% { opacity: 1; }
+    34%, 66% { opacity: 0; }
+    67%, 100% { opacity: 0; }
+}
+
+.format-slideshow img:nth-child(1) { animation: slideshow 9s infinite; }
+.format-slideshow img:nth-child(2) { animation: slideshow 9s infinite 3s; }
+.format-slideshow img:nth-child(3) { animation: slideshow 9s infinite 6s; }
+
+/* Product Page Styles */
+.product-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-md);
+    min-height: 100vh;
+    padding: var(--spacing-md);
+}
+
+@media (max-width: 1024px) {
+    .product-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.product-gallery {
+    position: relative;
+    height: calc(100vh - var(--spacing-md) * 2);
+}
+
+.product-gallery img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
 .product-info {
-    padding: var(--space-sm);
+    padding: var(--spacing-md) 0;
 }
 
 .product-title {
-    font-size: 1.25rem;
-    margin-bottom: var(--space-xs);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    margin-bottom: var(--spacing-sm);
 }
 
 .product-description {
-    color: var(--color-muted);
-    font-size: 0.9rem;
-    margin-bottom: var(--space-sm);
-}
-
-.specs-list {
-    list-style: none;
-    border-top: 1px solid var(--color-accent);
-    padding-top: var(--space-sm);
-}
-
-.specs-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: var(--space-xs);
-    font-size: 0.9rem;
-}
-
-.specs-label {
-    color: var(--color-muted);
-}
-
-.gallery-section {
-    padding: var(--space-xl) var(--space-lg);
-    background: linear-gradient(to bottom, #000000, #111111);
-}
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-md);
-    max-width: 1600px;
-    margin: 0 auto;
-}
-
-.gallery-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 4px;
-    aspect-ratio: 1;
-}
-
-.gallery-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.gallery-item:hover .gallery-image {
-    transform: scale(1.05);
-}
-
-@media (max-width: 768px) {
-    .product-grid {
-        grid-template-columns: 1fr;
-        padding: var(--space-md);
-    }
-
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: var(--space-sm);
-    }
-}
-
-/* Technical Specifications Section */
-.tech-specs {
-    padding: var(--space-xl) var(--space-lg);
-    background: #0a0a0a;
-}
-
-.specs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-lg);
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.spec-category {
-    background: var(--color-accent);
-    padding: var(--space-md);
-    border-radius: 8px;
-}
-
-.category-title {
     font-size: 1.2rem;
-    margin-bottom: var(--space-md);
+    line-height: 1.6;
+    color: var(--color-muted);
+    margin-bottom: var(--spacing-md);
+}
+
+/* Product Selector */
+.product-selector {
+    margin-top: var(--spacing-md);
+}
+
+.selector-group {
+    margin-bottom: var(--spacing-sm);
+}
+
+.selector-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-muted);
+}
+
+.selector-options {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.selector-option {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 4px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.selector-option:hover,
+.selector-option.active {
+    background: var(--color-accent);
     color: var(--color-text);
 }
 
-.spec-table {
-    width: 100%;
-    border-collapse: collapse;
-}
 
-.spec-table td {
-    padding: var(--space-xs);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.spec-table td:first-child {
-    color: var(--color-muted);
-    width: 40%;
-}
