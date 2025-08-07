@@ -17,7 +17,7 @@
 
     <div class="product-layout">
         <div class="product-gallery">
-            <img src="../../Assets/ribs/pandent/ribs-pendant-600-birch.jpg" alt="RIBS Pendant 600mm in birch">
+            <img src="../../Assets/ribs/pendant/ribs-pendant-600-birch.jpg" alt="RIBS Pendant 600mm in birch">
         </div>
 
         <div class="product-info">
@@ -71,7 +71,7 @@
                 // Ensure material is lowercase
                 const material = currentMaterial.toLowerCase();
                 // Construct the correct image path
-                const imagePath = `../../Assets/ribs/pandent/ribs-pendant-${currentSize}-${material}.jpg`;
+                const imagePath = `../../Assets/ribs/pendant/ribs-pendant-${currentSize}-${material}.jpg`;
                 
                 // Update image source and alt text
                 productImage.src = imagePath;
@@ -81,7 +81,7 @@
                 productImage.onerror = function() {
                     console.error(`Failed to load image: ${imagePath}`);
                     // Fallback to default if image fails to load
-                    this.src = '../../Assets/ribs/pandent/ribs-pendant-600-birch.jpg';
+                    this.src = '../../Assets/ribs/pendant/ribs-pendant-600-birch.jpg';
                     this.alt = 'RIBS Pendant 600mm in birch';
                 };
             }
