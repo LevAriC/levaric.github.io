@@ -6,32 +6,72 @@
     <title>RIBS Collection® — Omer Zimmerman Studio</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/ribs.css">
+        <link rel="stylesheet" href="../styles/ribs.css">
+        <style>
+            /* Scoped to /ribs only */
+            .ribs-landing #ribs-fixed-headline{position:fixed;left:0;right:0;top:0;height:15vh;min-height:100px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:3vh;z-index:9999;pointer-events:none;background:transparent;transform:translateY(var(--headline-offset,85vh));transition:transform .18s linear}
+            .ribs-landing #ribs-fixed-headline .title{margin:0;padding:0 16px;white-space:nowrap;font-family:'Space Grotesk',sans-serif;font-weight:300;letter-spacing:.01em;line-height:1.05;font-size:clamp(20px,3.2vw,48px);mix-blend-mode:difference;color:#fff;text-shadow:none}
+            @media (prefers-reduced-motion: reduce){.ribs-landing #ribs-fixed-headline{transition:none}}
+
+            /* Single full-bleed background image behind everything */
+            .ribs-landing .ribs-hero-bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+            .ribs-landing .ribs-hero-bg__img{width:100%;height:100%;object-fit:cover;display:block}
+
+            /* Scrollable content starts below final sticky height (15vh) */
+            .ribs-landing #ribs-scroll{position:relative;z-index:1;padding-top:15vh}
+
+            /* Lower three-tile overlay grid over the single background image */
+            .ribs-landing .collection-overview{background:transparent;margin:0;padding:0;position:relative;min-height:100vh;overflow:hidden}
+            .ribs-landing .collection-overview .tiles-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;display:block}
+            .ribs-landing .format-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr;gap:0;width:100%;height:100%;grid-auto-rows:1fr}
+            @media (min-width:600px){.ribs-landing .format-grid{grid-template-columns:repeat(2,1fr);height:100%}}
+            @media (min-width:1024px){.ribs-landing .format-grid{grid-template-columns:repeat(3,1fr);height:100%}}
+            @media (min-width:600px) and (max-width:1023.98px){.ribs-landing .format-grid .format-card:last-child{grid-column:1 / -1}}
+            .ribs-landing .format-card{position:relative;display:block;text-decoration:none;color:inherit;outline-offset:3px}
+            .ribs-landing .format-card{min-height:33vh}
+            .ribs-landing .format-card,.ribs-landing .format-preview{height:100%}
+            .ribs-landing .format-preview{position:relative;width:100%;overflow:hidden;margin:0;border-radius:0;background:transparent}
+            .ribs-landing .preview-image{display:none}
+            .ribs-landing .format-info{position:absolute;left:0;bottom:0;z-index:1;padding:10px 14px;background:rgba(0,0,0,0.28);color:#fff;pointer-events:none;max-width:85%;transform:translateY(8px);opacity:0;transition:opacity .25s ease,transform .25s ease;backdrop-filter:blur(2px)}
+            .ribs-landing .format-info h3{margin:0;font-size:clamp(16px,2vw,22px);font-weight:300;letter-spacing:.02em;color:#fff}
+            .ribs-landing .format-card:hover .format-info,.ribs-landing .format-card:focus .format-info,.ribs-landing .format-card:focus-visible .format-info{opacity:1;transform:translateY(0)}
+            @media (hover:none),(pointer:coarse){.ribs-landing .format-info{opacity:1;transform:none}}
+            .ribs-landing .format-card:focus-visible{outline:2px solid #fff}
+
+            /* Blend-mode fallback */
+            .ribs-landing.no-blend #ribs-fixed-headline .title{mix-blend-mode:normal;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.5)}
+            .ribs-landing.no-blend.contrast-light #ribs-fixed-headline .title{color:#000;text-shadow:0 2px 12px rgba(255,255,255,.35)}
+            .ribs-landing.no-blend.contrast-dark  #ribs-fixed-headline .title{color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.5)}
+    </style>
 </head>
-<body>
+<body class="ribs-landing">
     <!-- Floating Home Button -->
     <a href="../index.html" class="floating-home" title="Home">
         <img src="../Assets/Logo/oz-logo-png.png" alt="Omer Zimmermann Logo" class="floating-logo">
         <span class="home-tooltip">Home</span>
     </a>
 
-    <!-- Hero Section -->
-    <section class="collection-intro">
-        <div class="intro-background" style="background-image: url('../Assets/Lighting/RiBS/RiBSLong/5.jpg');">
-            <div class="intro-content">
-                <p class="intro-text">Ribbed shades. Wall or hanging. Some cozy, some sharp.<br>
-                Handmade in Tel Aviv. Still evolving.</p>
-            </div>
+        <!-- Fixed headline layer (always visible, reactive) -->
+        <header id="ribs-fixed-headline" role="banner" aria-label="RIBS collection headline">
+            <h1 class="title">Ribbed shades. Designed and made in Tel Aviv · always evolving.</h1>
+        </header>
+        <!-- Fixed hero background image -->
+        <div class="ribs-hero-bg" aria-hidden="true">
+            <img class="ribs-hero-bg__img" src="../Assets/Lighting/RiBS/RiBSLong/5.jpg" alt="">
         </div>
-    </section>
+        <!-- Scrollable content container -->
+        <main id="ribs-scroll">
+            <!-- Spacer to give full-screen reveal on load (100vh total = 15vh fixed header + 85vh spacer) -->
+            <div class="ribs-hero-spacer" style="height:85vh" aria-hidden="true"></div>
 
     <!-- Collection Overview -->
-    <section class="collection-overview">
+    <section class="collection-overview" aria-label="RIBS formats">
+        <img class="tiles-bg" src="../Assets/Lighting/RiBS/RiBSLong/1.jpg" alt="" aria-hidden="true" loading="lazy" width="1600" height="1067">
         <div class="format-grid">
             <!-- Pendant Format -->
-            <a href="ribs/pendant.html" class="format-card" data-format="pendant">
+        <a href="ribs/pendant.html" class="format-card" data-format="pendant" aria-label="RIBS Pendant">
                 <div class="format-preview">
-                    <img src="../Assets/ribs/pandent/ribs-pendant-600-birch.jpg" alt="RIBS Pendant in Birch" class="preview-image">
+            <!-- overlay tile; background is the single backdrop -->
                 </div>
                 <div class="format-info">
                     <h3>RIBS Pendant</h3>
@@ -39,9 +79,9 @@
             </a>
 
             <!-- Wall Format -->
-            <a href="ribs/wall.html" class="format-card" data-format="wall">
+        <a href="ribs/wall.html" class="format-card" data-format="wall" aria-label="RIBS Wall">
                 <div class="format-preview">
-                    <img src="../Assets/ribs/wall/ribs-wall-birch-1.png" alt="RIBS Wall" class="preview-image">
+            <!-- overlay tile; background is the single backdrop -->
                 </div>
                 <div class="format-info">
                     <h3>RIBS Wall</h3>
@@ -49,9 +89,9 @@
             </a>
 
             <!-- Strip Format -->
-            <a href="ribs/strip.html" class="format-card" data-format="strip">
+        <a href="ribs/strip.html" class="format-card" data-format="strip" aria-label="RIBS Strip">
                 <div class="format-preview">
-                    <img src="../Assets/ribs/strip/strip_birch_1.png" alt="RIBS Strip" class="preview-image">
+            <!-- overlay tile; background is the single backdrop -->
                 </div>
                 <div class="format-info">
                     <h3>RIBS Strip</h3>
@@ -75,68 +115,102 @@
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const productImages = {
-                pendant: [
-                    {
-                        src: '../Assets/ribs/pandent/ribs-pendant-600-birch.jpg',
-                        alt: 'RIBS Pendant in Birch'
-                    },
-                    {
-                        src: '../Assets/ribs/pandent/ribs-pendant-600-aluminum.jpg',
-                        alt: 'RIBS Pendant in Aluminum'
-                    },
-                    {
-                        src: '../Assets/ribs/pandent/ribs-pendant-600-perspex.jpg',
-                        alt: 'RIBS Pendant in Frosted Perspex'
-                    }
-                ],
-                wall: [
-                    {
-                        src: '../Assets/ribs/wall/ribs-wall-birch-1.png',
-                        alt: 'RIBS Wall in Birch'
-                    },
-                    {
-                        src: '../Assets/ribs/wall/ribs-wall-aluminum-1.png',
-                        alt: 'RIBS Wall in Aluminum'
-                    }
-                ],
-                strip: [
-                    {
-                        src: '../Assets/ribs/strip/strip_birch_1.png',
-                        alt: 'RIBS Strip in Birch'
-                    },
-                    {
-                        src: '../Assets/ribs/strip/strip_aluminum_1.png',
-                        alt: 'RIBS Strip in Aluminum'
-                    }
-                ]
-            };
+    </main>
+        <script>
+            // Scoped to /ribs only: headline bottom-to-top sticky at 15vh, reactive blending, and fallback contrast
+            (function(){
+                const root = document.body;
+                if (!root.classList.contains('ribs-landing')) return;
 
-            // Function to get a random item from an array
-            function getRandomItem(array) {
-                return array[Math.floor(Math.random() * array.length)];
-            }
+                const header = document.getElementById('ribs-fixed-headline');
+                const titleEl = header ? header.querySelector('.title') : null;
+                const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            // Set random preview images for each product type
-            Object.keys(productImages).forEach(productType => {
-                const card = document.querySelector(`[data-format="${productType}"]`);
-                const img = card.querySelector('.preview-image');
-                const randomImage = getRandomItem(productImages[productType]);
-                
-                img.src = randomImage.src;
-                img.alt = randomImage.alt;
+                // Detect support for mix-blend-mode
+                let supportsBlend = false;
+                try { supportsBlend = CSS.supports('mix-blend-mode','difference'); } catch(_) { supportsBlend = false; }
+                if (!supportsBlend) root.classList.add('no-blend');
 
-                // Handle loading errors
-                img.onerror = function() {
-                    console.error(`Failed to load image: ${this.src}`);
-                    // Fallback to first image in array
-                    this.src = productImages[productType][0].src;
-                    this.alt = productImages[productType][0].alt;
-                };
-            });
-        });
-    </script>
+                let startTop = Math.round((window.innerHeight || 0) * 0.85); // 100vh - 15vh
+                let ticking = false;
+                const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
+
+                function update(){
+                    const y = window.scrollY || window.pageYOffset || 0;
+                    const offset = clamp(startTop - y, 0, startTop);
+                    document.documentElement.style.setProperty('--headline-offset', offset + 'px');
+                }
+
+                // Optional subtle parallax for the page background (slower than scroll)
+                const bg = document.querySelector('.ribs-hero-bg__img');
+                function parallax(){
+                    if (!bg || prefersReduced) return; 
+                    const y = window.scrollY || 0;
+                    const offset = Math.round(y * -0.15); // 15% slower
+                    bg.style.transform = `translateY(${offset}px)`;
+                    bg.style.willChange = 'transform';
+                }
+
+                // Fallback contrast toggling for no-blend environments
+                // Samples the background under the title area via canvas and toggles .contrast-light/.contrast-dark.
+                let canvas, ctx;
+                function ensureCanvas(){
+                    if (canvas) return true;
+                    canvas = document.createElement('canvas');
+                    ctx = canvas.getContext('2d');
+                    return !!ctx;
+                }
+                function sampleLuma(){
+                    const bgImg = bg; if (!bgImg || !titleEl || !ensureCanvas()) return null;
+                    const rect = titleEl.getBoundingClientRect();
+                    const vw = document.documentElement.clientWidth || window.innerWidth;
+                    const vh = document.documentElement.clientHeight || window.innerHeight;
+                    // Create a small sample canvas mapping the bg image to viewport
+                    const iw = bgImg.naturalWidth || bgImg.width; const ih = bgImg.naturalHeight || bgImg.height;
+                    if (!iw || !ih || !vw || !vh) return null;
+                    canvas.width = 64; canvas.height = 64;
+                    // Compute the image area of bg that corresponds to rect
+                    // Assuming object-fit: cover. We simulate cover scaling.
+                    const scale = Math.max(vw/iw, vh/ih);
+                    const drawW = iw*scale; const drawH = ih*scale;
+                    const dx = (vw - drawW)/2; const dy = (vh - drawH)/2;
+                    // Draw the whole viewport region of bg into canvas at low res
+                    ctx.clearRect(0,0,64,64);
+                    try{ ctx.drawImage(bgImg, dx, dy, drawW, drawH); }catch(_){ return null; }
+                    // Now sample the area under the title: map rect center to canvas space
+                    const cx = ((rect.left + rect.right)/2) / vw * 64;
+                    const cy = ((rect.top + rect.bottom)/2) / vh * 64;
+                    const sx = Math.max(0, Math.min(64-8, Math.round(cx-4)));
+                    const sy = Math.max(0, Math.min(64-8, Math.round(cy-4)));
+                    let data;
+                    try { data = ctx.getImageData(sx, sy, 8, 8).data; } catch(_) { return null; }
+                    let r=0,g=0,b=0,n=0;
+                    for (let i=0;i<data.length;i+=4){ r+=data[i]; g+=data[i+1]; b+=data[i+2]; n++; }
+                    if (!n) return null;
+                    r/=n; g/=n; b/=n;
+                    // Perceived luminance (sRGB)
+                    const luma = 0.2126*r/255 + 0.7152*g/255 + 0.0722*b/255;
+                    return luma;
+                }
+                function updateContrast(){
+                    if (supportsBlend) return; // blend handles contrast visually
+                    const l = sampleLuma(); if (l == null) return;
+                    // If background is bright, use dark text; otherwise light text
+                    const isBright = l > 0.6;
+                    root.classList.toggle('contrast-light', isBright);
+                    root.classList.toggle('contrast-dark', !isBright);
+                }
+
+                function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(()=>{ update(); parallax(); updateContrast(); ticking = false; }); } }
+                function onResize(){ startTop = Math.round((window.innerHeight || 0) * 0.85); update(); updateContrast(); }
+
+                // Init
+                const init = () => { update(); parallax(); updateContrast(); };
+                if (bg && (!bg.complete || bg.naturalWidth === 0)) { bg.addEventListener('load', init, { once: true }); } else { init(); }
+                window.addEventListener('scroll', onScroll, { passive: true });
+                window.addEventListener('resize', onResize);
+                document.addEventListener('visibilitychange', ()=>{ if (!document.hidden) { onResize(); } });
+            })();
+        </script>
 </body>
 </html>
