@@ -2,76 +2,311 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" conte            /* Sticky behavior targets video-overlay */
+            .ribs-hero .video-overlay.is-sticky {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: var(--hero-sticky-h);
+                display: flex;
+                align-items: center;
+                padding: 0 var(--hero-padding-x);
+                z-index: calc(var(--hero-z) + 1);
+                background: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0));
+                backdrop-filter: blur(1px);
+                -webkit-backdrop-filter: blur(1px);
+            }idth, initial-scale=1.0">
     <title>RIBS Collection® — Omer Zimmerman Studio</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/main.css">
         <link rel="stylesheet" href="../styles/ribs.css">
         <style>
-            /* Scoped to /ribs only */
-            .ribs-landing #ribs-fixed-headline{position:fixed;left:0;right:0;top:0;height:15vh;min-height:100px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:3vh;z-index:9999;pointer-events:none;background:transparent;transform:translateY(var(--headline-offset,85vh));transition:transform .18s linear}
-            .ribs-landing #ribs-fixed-headline .title{margin:0;padding:0 16px;white-space:nowrap;font-family:'Space Grotesk',sans-serif;font-weight:300;letter-spacing:.01em;line-height:1.05;font-size:clamp(20px,3.2vw,48px);mix-blend-mode:difference;color:#fff;text-shadow:none}
-            @media (prefers-reduced-motion: reduce){.ribs-landing #ribs-fixed-headline{transition:none}}
+            :root {
+                --hero-sticky-h: 15vh;
+                --hero-padding-x: 5vw;
+                --hero-padding-b: 4vh;
+                --hero-z: 50;
 
-            /* Single full-bleed background image behind everything */
-            .ribs-landing .ribs-hero-bg{position:fixed;inset:0;z-index:0;pointer-events:none}
-            .ribs-landing .ribs-hero-bg__img{width:100%;height:100%;object-fit:cover;display:block}
+                --sticky-text: #ffffff;
+                --sticky-bg: rgba(0,0,0,0.45);
+            }
 
-            /* Scrollable content starts below final sticky height (15vh) */
-            .ribs-landing #ribs-scroll{position:relative;z-index:1;padding-top:15vh}
+            /* The scrolling content layer */
+            .ribs-page {
+                position: relative;
+                z-index: 1;
+            }
 
-            /* Lower three-tile overlay grid over the single background image */
-            .ribs-landing .collection-overview{background:transparent;margin:0;padding:0;position:relative;min-height:100vh;overflow:hidden}
-            .ribs-landing .collection-overview .tiles-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;display:block}
-            .ribs-landing .format-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr;gap:0;width:100%;height:100%;grid-auto-rows:1fr}
-            @media (min-width:600px){.ribs-landing .format-grid{grid-template-columns:repeat(2,1fr);height:100%}}
-            @media (min-width:1024px){.ribs-landing .format-grid{grid-template-columns:repeat(3,1fr);height:100%}}
-            @media (min-width:600px) and (max-width:1023.98px){.ribs-landing .format-grid .format-card:last-child{grid-column:1 / -1}}
-            .ribs-landing .format-card{position:relative;display:block;text-decoration:none;color:inherit;outline-offset:3px}
-            .ribs-landing .format-card{min-height:33vh}
-            .ribs-landing .format-card,.ribs-landing .format-preview{height:100%}
-            .ribs-landing .format-preview{position:relative;width:100%;overflow:hidden;margin:0;border-radius:0;background:transparent}
-            .ribs-landing .preview-image{display:none}
-            .ribs-landing .format-info{position:absolute;left:0;bottom:0;z-index:1;padding:10px 14px;background:rgba(0,0,0,0.28);color:#fff;pointer-events:none;max-width:85%;transform:translateY(8px);opacity:0;transition:opacity .25s ease,transform .25s ease;backdrop-filter:blur(2px)}
-            .ribs-landing .format-info h3{margin:0;font-size:clamp(16px,2vw,22px);font-weight:300;letter-spacing:.02em;color:#fff}
-            .ribs-landing .format-card:hover .format-info,.ribs-landing .format-card:focus .format-info,.ribs-landing .format-card:focus-visible .format-info{opacity:1;transform:translateY(0)}
-            @media (hover:none),(pointer:coarse){.ribs-landing .format-info{opacity:1;transform:none}}
-            .ribs-landing .format-card:focus-visible{outline:2px solid #fff}
+            /* Make sure body and sections are transparent so backdrop shows through */
+            html, body, .ribs-page, .ribs-hero, #ribs-grid {
+                background: transparent;
+            }
 
-            /* Blend-mode fallback */
-            .ribs-landing.no-blend #ribs-fixed-headline .title{mix-blend-mode:normal;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.5)}
-            .ribs-landing.no-blend.contrast-light #ribs-fixed-headline .title{color:#000;text-shadow:0 2px 12px rgba(255,255,255,.35)}
-            .ribs-landing.no-blend.contrast-dark  #ribs-fixed-headline .title{color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.5)}
-    </style>
-</head>
-<body class="ribs-landing">
+            /* Ensure clean page ending with no gaps after grid */
+            body, html {
+                margin: 0;
+                padding: 0;
+            }
+
+            .ribs-page {
+                margin: 0;
+                padding: 0;
+            }
+
+            /* Hero section with embedded background */
+            .ribs-hero {
+                position: relative;
+                height: 100vh;
+                min-height: 540px;
+                width: 100%;
+                overflow: visible;
+            }
+
+            /* Background image within hero section */
+            .hero-background {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-image: url("../Assets/Lighting/RiBS/RiBSLong/5.jpg");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                z-index: 1;
+            }
+
+            /* Video overlay - matches homepage structure */
+            .ribs-hero .video-overlay {
+                position: absolute;
+                bottom: var(--hero-padding-b);
+                left: var(--hero-padding-x);
+                right: var(--hero-padding-x);
+                text-align: left;
+                color: white;
+                font-family: 'Space Grotesk', sans-serif;
+                z-index: 12;
+                mix-blend-mode: difference;
+            }
+
+            /* Headline inherits blend behavior from video-overlay */
+            .hero-headline {
+                margin: 0;
+                padding: 0.25rem 0;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: clamp(2rem, 4.2vw, 4rem);
+                line-height: 1.1;
+                font-weight: 300;
+                letter-spacing: 0.02em;
+            }
+
+            /* Sticky headline occupying top 15vh */
+            .hero-headline.is-sticky {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: var(--hero-sticky-h);
+                display: flex;
+                align-items: center;
+                padding: 0 var(--hero-padding-x);
+                bottom: auto;
+                z-index: calc(var(--hero-z) + 1);
+
+                /* subtle gradient for readability while still showing backdrop */
+                background: linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0));
+                backdrop-filter: blur(2px);
+                -webkit-backdrop-filter: blur(2px);
+            }
+
+            /* When the hero area is no longer behind the sticky headline (e.g., deep scroll), fallback to solid for legibility */
+            body.hero-stuck-nohero .ribs-hero .video-overlay.is-sticky {
+                mix-blend-mode: normal;
+                color: var(--sticky-text);
+                background: var(--sticky-bg);
+            }
+            
+            body.hero-stuck-nohero .ribs-hero .video-overlay.is-sticky .hero-headline {
+                text-shadow: 0 1px 10px rgba(0,0,0,0.35);
+            }
+
+            /* Push grid below sticky headline (only when sticky) */
+            body.hero-stuck #ribs-grid {
+                margin-top: var(--hero-sticky-h);
+            }
+            #ribs-grid { margin-top: 0; }
+
+            /* Remove any borders/dividers under hero */
+            .ribs-hero, #ribs-grid {
+                border: none;
+            }
+
+            /* Grid Styles */
+            .ribs-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0;
+                width: 100%;
+                min-height: 100vh;
+                background: transparent;
+                padding: 0;
+                position: relative;
+                z-index: 1;
+            }
+
+            @media (max-width: 1023.98px) {
+                .ribs-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    min-height: 80vh;
+                }
+            }
+
+            @media (max-width: 599.98px) {
+                .ribs-grid {
+                    grid-template-columns: 1fr;
+                    min-height: auto;
+                }
+            }
+
+            @media (min-width: 600px) and (max-width: 1023.98px) {
+                .ribs-grid .format-card:last-child {
+                    grid-column: 1 / -1;
+                }
+            }
+
+            .ribs-grid > * {
+                position: relative;
+                overflow: hidden;
+                margin: 0;
+                padding: 0;
+                border: 0;
+            }
+
+            .ribs-grid img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            .format-card {
+                position: relative;
+                display: block;
+                text-decoration: none;
+                color: inherit;
+                outline-offset: 3px;
+                min-height: 33vh;
+                height: 100%;
+            }
+
+            .format-preview {
+                position: relative;
+                width: 100%;
+                overflow: hidden;
+                margin: 0;
+                border-radius: 0;
+                background: transparent;
+                height: 100%;
+            }
+
+            .format-info {
+                position: absolute;
+                left: 1rem;
+                bottom: 1rem;
+                z-index: 1;
+                padding: 0;
+                background: transparent !important;
+                color: #fff;
+                pointer-events: none;
+                max-width: 85%;
+                transform: translateY(6px);
+                opacity: 0;
+                transition: opacity .25s ease, transform .25s ease;
+                box-shadow: none !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
+
+            .format-info::before,
+            .format-info::after {
+                display: none !important;
+            }
+
+            .format-info h3 {
+                margin: 0;
+                font-size: clamp(16px, 2vw, 22px);
+                font-weight: 300;
+                letter-spacing: 0.02em;
+                color: #fff;
+                -webkit-text-stroke: 0.4px rgba(0,0,0,0.35);
+                text-shadow: 0 1px 2px rgba(0,0,0,0.55), 0 0 12px rgba(0,0,0,0.25);
+            }
+
+            .format-card:hover .format-info,
+            .format-card:focus .format-info,
+            .format-card:focus-visible .format-info {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            @media (hover: none) and (pointer: coarse) {
+                .format-info {
+                    opacity: 1 !important;
+                    transform: none !important;
+                }
+            }
+
+            .format-card:focus-visible {
+                outline: 2px solid #fff;
+            }
+
+            /* Accessibility: high contrast avoids blend mode */
+            @media (prefers-contrast: more) {
+                .hero-headline { 
+                    mix-blend-mode: normal; 
+                    color: #ffffff; 
+                    text-shadow: 0 2px 12px rgba(0,0,0,0.6); 
+                }
+            }
+
+            @media (max-width: 640px) {
+                .hero-headline { 
+                    font-size: clamp(1.6rem, 6vw, 2.2rem); 
+                }
+            }
+
+            /* Reduced motion preferences */
+            @media (prefers-reduced-motion: reduce) {
+                .hero-headline {
+                    transition: none;
+                }
+            }
+        </style>
+    </head>
+    <body class="ribs-landing">
     <!-- Floating Home Button -->
     <a href="../index.html" class="floating-home" title="Home">
         <img src="../Assets/Logo/oz-logo-png.png" alt="Omer Zimmermann Logo" class="floating-logo">
         <span class="home-tooltip">Home</span>
     </a>
 
-        <!-- Fixed headline layer (always visible, reactive) -->
-        <header id="ribs-fixed-headline" role="banner" aria-label="RIBS collection headline">
-            <h1 class="title">Ribbed shades. Designed and made in Tel Aviv · always evolving.</h1>
-        </header>
-        <!-- Fixed hero background image -->
-        <div class="ribs-hero-bg" aria-hidden="true">
-            <img class="ribs-hero-bg__img" src="../Assets/Lighting/RiBS/RiBSLong/5.jpg" alt="">
-        </div>
-        <!-- Scrollable content container -->
-        <main id="ribs-scroll">
-            <!-- Spacer to give full-screen reveal on load (100vh total = 15vh fixed header + 85vh spacer) -->
-            <div class="ribs-hero-spacer" style="height:85vh" aria-hidden="true"></div>
+    <!-- Fixed full-page hero backdrop -->
+    <main class="ribs-page">
+        <section class="ribs-hero" aria-label="RIBS Collection hero">
+            <div class="hero-background"></div>
+            <div class="video-overlay">
+                <h1 class="hero-headline">RIBS Collection</h1>
+            </div>
+        </section>
 
-    <!-- Collection Overview -->
-    <section class="collection-overview" aria-label="RIBS formats">
-        <img class="tiles-bg" src="../Assets/Lighting/RiBS/RiBSLong/1.jpg" alt="" aria-hidden="true" loading="lazy" width="1600" height="1067">
-        <div class="format-grid">
+        <section id="ribs-grid" class="collection-overview ribs-grid" aria-label="RIBS formats">
             <!-- Pendant Format -->
         <a href="ribs/pendant.html" class="format-card" data-format="pendant" aria-label="RIBS Pendant">
                 <div class="format-preview">
-            <!-- overlay tile; background is the single backdrop -->
+                    <img src="../Assets/ribs/pandent/ribs-pendant-600-birch.jpg" alt="RIBS Pendant" loading="lazy" decoding="async">
                 </div>
                 <div class="format-info">
                     <h3>RIBS Pendant</h3>
@@ -81,7 +316,7 @@
             <!-- Wall Format -->
         <a href="ribs/wall.html" class="format-card" data-format="wall" aria-label="RIBS Wall">
                 <div class="format-preview">
-            <!-- overlay tile; background is the single backdrop -->
+                    <img src="../Assets/ribs/wall/ribs-wall-birch-1.png" alt="RIBS Wall" loading="lazy" decoding="async">
                 </div>
                 <div class="format-info">
                     <h3>RIBS Wall</h3>
@@ -91,126 +326,85 @@
             <!-- Strip Format -->
         <a href="ribs/strip.html" class="format-card" data-format="strip" aria-label="RIBS Strip">
                 <div class="format-preview">
-            <!-- overlay tile; background is the single backdrop -->
+                    <img src="../Assets/ribs/strip/strip_birch_1.png" alt="RIBS Strip" loading="lazy" decoding="async">
                 </div>
                 <div class="format-info">
                     <h3>RIBS Strip</h3>
                 </div>
             </a>
-        </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="footer-content">
-            <p class="studio-info">Omer Zimmerman Studio<br>
-            Handmade in Tel Aviv since 2017</p>
-            <div class="footer-links">
-                <a href="https://www.instagram.com/omerzimmermann/" target="_blank" rel="noopener">Instagram</a>
-                <span class="separator">·</span>
-                <a href="mailto:contact@omerzimmerman.com">Email</a>
-                <span class="separator">·</span>
-                <a href="#contact">Contact</a>
-            </div>
-        </div>
-    </footer>
-
     </main>
-        <script>
-            // Scoped to /ribs only: headline bottom-to-top sticky at 15vh, reactive blending, and fallback contrast
-            (function(){
-                const root = document.body;
-                if (!root.classList.contains('ribs-landing')) return;
 
-                const header = document.getElementById('ribs-fixed-headline');
-                const titleEl = header ? header.querySelector('.title') : null;
-                const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    <script>
+    (function() {
+      const hero = document.querySelector('.ribs-hero');
+      const headline = document.querySelector('.ribs-hero .video-overlay');
+      const grid = document.querySelector('#ribs-grid');
+      if (!hero || !headline || !grid) return;
 
-                // Detect support for mix-blend-mode
-                let supportsBlend = false;
-                try { supportsBlend = CSS.supports('mix-blend-mode','difference'); } catch(_) { supportsBlend = false; }
-                if (!supportsBlend) root.classList.add('no-blend');
+      // Invisible sentinel at bottom of the hero to know when to stick
+      const sentinel = document.createElement('div');
+      Object.assign(sentinel.style, { 
+        position:'absolute', 
+        left:'0', 
+        right:'0', 
+        bottom:'0', 
+        height:'1px', 
+        pointerEvents:'none' 
+      });
+      sentinel.setAttribute('aria-hidden', 'true');
+      hero.appendChild(sentinel);
 
-                let startTop = Math.round((window.innerHeight || 0) * 0.85); // 100vh - 15vh
-                let ticking = false;
-                const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
+      const STICKY_VH = 15;
 
-                function update(){
-                    const y = window.scrollY || window.pageYOffset || 0;
-                    const offset = clamp(startTop - y, 0, startTop);
-                    document.documentElement.style.setProperty('--headline-offset', offset + 'px');
-                }
+      function updateBlendFallback() {
+        const heroBottom = hero.getBoundingClientRect().bottom;
+        const stickyZoneBottom = (window.innerHeight * (STICKY_VH / 100));
 
-                // Optional subtle parallax for the page background (slower than scroll)
-                const bg = document.querySelector('.ribs-hero-bg__img');
-                function parallax(){
-                    if (!bg || prefersReduced) return; 
-                    const y = window.scrollY || 0;
-                    const offset = Math.round(y * -0.15); // 15% slower
-                    bg.style.transform = `translateY(${offset}px)`;
-                    bg.style.willChange = 'transform';
-                }
+        // If hero bottom is above the sticky zone, the backdrop isn't behind the sticky headline -> fallback
+        const noHeroBehindSticky = headline.classList.contains('is-sticky') && heroBottom < stickyZoneBottom - 1;
 
-                // Fallback contrast toggling for no-blend environments
-                // Samples the background under the title area via canvas and toggles .contrast-light/.contrast-dark.
-                let canvas, ctx;
-                function ensureCanvas(){
-                    if (canvas) return true;
-                    canvas = document.createElement('canvas');
-                    ctx = canvas.getContext('2d');
-                    return !!ctx;
-                }
-                function sampleLuma(){
-                    const bgImg = bg; if (!bgImg || !titleEl || !ensureCanvas()) return null;
-                    const rect = titleEl.getBoundingClientRect();
-                    const vw = document.documentElement.clientWidth || window.innerWidth;
-                    const vh = document.documentElement.clientHeight || window.innerHeight;
-                    // Create a small sample canvas mapping the bg image to viewport
-                    const iw = bgImg.naturalWidth || bgImg.width; const ih = bgImg.naturalHeight || bgImg.height;
-                    if (!iw || !ih || !vw || !vh) return null;
-                    canvas.width = 64; canvas.height = 64;
-                    // Compute the image area of bg that corresponds to rect
-                    // Assuming object-fit: cover. We simulate cover scaling.
-                    const scale = Math.max(vw/iw, vh/ih);
-                    const drawW = iw*scale; const drawH = ih*scale;
-                    const dx = (vw - drawW)/2; const dy = (vh - drawH)/2;
-                    // Draw the whole viewport region of bg into canvas at low res
-                    ctx.clearRect(0,0,64,64);
-                    try{ ctx.drawImage(bgImg, dx, dy, drawW, drawH); }catch(_){ return null; }
-                    // Now sample the area under the title: map rect center to canvas space
-                    const cx = ((rect.left + rect.right)/2) / vw * 64;
-                    const cy = ((rect.top + rect.bottom)/2) / vh * 64;
-                    const sx = Math.max(0, Math.min(64-8, Math.round(cx-4)));
-                    const sy = Math.max(0, Math.min(64-8, Math.round(cy-4)));
-                    let data;
-                    try { data = ctx.getImageData(sx, sy, 8, 8).data; } catch(_) { return null; }
-                    let r=0,g=0,b=0,n=0;
-                    for (let i=0;i<data.length;i+=4){ r+=data[i]; g+=data[i+1]; b+=data[i+2]; n++; }
-                    if (!n) return null;
-                    r/=n; g/=n; b/=n;
-                    // Perceived luminance (sRGB)
-                    const luma = 0.2126*r/255 + 0.7152*g/255 + 0.0722*b/255;
-                    return luma;
-                }
-                function updateContrast(){
-                    if (supportsBlend) return; // blend handles contrast visually
-                    const l = sampleLuma(); if (l == null) return;
-                    // If background is bright, use dark text; otherwise light text
-                    const isBright = l > 0.6;
-                    root.classList.toggle('contrast-light', isBright);
-                    root.classList.toggle('contrast-dark', !isBright);
-                }
+        if (noHeroBehindSticky) {
+          document.body.classList.add('hero-stuck-nohero');
+        } else {
+          document.body.classList.remove('hero-stuck-nohero');
+        }
+      }
 
-                function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(()=>{ update(); parallax(); updateContrast(); ticking = false; }); } }
-                function onResize(){ startTop = Math.round((window.innerHeight || 0) * 0.85); update(); updateContrast(); }
+      const observer = new IntersectionObserver(
+        () => {
+          const heroBottom = hero.getBoundingClientRect().bottom;
+          const threshold = (window.innerHeight * (STICKY_VH / 100));
+          const shouldStick = heroBottom <= threshold + 0.5;
 
-                // Init
-                const init = () => { update(); parallax(); updateContrast(); };
-                if (bg && (!bg.complete || bg.naturalWidth === 0)) { bg.addEventListener('load', init, { once: true }); } else { init(); }
-                window.addEventListener('scroll', onScroll, { passive: true });
-                window.addEventListener('resize', onResize);
-                document.addEventListener('visibilitychange', ()=>{ if (!document.hidden) { onResize(); } });
-            })();
-        </script>
+          if (shouldStick) {
+            if (!headline.classList.contains('is-sticky')) {
+              headline.classList.add('is-sticky');
+              document.body.classList.add('hero-stuck');
+            }
+          } else {
+            if (headline.classList.contains('is-sticky')) {
+              headline.classList.remove('is-sticky');
+              document.body.classList.remove('hero-stuck');
+              document.body.classList.remove('hero-stuck-nohero');
+            }
+          }
+          updateBlendFallback();
+        },
+        { 
+          root: null, 
+          threshold: [0, 1], 
+          rootMargin: `-${STICKY_VH}vh 0px 0px 0px` 
+        }
+      );
+
+      observer.observe(sentinel);
+
+      window.addEventListener('scroll', updateBlendFallback, { passive: true });
+      window.addEventListener('resize', updateBlendFallback);
+    })();
+    </script>
 </body>
 </html>
+
