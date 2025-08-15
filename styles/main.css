@@ -84,6 +84,37 @@ body.lighting-page {
     -webkit-backdrop-filter: blur(8px);
 }
 
+/* Back link styles */
+:root { --back-link-size: clamp(16px, 1.2vw, 18px); }
+
+.back-link{
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 2147483647;
+
+  font-size: calc(var(--back-link-size) * 1.15); /* +15% */
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+
+  /* auto-invert vs. whatever is behind */
+  color: #fff;
+  mix-blend-mode: difference;
+
+  transform-origin: right center;
+  transition: transform .15s ease;
+}
+.back-link:hover{ transform: scale(1.06); }
+.back-link:active{ transform: scale(1.03); }
+
+/* Hide on Home */
+body.page-home .back-link,
+body.home .back-link{ display:none; }
+
 /* Collection Intro */
 .collection-intro {
     width: 100%;

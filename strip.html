@@ -23,20 +23,6 @@
             padding: 20px;
         }
         
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            text-decoration: none;
-            color: #333;
-            font-size: 1.2em;
-            margin-bottom: 40px;
-            transition: color 0.3s ease;
-        }
-        
-        .back-button:hover {
-            color: #666;
-        }
-        
         .main-image {
             width: 100%;
             height: 80vh;
@@ -89,7 +75,7 @@
 </head>
 <body>
     <div class="container">
-        <a href="collections/ribs.html" class="back-button">← Back to Collection</a>
+        <a class="back-link" href="#" aria-label="Go back">Back</a>
         
         <img src="Assets/Lighting/RiBS/Illustrations/Ribs long A.45.png" alt="RiBS Strip Light" class="main-image" id="mainImage">
         
@@ -115,6 +101,65 @@
         function updateMainImage(src) {
             document.getElementById('mainImage').src = src;
         }
+
+        // Deterministic back link behavior
+        (function() {
+          const backLink = document.querySelector('.back-link');
+          if (!backLink) return;
+
+          const HOME_PATH = '/';
+          const RIBS_COLLECTION_PATH = '/ribs';
+          
+          function computeBackTarget() {
+              const currentPath = window.location.pathname;
+              
+              // If current path is the RIBS Collection page -> Back goes to Home
+              if (currentPath === '/ribs.html' || currentPath === '/collections/ribs.html') {
+                  return HOME_PATH;
+              }
+              
+              // If current path is any RIBS subpage -> Back goes to the RIBS Collection page
+              if (currentPath.includes('/ribs/') || 
+                  currentPath.includes('ribs-') || 
+                  currentPath.match(/\/(pendant|strip|wall)\.html$/)) {
+                  return RIBS_COLLECTION_PATH;
+              }
+              
+              // Otherwise -> Back goes to the parent path
+              if (currentPath === HOME_PATH || currentPath === '/index.html' || currentPath === '') {
+                  return null; // Home page, no back link
+              }
+              
+              const pathParts = currentPath.split('/').filter(part => part);
+              if (pathParts.length > 1) {
+                  pathParts.pop();
+                  return '/' + pathParts.join('/');
+              }
+              
+              return HOME_PATH;
+          }
+          
+          function updateBackLink() {
+              const target = computeBackTarget();
+              if (target === null) {
+                  backLink.style.display = 'none';
+              } else {
+                  backLink.style.display = 'block';
+                  backLink.href = target;
+              }
+          }
+          
+          backLink.addEventListener('click', (e) => {
+              e.preventDefault();
+              const target = computeBackTarget();
+              if (target) {
+                  window.location.assign(target);
+              }
+          });
+          
+          // Initialize the back link
+          updateBackLink();
+        })();
     </script>
 </body>
 </html>

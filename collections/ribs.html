@@ -293,6 +293,9 @@
         <span class="home-tooltip">Home</span>
     </a>
 
+    <!-- Text-only Back Link -->
+    <a class="back-link" href="#" aria-label="Go back">Back</a>
+
     <!-- Fixed full-page hero backdrop -->
     <main class="ribs-page">
         <section class="ribs-hero" aria-label="RIBS Collection hero">
@@ -403,6 +406,64 @@
 
       window.addEventListener('scroll', updateBlendFallback, { passive: true });
       window.addEventListener('resize', updateBlendFallback);
+    })();
+
+    // Deterministic back link behavior
+    (function(){
+        const link = document.querySelector('.back-link');
+        if(!link) return;
+
+        const RIBS_COLLECTION_URL = 'https://omerzimer.com/collections/ribs.html';
+        const HOME_PATH = '/';
+
+        // Normalize current path
+        const path = location.pathname.replace(/\/index\.html$/i, '').toLowerCase();
+
+        // Detect pages
+        const isHome =
+            document.body.classList.contains('page-home') ||
+            document.body.classList.contains('home') ||
+            path === '/' ;
+
+        // Consider these as "RIBS collection" pages (local or deployed)
+        const isRibsCollection =
+            path === '/ribs' || path === '/ribs/' ||
+            path.endsWith('/collections/ribs.html');
+
+        // Any deeper RIBS subpage (pendant/wall/strip), in either style of routing:
+        const isRibsSubpage =
+            /^\/ribs\/(pendant|wall|strip)(\/|\.html|$)/i.test(path) ||
+            /\/collections\/ribs\/(pendant|wall|strip)(\/|\.html|$)/i.test(path) ||
+            /\/ribs-(pendant|wall|strip)\.html$/i.test(path);
+
+        function parentPath(p){
+            const parent = p.replace(/\/[^\/]+\/?$/, '') || '/';
+            return parent;
+        }
+
+        // Compute deterministic target (no history.back)
+        function computeTarget(){
+            if (isHome) return null;                              // no Back on Home
+            if (isRibsSubpage) return RIBS_COLLECTION_URL;        // RIBS subpages -> your URL
+            if (isRibsCollection) return HOME_PATH;               // RIBS collection -> Home
+            return parentPath(path);                              // generic fallback
+        }
+
+        const target = computeTarget();
+
+        if (!target || (target === path)) {
+            link.remove(); // nothing meaningful to do
+            return;
+        }
+
+        // Update href so it still works if JS is slow/blocked
+        link.setAttribute('href', target);
+
+        // Click -> navigate to target
+        link.addEventListener('click', function(ev){
+            ev.preventDefault();
+            window.location.assign(target);
+        });
     })();
     </script>
 </body>
