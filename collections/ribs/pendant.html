@@ -196,55 +196,50 @@
             const link = document.querySelector('.back-link');
             if(!link) return;
 
+            const HOME_URL = 'https://omerzimer.com/';
             const RIBS_COLLECTION_URL = 'https://omerzimer.com/collections/ribs.html';
-            const HOME_PATH = '/';
 
             // Normalize current path
+            const origin = location.origin;
             const path = location.pathname.replace(/\/index\.html$/i, '').toLowerCase();
 
             // Detect pages
             const isHome =
                 document.body.classList.contains('page-home') ||
                 document.body.classList.contains('home') ||
-                path === '/' ;
+                path === '/' || path === '';
 
-            // Consider these as "RIBS collection" pages (local or deployed)
+            // Treat both styles as "RIBS collection"
             const isRibsCollection =
-                path === '/ribs' || path === '/ribs/' ||
-                path.endsWith('/collections/ribs.html');
+                path === '/ribs' || path === '/ribs/' || path.endsWith('/collections/ribs.html');
 
-            // Any deeper RIBS subpage (pendant/wall/strip), in either style of routing:
+            // Any RIBS subpage (pendant/wall/strip), either routing style or file-name style
             const isRibsSubpage =
                 /^\/ribs\/(pendant|wall|strip)(\/|\.html|$)/i.test(path) ||
                 /\/collections\/ribs\/(pendant|wall|strip)(\/|\.html|$)/i.test(path) ||
                 /\/ribs-(pendant|wall|strip)\.html$/i.test(path);
 
-            function parentPath(p){
+            // Generic parent fallback (for non-RIBS pages)
+            function parentAbs(p){
                 const parent = p.replace(/\/[^\/]+\/?$/, '') || '/';
-                return parent;
+                return new URL(parent, origin).href;
             }
 
-            // Compute deterministic target (no history.back)
             function computeTarget(){
-                if (isHome) return null;                              // no Back on Home
-                if (isRibsSubpage) return RIBS_COLLECTION_URL;        // RIBS subpages -> your URL
-                if (isRibsCollection) return HOME_PATH;               // RIBS collection -> Home
-                return parentPath(path);                              // generic fallback
+                if (isHome) return null;                         // no Back on Home
+                if (isRibsSubpage)   return RIBS_COLLECTION_URL; // RIBS subpages -> RIBS collection page
+                if (isRibsCollection) return HOME_URL;           // RIBS collection -> Home
+                return parentAbs(path);                          // generic parent for other sections
             }
 
             const target = computeTarget();
+            if (!target) { link.remove(); return; }
 
-            if (!target || (target === path)) {
-                link.remove(); // nothing meaningful to do
-                return;
-            }
-
-            // Update href so it still works if JS is slow/blocked
+            // Set real URL to avoid "#"/scroll-top behavior and force hard navigation
             link.setAttribute('href', target);
-
-            // Click -> navigate to target
-            link.addEventListener('click', function(ev){
-                ev.preventDefault();
+            link.addEventListener('click', function(e){
+                e.preventDefault();
+                e.stopPropagation();
                 window.location.assign(target);
             });
         })();
