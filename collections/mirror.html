@@ -4,130 +4,467 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mirror System® — Omer Zimmerman Studio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/main.css">
-</head>
-<body>
-    <!-- Floating Home Button -->
-    <a href="../lighting.html" class="floating-home" title="Back to Collections">
-        <img src="../Assets/Logo/oz-logo-png.png" alt="Omer Zimmermann Logo" class="floating-logo">
-        <span class="home-tooltip">Collections</span>
-    </a>
+    <style>
+        :root{
+            --hero-sticky-h: 15vh;
+            --hero-padding-x: 5vw;
+            --hero-padding-b: 4vh;
+            --ui-z: 120;
+        }
 
+        /* Mirror page scoped styles */
+        .page-mirror .mirror-hero-backdrop{
+            position: fixed; 
+            inset: 0; 
+            z-index: 0;
+            background-image: url("../Assets/Lighting/MiRROR/1.jpg");
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat;
+        }
+
+        /* Scroll layer */
+        .page-mirror .mirror-hero, 
+        .page-mirror #mirror-grid{ 
+            position: relative; 
+            z-index: 1; 
+            background: transparent; 
+        }
+        
+        .page-mirror .mirror-hero{ 
+            height: 100vh; 
+            min-height: 540px; 
+        }
+
+        /* Headline: reactive negative over the hero image */
+        .page-mirror .mirror-headline{
+            position: absolute; 
+            left: var(--hero-padding-x); 
+            right: var(--hero-padding-x); 
+            bottom: var(--hero-padding-b);
+            margin: 0; 
+            padding: .25rem 0; 
+            font-weight: 700; 
+            line-height: 1.1;
+            font-size: clamp(2rem, 4.2vw, 4rem);
+            
+            /* single-line */
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis;
+            
+            /* reactive negative over the hero image */
+            color: #fff;                 /* base */
+            mix-blend-mode: difference;  /* reactive negative */
+            text-shadow: none;
+            
+            transition: transform .22s ease, opacity .22s ease, color .22s ease, background-color .22s ease;
+        }
+
+        /* Sticky headline at 15vh */
+        .page-mirror .mirror-headline.is-sticky{
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            height: var(--hero-sticky-h);
+            display: flex; 
+            align-items: center; 
+            padding: 0 var(--hero-padding-x);
+            background: linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,0));
+            backdrop-filter: blur(2px); 
+            -webkit-backdrop-filter: blur(2px);
+            z-index: calc(var(--ui-z) + 1);
+        }
+        
+        .page-mirror.mirror-hero-stuck #mirror-grid{ 
+            margin-top: var(--hero-sticky-h); 
+        }
+        
+        /* Sticky fallback only when hero is not behind */
+        .page-mirror.mirror-hero-solid .mirror-headline.is-sticky{ 
+            mix-blend-mode: normal; 
+            color: #fff; 
+            text-shadow: 0 1px 10px rgba(0,0,0,.35); 
+        }
+
+        /* Grid cards */
+        .page-mirror .mirror-grid{ 
+            padding: 8vh 5vw 12vh; 
+            display: grid; 
+            gap: 2rem; 
+            grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); 
+        }
+        
+        /* Remove old overlay styles and clean up cards */
+        .page-mirror #mirror-grid .mirror-card { 
+            position: relative; 
+            background: transparent !important; 
+            border: 0 !important; 
+            box-shadow: none !important;
+            aspect-ratio: 1.2/1; 
+            display: flex; 
+            flex-direction: column;
+            align-items: flex-end; 
+            padding: 1rem; 
+            overflow: hidden;
+        }
+        
+        .page-mirror #mirror-grid .overlay,
+        .page-mirror #mirror-grid .caption,
+        .page-mirror #mirror-grid .label-box,
+        .page-mirror #mirror-grid .hover-caption,
+        .page-mirror #mirror-grid .mirror-card::before,
+        .page-mirror #mirror-grid .mirror-card::after { 
+            display: none !important; 
+            content: none !important; 
+        }
+        
+        .page-mirror #mirror-grid .mirror-card img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%; 
+            height: auto; 
+            display: block;
+            object-fit: cover;
+            z-index: 0;
+        }
+        
+        .page-mirror #mirror-grid .mirror-card h3{ 
+            margin: 0; 
+            font-size: clamp(1.1rem,2.2vw,1.6rem); 
+            color: #fff; 
+            mix-blend-mode: difference;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Delicate bottom-left label */
+        .page-mirror #mirror-grid .card-label {
+            position: absolute; 
+            left: 10px; 
+            bottom: 10px; 
+            margin: 0;
+            font-size: clamp(12px, 1.2vw, 14px);
+            font-weight: 500; 
+            letter-spacing: .02em; 
+            line-height: 1;
+            color: #fff; 
+            mix-blend-mode: difference; 
+            background: none; 
+            padding: 0; 
+            border: 0; 
+            pointer-events: none;
+        }
+
+        .page-mirror .sr-only {
+            position: absolute !important;
+            width: 1px; 
+            height: 1px;
+            padding: 0; 
+            margin: -1px;
+            overflow: hidden; 
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap; 
+            border: 0;
+        }
+
+        /* Remove old floating home button styles */
+        .page-mirror .floating-home {
+            display: none;
+        }
+
+        /* Lightbox styles (Mirror only) */
+        .page-mirror .lightbox-overlay{
+            position: fixed; inset: 0; z-index: 99999;
+            display: none; align-items: center; justify-content: center;
+            background: rgba(0,0,0,.92);
+            touch-action: none; /* so we can pan/zoom without scrolling the page */
+        }
+        .page-mirror .lightbox-overlay.open{ display: flex; }
+
+        /* Almost full screen, but with margins */
+        .page-mirror .lightbox-overlay .lb-img{
+            max-width: 92vw; max-height: 92vh;
+            object-fit: contain;
+            transform-origin: 50% 50%;
+            transform: translate(0px,0px) scale(1);
+            cursor: zoom-in;
+            will-change: transform;
+            user-select: none;
+            -webkit-user-drag: none;
+            pointer-events: auto;
+        }
+        .page-mirror .lightbox-overlay.zoomed .lb-img{ cursor: grab; }
+
+        .page-mirror .lightbox-overlay .lb-close{
+            position: absolute; top: 14px; right: 18px;
+            font-size: 28px; line-height: 1;
+            color: #fff; background: none; border: 0; cursor: pointer;
+        }
+        .page-mirror .lightbox-overlay .lb-close:focus-visible{
+            outline: 2px solid #fff; outline-offset: 2px;
+        }
+
+        /* Overlay stays below the back link */
+        .page-mirror .lightbox-overlay { z-index: 99999; }
+
+        /* Make sure Back is always above everything */
+        .back-link { z-index: 2147483647 !important; }
+
+        /* Hide/remove the X close button (belt-and-suspenders) */
+        .page-mirror .lightbox-overlay .lb-close { display: none !important; }
+    </style>
+</head>
+<body class="page-mirror">
     <!-- Text-only Back Link -->
     <a class="back-link" href="#" aria-label="Go back">Back</a>
 
-    <!-- Mirror System Section -->
-    <section class="mirror-section">
-        <div class="mirror-intro">
-            <h2 class="mirror-title">Mirror System®</h2>
-            <p class="mirror-text">A mirror with built-in light.<br>
-            Pick the shape, pick the size.<br>
-            Glows like nothing else.</p>
-        </div>
+    <!-- Fixed backdrop -->
+    <div class="mirror-hero-backdrop" aria-hidden="true"></div>
 
-        <div class="mirror-grid">
-            <div class="mirror-specs">
-                <dl class="mirror-details">
-                    <dt>MODEL</dt>
-                    <dd>Mirror System [Custom]</dd>
-                    <dt>TYPE</dt>
-                    <dd>Illuminated wall-mounted mirror</dd>
-                    <dt>LIGHT SOURCE</dt>
-                    <dd>Integrated LED</dd>
-                    <dt>MATERIALS</dt>
-                    <dd>Glass + Wood or Aluminum frame</dd>
-                    <dt>OPTIONS</dt>
-                    <dd>Round / Oval / Rectangular</dd>
-                    <dt>DIMENSIONS</dt>
-                    <dd>Custom</dd>
-                </dl>
-            </div>
-
-            <div class="mirror-gallery">
-                <div class="mirror-item">
-                    <img src="../Assets/Lighting/MiRROR/1.jpg" alt="Mirror System - Hotel Installation" loading="lazy">
-                    <span class="mirror-caption">Hotel Installation</span>
-                </div>
-                <div class="mirror-item">
-                    <img src="../Assets/Lighting/MiRROR/2.jpg" alt="Mirror System - Restaurant" loading="lazy">
-                    <span class="mirror-caption">Restaurant</span>
-                </div>
-                <div class="mirror-item">
-                    <img src="../Assets/Lighting/MiRROR/3.jpg" alt="Mirror System - Entryway" loading="lazy">
-                    <span class="mirror-caption">Entryway</span>
-                </div>
-            </div>
-        </div>
+    <!-- Hero section -->
+    <section class="mirror-hero" aria-label="Mirror System hero">
+        <h1 class="mirror-headline">Mirror System</h1>
     </section>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="footer-content">
-            <p class="studio-info">Omer Zimmerman Studio<br>
-            Handmade in Tel Aviv since 2017</p>
-            <div class="footer-links">
-                <a href="https://www.instagram.com/omerzimmermann/" target="_blank" rel="noopener">Instagram</a>
-                <span class="separator">·</span>
-                <a href="mailto:contact@omerzimmerman.com">Email</a>
-                <span class="separator">·</span>
-                <a href="#contact">Contact</a>
-            </div>
-        </div>
-    </footer>
+    <!-- Grid section -->
+    <section id="mirror-grid" class="mirror-grid">
+        <figure class="mirror-card size-400 type-full">
+            <a class="lightbox-link" href="../assets/mirror/miro-400-full.jpg">
+                <img src="../assets/mirror/miro-400-full.jpg" alt="Miro 400 — full view" loading="eager">
+            </a>
+            <figcaption class="card-label">Miro 400<span class="sr-only"> — full view</span></figcaption>
+        </figure>
+
+        <figure class="mirror-card size-400 type-close">
+            <a class="lightbox-link" href="../assets/mirror/miro-400-close.jpg">
+                <img src="../assets/mirror/miro-400-close.jpg" alt="Miro 400 — close-up" loading="lazy">
+            </a>
+            <figcaption class="card-label">Miro 400<span class="sr-only"> — close-up</span></figcaption>
+        </figure>
+
+        <figure class="mirror-card size-600 type-full">
+            <a class="lightbox-link" href="../assets/mirror/miro-600-full.jpg">
+                <img src="../assets/mirror/miro-600-full.jpg" alt="Miro 600 — full view" loading="lazy">
+            </a>
+            <figcaption class="card-label">Miro 600<span class="sr-only"> — full view</span></figcaption>
+        </figure>
+
+        <figure class="mirror-card size-600 type-close">
+            <a class="lightbox-link" href="../assets/mirror/miro-600-close.jpg">
+                <img src="../assets/mirror/miro-600-close.jpg" alt="Miro 600 — close-up" loading="lazy">
+            </a>
+            <figcaption class="card-label">Miro 600<span class="sr-only"> — close-up</span></figcaption>
+        </figure>
+    </section>
 
     <script>
-    // Deterministic back link behavior
+    // Mirror hero sticky behavior (Mirror scoped)
     (function(){
-        const link = document.querySelector('.back-link');
+        if(!document.querySelector('.page-mirror')) return;  // MIRROR ONLY
+        
+        const hero = document.querySelector('.mirror-hero');
+        const headline = document.querySelector('.mirror-headline');
+        const grid = document.querySelector('#mirror-grid');
+        if(!hero || !headline || !grid) return;
+
+        // Sticky at 15vh using the same approach as RIBS
+        const sentinel = document.createElement('div');
+        Object.assign(sentinel.style,{position:'absolute',left:'0',right:'0',bottom:'0',height:'1px',pointerEvents:'none'});
+        hero.appendChild(sentinel);
+
+        const STICKY_VH = 15;
+        const io = new IntersectionObserver(()=> {
+            const heroBottom = hero.getBoundingClientRect().bottom;
+            const threshold = window.innerHeight * (STICKY_VH/100);
+            const shouldStick = heroBottom <= threshold + 0.5;
+
+            headline.classList.toggle('is-sticky', shouldStick);
+            document.body.classList.toggle('mirror-hero-stuck', shouldStick);
+
+            // Solid fallback when hero no longer behind sticky zone
+            const noHeroBehind = shouldStick && heroBottom < threshold - 1;
+            document.body.classList.toggle('mirror-hero-solid', !!noHeroBehind);
+        }, { root:null, threshold: [0,1], rootMargin:`-${STICKY_VH}vh 0px 0px 0px` });
+        io.observe(sentinel);
+    })();
+
+    // Back link: Mirror page only - always go to homepage
+    (function(){
+        if(!document.querySelector('.page-mirror')) return;  // MIRROR ONLY
+        var link = document.querySelector('.back-link');
         if(!link) return;
-
-        const HOME_URL = 'https://omerzimer.com/';
-        const RIBS_COLLECTION_URL = 'https://omerzimer.com/collections/ribs.html';
-
-        // Normalize current path
-        const origin = location.origin;
-        const path = location.pathname.replace(/\/index\.html$/i, '').toLowerCase();
-
-        // Detect pages
-        const isHome =
-            document.body.classList.contains('page-home') ||
-            document.body.classList.contains('home') ||
-            path === '/' || path === '';
-
-        // Treat both styles as "RIBS collection"
-        const isRibsCollection =
-            path === '/ribs' || path === '/ribs/' || path.endsWith('/collections/ribs.html');
-
-        // Any RIBS subpage (pendant/wall/strip), either routing style or file-name style
-        const isRibsSubpage =
-            /^\/ribs\/(pendant|wall|strip)(\/|\.html|$)/i.test(path) ||
-            /\/collections\/ribs\/(pendant|wall|strip)(\/|\.html|$)/i.test(path) ||
-            /\/ribs-(pendant|wall|strip)\.html$/i.test(path);
-
-        // Generic parent fallback (for non-RIBS pages)
-        function parentAbs(p){
-            const parent = p.replace(/\/[^\/]+\/?$/, '') || '/';
-            return new URL(parent, origin).href;
-        }
-
-        function computeTarget(){
-            if (isHome) return null;                         // no Back on Home
-            if (isRibsSubpage)   return RIBS_COLLECTION_URL; // RIBS subpages -> RIBS collection page
-            if (isRibsCollection) return HOME_URL;           // RIBS collection -> Home
-            return parentAbs(path);                          // generic parent for other sections
-        }
-
-        const target = computeTarget();
-        if (!target) { link.remove(); return; }
-
-        // Set real URL to avoid "#"/scroll-top behavior and force hard navigation
-        link.setAttribute('href', target);
-        link.addEventListener('click', function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            window.location.assign(target);
+        var HOME = 'https://omerzimer.com/';
+        
+        // If on home, there should be no back link, but guard anyway:
+        var atHome = location.hostname === 'omerzimer.com' && location.pathname.replace(/\/index\.html$/i,'') === '/';
+        if (atHome) { link.remove(); return; }
+        
+        link.setAttribute('href', HOME);
+        link.addEventListener('click', function(e){ 
+            e.preventDefault(); 
+            e.stopPropagation(); 
+            window.location.assign(HOME); 
         });
+    })();
+    </script>
+
+    <!-- Lightbox markup -->
+    <div class="lightbox-overlay" id="mirror-lightbox" aria-hidden="true" role="dialog" aria-label="Image preview">
+        <button class="lb-close" aria-label="Close">×</button>
+        <img class="lb-img" alt="">
+    </div>
+
+    <script>
+    (function(){
+        if(!document.querySelector('.page-mirror')) return; // MIRROR ONLY
+
+        var grid = document.querySelector('#mirror-grid');
+        var overlay = document.getElementById('mirror-lightbox');
+        if(!grid || !overlay) return;
+
+        var imgEl = overlay.querySelector('.lb-img');
+        var closeBtn = overlay.querySelector('.lb-close');
+
+        var scale = 1, minS = 1, maxS = 4;
+        var posX = 0, posY = 0;
+        var startX = 0, startY = 0;
+        var panning = false;
+
+        function update(){
+            imgEl.style.transform = 'translate(' + posX + 'px,' + posY + 'px) scale(' + scale + ')';
+            overlay.classList.toggle('zoomed', scale > 1.01);
+            imgEl.style.cursor = scale > 1.01 ? 'grab' : 'zoom-in';
+        }
+
+        function openLB(src){
+            scale = 1; posX = 0; posY = 0; update();
+            imgEl.src = src;
+            overlay.classList.add('open');
+            overlay.setAttribute('aria-hidden','false');
+            closeBtn.focus({preventScroll:true});
+        }
+        function closeLB(){
+            overlay.classList.remove('open');
+            overlay.setAttribute('aria-hidden','true');
+            imgEl.removeAttribute('src');
+        }
+
+        // Open from grid
+        grid.addEventListener('click', function(e){
+            var a = e.target.closest('a.lightbox-link');
+            if(!a) return;
+            e.preventDefault();
+            openLB(a.getAttribute('href'));
+        });
+
+        // Close interactions
+        closeBtn.addEventListener('click', closeLB);
+        overlay.addEventListener('click', function(e){
+            if(e.target === overlay) closeLB();
+        });
+        document.addEventListener('keydown', function(e){
+            if(!overlay.classList.contains('open')) return;
+            if(e.key === 'Escape') closeLB();
+            if(e.key === '+' || e.key === '=') { zoomAtCenter(1.1); }
+            if(e.key === '-' || e.key === '_') { zoomAtCenter(0.9); }
+            if(e.key === '0') { scale = 1; posX = 0; posY = 0; update(); }
+        });
+
+        // Zoom helpers
+        function clamp(v, lo, hi){ return Math.max(lo, Math.min(hi, v)); }
+
+        function zoomAtPoint(factor, clientX, clientY){
+            var rect = imgEl.getBoundingClientRect();
+            var prev = scale;
+            scale = clamp(scale * factor, minS, maxS);
+
+            // Keep zoom centered around the pointer
+            var ox = clientX - (rect.left + rect.width/2);
+            var oy = clientY - (rect.top  + rect.height/2);
+            posX -= ox * (scale/prev - 1);
+            posY -= oy * (scale/prev - 1);
+            update();
+        }
+        function zoomAtCenter(f){
+            var cx = overlay.clientWidth / 2, cy = overlay.clientHeight / 2;
+            zoomAtPoint(f, cx, cy);
+        }
+
+        // Mouse wheel zoom
+        overlay.addEventListener('wheel', function(e){
+            if(!overlay.classList.contains('open')) return;
+            e.preventDefault();
+            var factor = e.deltaY < 0 ? 1.1 : 0.9;
+            zoomAtPoint(factor, e.clientX, e.clientY);
+        }, {passive:false});
+
+        // Double-click to toggle zoom (1x <-> 2.5x) at pointer
+        overlay.addEventListener('dblclick', function(e){
+            if(!overlay.classList.contains('open')) return;
+            e.preventDefault();
+            var targetScale = scale > 1.01 ? 1 : 2.5;
+            var factor = targetScale / scale;
+            zoomAtPoint(factor, e.clientX, e.clientY);
+        });
+
+        // Drag to pan when zoomed
+        imgEl.addEventListener('pointerdown', function(e){
+            if(scale <= 1.01) return;
+            panning = true;
+            imgEl.setPointerCapture(e.pointerId);
+            startX = e.clientX - posX;
+            startY = e.clientY - posY;
+            imgEl.style.cursor = 'grabbing';
+        });
+        imgEl.addEventListener('pointermove', function(e){
+            if(!panning) return;
+            posX = e.clientX - startX;
+            posY = e.clientY - startY;
+            update();
+        });
+        imgEl.addEventListener('pointerup', function(e){
+            if(!panning) return;
+            panning = false;
+            imgEl.releasePointerCapture(e.pointerId);
+            imgEl.style.cursor = 'grab';
+        });
+        imgEl.addEventListener('pointercancel', function(){ panning = false; });
+
+    })();
+    </script>
+
+    <script>
+    (function(){
+        if(!document.querySelector('.page-mirror')) return; // MIRROR ONLY
+
+        var overlay = document.getElementById('mirror-lightbox');
+        var back = document.querySelector('.back-link');
+        if(!back) return;
+
+        var MIRROR_URL = 'https://omerzimer.com/collections/mirror.html';
+        var HOME_URL   = 'https://omerzimer.com/'; // keep existing behavior when overlay is closed
+
+        /* Remove the X button if it exists */
+        var x = overlay ? overlay.querySelector('.lb-close') : null;
+        if (x) x.remove();
+
+        /* Ensure Back sits on top */
+        back.style.zIndex = '2147483647';
+
+        /* Back behavior:
+           - If overlay is OPEN -> go to MIRROR_URL
+           - If overlay is CLOSED -> preserve previous behavior (Home) */
+        back.addEventListener('click', function(e){
+            e.preventDefault(); e.stopPropagation();
+            var isOpen = !!(overlay && overlay.classList.contains('open'));
+            var target = isOpen ? MIRROR_URL : HOME_URL;
+            window.location.assign(target);
+        }, { capture: true });
     })();
     </script>
 </body>
