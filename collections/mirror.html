@@ -242,29 +242,29 @@
     <!-- Grid section -->
     <section id="mirror-grid" class="mirror-grid">
         <figure class="mirror-card size-400 type-full">
-            <a class="lightbox-link" href="../assets/mirror/miro-400-full.jpg">
-                <img src="../assets/mirror/miro-400-full.jpg" alt="Miro 400 — full view" loading="eager">
+            <a class="lightbox-link" href="../Assets/mirror/miro-400-full.jpg">
+                <img src="../Assets/mirror/miro-400-full.jpg" alt="Miro 400 — full view" loading="eager">
             </a>
             <figcaption class="card-label">Miro 400<span class="sr-only"> — full view</span></figcaption>
         </figure>
 
         <figure class="mirror-card size-400 type-close">
-            <a class="lightbox-link" href="../assets/mirror/miro-400-close.jpg">
-                <img src="../assets/mirror/miro-400-close.jpg" alt="Miro 400 — close-up" loading="lazy">
+            <a class="lightbox-link" href="../Assets/mirror/miro-400-close.jpg">
+                <img src="../Assets/mirror/miro-400-close.jpg" alt="Miro 400 — close-up" loading="lazy">
             </a>
             <figcaption class="card-label">Miro 400<span class="sr-only"> — close-up</span></figcaption>
         </figure>
 
         <figure class="mirror-card size-600 type-full">
-            <a class="lightbox-link" href="../assets/mirror/miro-600-full.jpg">
-                <img src="../assets/mirror/miro-600-full.jpg" alt="Miro 600 — full view" loading="lazy">
+            <a class="lightbox-link" href="../Assets/mirror/miro-600-full.jpg">
+                <img src="../Assets/mirror/miro-600-full.jpg" alt="Miro 600 — full view" loading="lazy">
             </a>
             <figcaption class="card-label">Miro 600<span class="sr-only"> — full view</span></figcaption>
         </figure>
 
         <figure class="mirror-card size-600 type-close">
-            <a class="lightbox-link" href="../assets/mirror/miro-600-close.jpg">
-                <img src="../assets/mirror/miro-600-close.jpg" alt="Miro 600 — close-up" loading="lazy">
+            <a class="lightbox-link" href="../Assets/mirror/miro-600-close.jpg">
+                <img src="../Assets/mirror/miro-600-close.jpg" alt="Miro 600 — close-up" loading="lazy">
             </a>
             <figcaption class="card-label">Miro 600<span class="sr-only"> — close-up</span></figcaption>
         </figure>
@@ -336,7 +336,6 @@
         if(!grid || !overlay) return;
 
         var imgEl = overlay.querySelector('.lb-img');
-        var closeBtn = overlay.querySelector('.lb-close');
 
         var scale = 1, minS = 1, maxS = 4;
         var posX = 0, posY = 0;
@@ -354,7 +353,6 @@
             imgEl.src = src;
             overlay.classList.add('open');
             overlay.setAttribute('aria-hidden','false');
-            closeBtn.focus({preventScroll:true});
         }
         function closeLB(){
             overlay.classList.remove('open');
@@ -371,7 +369,6 @@
         });
 
         // Close interactions
-        closeBtn.addEventListener('click', closeLB);
         overlay.addEventListener('click', function(e){
             if(e.target === overlay) closeLB();
         });
