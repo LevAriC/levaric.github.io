@@ -36,6 +36,7 @@
         .page-mirror .mirror-hero{ 
             height: 100vh; 
             min-height: 540px; 
+            background: transparent;
         }
 
         /* Headline: reactive negative over the hero image */
@@ -96,6 +97,7 @@
             display: grid; 
             gap: 2rem; 
             grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); 
+            margin-top: 0; /* Ensure grid starts immediately after hero */
         }
         
         /* Remove old overlay styles and clean up cards */
@@ -131,6 +133,12 @@
             display: block;
             object-fit: cover;
             z-index: 0;
+        }
+        
+        .page-mirror #mirror-grid a.lightbox-link{ 
+            display: block; 
+            text-decoration: none; 
+            color: inherit; 
         }
         
         .page-mirror #mirror-grid .mirror-card h3{ 
@@ -315,7 +323,7 @@
 
     <!-- Lightbox markup -->
     <div class="lightbox-overlay" id="mirror-lightbox" aria-hidden="true" role="dialog" aria-label="Image preview">
-        <button class="lb-close" aria-label="Close">×</button>
+        <!-- REMOVE the X button entirely -->
         <img class="lb-img" alt="">
     </div>
 
@@ -441,30 +449,35 @@
     <script>
     (function(){
         if(!document.querySelector('.page-mirror')) return; // MIRROR ONLY
-
-        var overlay = document.getElementById('mirror-lightbox');
         var back = document.querySelector('.back-link');
-        if(!back) return;
+        var overlay = document.getElementById('mirror-lightbox');
+        if(!back || !overlay) return;
 
-        var MIRROR_URL = 'https://omerzimer.com/collections/mirror.html';
-        var HOME_URL   = 'https://omerzimer.com/'; // keep existing behavior when overlay is closed
+        // Compute URLs that work locally and on production
+        var isFile = location.protocol === 'file:';
+        // Mirror URL: current page without hash
+        var MIRROR_URL = isFile
+            ? location.href.replace(/#.*$/,'')
+            : 'https://omerzimer.com/collections/mirror.html';
 
-        /* Remove the X button if it exists */
-        var x = overlay ? overlay.querySelector('.lb-close') : null;
-        if (x) x.remove();
+        // Home URL: parent index.html when local; domain root in production
+        var HOME_URL = isFile
+            ? new URL('../index.html', location.href).href
+            : 'https://omerzimer.com/';
 
-        /* Ensure Back sits on top */
+        // Ensure Back is on top of overlay
         back.style.zIndex = '2147483647';
 
-        /* Back behavior:
-           - If overlay is OPEN -> go to MIRROR_URL
-           - If overlay is CLOSED -> preserve previous behavior (Home) */
+        // While overlay OPEN -> Back goes to MIRROR_URL; when CLOSED -> Back goes to HOME_URL
         back.addEventListener('click', function(e){
             e.preventDefault(); e.stopPropagation();
-            var isOpen = !!(overlay && overlay.classList.contains('open'));
-            var target = isOpen ? MIRROR_URL : HOME_URL;
-            window.location.assign(target);
-        }, { capture: true });
+            var isOpen = overlay.classList.contains('open');
+            window.location.assign(isOpen ? MIRROR_URL : HOME_URL);
+        }, { capture:true });
+
+        // Lightbox open/close (keep your existing open logic). Minimal close on dim click/ESC:
+        overlay.addEventListener('click', function(e){ if(e.target === overlay) overlay.classList.remove('open'); });
+        document.addEventListener('keydown', function(e){ if(e.key === 'Escape') overlay.classList.remove('open'); });
     })();
     </script>
 </body>
